@@ -1,17 +1,14 @@
+edgeList = []
 console.log("Test")
-var l = "wow"
-console.log(l)
 var a = node()
 a.setName("a")
 console.log(a.name)
 var b = node()
 b.setName("b")
-a.addLink(b)
-console.log("Hello")
+a.addLink(b, "Aggregation")
 
 function node(){
     name = null
-    nextNodes = []
     return{
         setName(newName){
             this.name = newName
@@ -19,9 +16,12 @@ function node(){
         getName(){
             return name
         },
-        addLink(node){
-            nextNodes.push(node);
-            console.log(node.name + " has been pushed")
+        addLink(node, type){
+            edgeList.push(new edge(this, node, type));
+            console.log("A new Edge has been pushed With the following attributes:")
+            console.log("Start node: " + edgeList[edgeList.length - 1].start.name)
+            console.log("End node: " + edgeList[edgeList.length - 1].end.name)
+            console.log("Connection type: " + edgeList[edgeList.length - 1].edgeType)
         }
     }
 }
@@ -33,10 +33,10 @@ function classNode(){
     methods = null
     return{
         setAttributes(newAttributes){
-            node.attributes = newAttributes
+            this.attributes = newAttributes
         },
         setMethods(newMethods){
-            node.methods = newMethods
+            this.methods = newMethods
         }
     }
 }
@@ -47,10 +47,30 @@ function inheritanceNode(){
     methods = null
     return{
         setAttributes(newAttributes){
-            node.attributes = newAttributes
+            this.attributes = newAttributes
         },
         setMethods(newMethods){
-            node.methods = newMethods
+            this.methods = newMethods
         }
     }
+}
+
+function noteNode(){
+    inheritanceNode.prototype = Object.create(node.prototype)
+    contents = null;
+    return{
+        setContents(text){
+            this.contents = text
+        },
+        getContents(){
+            return this.contents
+        }
+    }
+}
+
+function edge(start, end, type){
+    this.start = start
+    this.end = end
+    this.edgeType = type
+    
 }
