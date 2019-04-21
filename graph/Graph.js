@@ -1,22 +1,27 @@
 'use strict';
 
-function createGraphFramework() {
+class GraphFramework {
 
+    constructor(node, edge){
+        this.node = node
+        this.edge = edge
+    }
 
-    const nodePrototype = {
+    nodePrototype() {
         draw: function (g2) {
+            
 
-        },
+        }
         translate: function (dx, dy) {
 
-        },
+        }
         contains: function (point) { },
         getConnectionPoint: function (point) { },
         getBounds: function () { },
         clone: function () { }
     }
 
-    const edgePrototype = {
+    edgePrototype() {
         draw: function (g2) { },
         contains: function (point) { },
         connect: function (start, end) { },
