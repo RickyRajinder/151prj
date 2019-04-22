@@ -7,8 +7,25 @@ var b = node()
 b.setName("b")
 a.addLink(b, "Aggregation")
 
+$(function () {
+    $('#classtoolbar').w2toolbar({
+        name: 'toolbar',
+        items: [
+            {type: 'button', id: 'select', icon: 'rectangle', caption: 'Select'},
+            {type: 'break' },
+            {type: 'button', id: 'class', caption: 'Class'},
+            {type: 'break' },
+            {type: 'button', id: 'interface', caption: 'Interface'},
+            {type: 'break' },
+            {type: 'button', id: 'package', caption: 'Package'},
+            {type: 'break' },
+            {type: 'button', id: 'note', caption: 'Note'},
+            {type: 'break' },
+        ]
+    });
+});
 function node(){
-    name = null
+    const name = null
     return{
         setName(newName){
             this.name = newName
