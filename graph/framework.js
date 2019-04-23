@@ -12,6 +12,7 @@ function drawGrabber(x, y) {
 	panel.appendChild(square)
 }
 
+
 function createCircleNode(x, y, size, color) {
 	return {
 		getBounds: () => {
@@ -41,7 +42,7 @@ function createCircleNode(x, y, size, color) {
 	}
 }
 
-function createClassNode(x, y, width, height){
+function createClassNode(x, y, width, height) {
 	return {
 		getBounds: () => {
 			return {
@@ -78,11 +79,25 @@ class Graph {
 			n.draw()
 		}
 	}
+
+/*
+	drawToolBar() {
+		const bar = new Path2D()
+		ctx.lineWidth = 2
+		bar.rect(5, 5, 990, 50)
+		ctx.rect(5, 5, 990, 50)
+		ctx.fillStyle = '#99e6ff'
+		ctx.fill(bar)
+		ctx.stroke()
+	}
+	*/
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
 	const graph = new Graph()
-	const n1 = createCircleNode(10, 10, 20, 'goldenrod')
+	const n1 = createCircleNode(10, 10, 20, 'black')
 	const n2 = createCircleNode(30, 30, 20, 'blue')
 	graph.add(n1)
 	graph.add(n2)
