@@ -39,6 +39,7 @@ function drawSelectButton(){
             drawToolBar()
             drawClassButton()
             drawInterfaceButton()
+            drawPackageButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -91,7 +92,7 @@ function drawInterfaceButton(){
     canvas.addEventListener('mousemove', function(e) {
         if (ctx.isPointInPath(interfaceButton, e.clientX, e.clientY)){
             ctx.font = "lighter 15px Arial"
-            ctx.fillText("Interface", 118, 70)
+            ctx.fillText("Interface", 115, 70)
         }
         else {
         }
@@ -103,6 +104,7 @@ function drawPackageButton(){
     packageButton.rect(169, 10, 50, 40)
     ctx.stroke(packageButton)
     ctx.fillStyle = "white"
+    ctx.fillRect(179, 26, 30, 20)
 
 }
 
@@ -110,6 +112,7 @@ drawToolBar()
 drawSelectButton()
 drawClassButton()
 drawInterfaceButton()
+drawPackageButton()
 
 function node(){
     const name = null
