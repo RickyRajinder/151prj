@@ -147,7 +147,7 @@ function draw() {
         var ctx = canvas.getContext('2d');
 
         for(i = 0; i < nodeList.length; i++){
-            //draws the nodes created at their position as a 10x10 square.
+            //draws the nodes created at their position as a 10x10 square
             ctx.fillRect(nodeList[i].getx(), nodeList[i].gety(), 10, 10)
         }
     }
