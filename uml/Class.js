@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
@@ -144,7 +145,16 @@ function classNode(){
     node.call(this)
     attributes = null;
     methods = null;
+
 }
+classNode.prototype.setMethods = function(method){
+    this.methods = method
+}
+classNode.prototype.getMethods = function(){
+    return this.methods
+}
+
+//inheritanceNode - node for inheritance type nodes
 
 classNode.prototype = Object.create(node.prototype)
 classNode.prototype.setAttributes = function(attribute){
@@ -184,6 +194,8 @@ inheritanceNode.prototype.getMethods = function(){
 
 //noteNode - node for note type nodes
 
+//noteNode - node for note type nodes
+
 function noteNode(){
     node.call(this)
     this.contents = null
@@ -196,7 +208,6 @@ node.prototype.setContents = function(contents){
 node.prototype.getContents = function(){
     return this.contents
 }
-
 //creates an edge with given data, start node, end node, and type of edge
 function edge(start, end, type){
     this.start = start
