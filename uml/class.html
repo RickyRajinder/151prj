@@ -4,10 +4,18 @@
     <link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.5.rc1.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.5.rc1.min.js"></script>
+    <title>UML Editor: Class Diagram</title>
+     <p><font size="30">Class Diagram</font></p>
+     <script src="Class.js"></script>
+     <style type="text/css">
+        canvas { border: 1px solid black; }
+      </style>
 </head>
 <body>
 <div id="classtoolbar" style="width: 100%; height: 100%;"></div>
+<body onload="draw();">
+    <canvas id="canvas" width="800" height="600"></canvas>
+  </body>
 </body>
-<script src="Class.js">
 </script>
 </html>
