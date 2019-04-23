@@ -34,6 +34,12 @@ function drawSelectButton(){
             drawPackageButton()
             drawNoteButton()
             drawDependencyButton()
+            drawInheritanceButton()
+            drawInterfaceTypeButton()
+            drawAssociationButton()
+            drawAggregationButton()
+            drawCompositionButton()
+            drawDeleteButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -44,19 +50,22 @@ function drawSelectButton(){
             ctx.fillRect(40, 35, 6, 6)
         }
     })
+    canvas.addEventListener('click', function (e) {
+
+    })
 }
 
 function drawClassButton(){
     let classButton = new Path2D()
     classButton.rect(63, 10, 50, 40)
     ctx.fillStyle = "white"
-    ctx.fillRect(73,20, 30, 6)
-    ctx.fillRect(73,26, 30, 6)
-    ctx.fillRect(73,32, 30, 6)
     ctx.rect(73,20,30,6)
     ctx.rect(73,26,30,6)
     ctx.rect(73,32,30,6)
     ctx.stroke(classButton)
+    ctx.fillRect(73,20, 30, 6)
+    ctx.fillRect(73,26, 30, 6)
+    ctx.fillRect(73,32, 30, 6)
     ctx.stroke()
     canvas.addEventListener('mousemove', function(e) {
         if (ctx.isPointInPath(classButton, e.clientX, e.clientY)){
@@ -65,6 +74,9 @@ function drawClassButton(){
         }
         else {
         }
+    })
+    canvas.addEventListener('click', function (e) {
+
     })
 }
 
@@ -91,6 +103,9 @@ function drawInterfaceButton(){
         else {
         }
     })
+    canvas.addEventListener('click', function (e) {
+
+    })
 }
 
 function drawPackageButton(){
@@ -111,6 +126,9 @@ function drawPackageButton(){
         else {
         }
     })
+    canvas.addEventListener('click', function (e) {
+
+    })
 }
 
 function drawNoteButton(){
@@ -123,10 +141,13 @@ function drawNoteButton(){
     canvas.addEventListener('mousemove', function(e) {
         if (ctx.isPointInPath(noteButton, e.clientX, e.clientY)){
             ctx.font = "lighter 15px Arial"
-            ctx.fillText("Note", 228, 70)
+            ctx.fillText("Note", 230, 70)
         }
         else {
         }
+    })
+    canvas.addEventListener('click', function (e) {
+
     })
 }
 
@@ -136,12 +157,198 @@ function drawDependencyButton(){
     ctx.stroke(depButton)
     ctx.beginPath()
     ctx.setLineDash([4,5])
-    ctx.moveTo(285,20)
+    ctx.moveTo(290,20)
     ctx.lineTo(315,40)
     ctx.stroke()
-
     ctx.beginPath()
     ctx.setLineDash([])
+    ctx.moveTo(302, 42)
+    ctx.lineTo(320, 45)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(314, 27)
+    ctx.lineTo(320, 44)
+    ctx.stroke()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(depButton, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Dependency", 262, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawInheritanceButton(){
+    ctx.fillStyle = "white"
+    let inButton = new Path2D()
+    inButton.rect(328, 10, 50, 40)
+    ctx.stroke(inButton)
+    ctx.beginPath()
+    ctx.moveTo(340, 20)
+    ctx.lineTo(360, 36)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(352, 42)
+    ctx.lineTo(370, 45)
+    ctx.lineTo(364, 27)
+    ctx.stroke()
+    ctx.fill()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(inButton, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Inheritance", 320, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawInterfaceTypeButton(){
+    let button = new Path2D()
+    button.rect(381, 10, 50, 40)
+    ctx.stroke(button)
+    ctx.beginPath()
+    ctx.setLineDash([4,5])
+    ctx.moveTo(390, 20)
+    ctx.lineTo(415, 40)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.setLineDash([])
+    ctx.moveTo(402, 42)
+    ctx.lineTo(420, 45)
+    ctx.lineTo(414, 27)
+    ctx.stroke()
+    ctx.fill()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Interface Type Implementation", 320, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawAssociationButton(){
+    let button = new Path2D()
+    button.rect(434, 10, 50, 40)
+    ctx.stroke(button)
+    ctx.beginPath()
+    ctx.moveTo(445, 20)
+    ctx.lineTo(470, 40)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(457, 42)
+    ctx.lineTo(475, 45)
+    ctx.lineTo(469, 27)
+    ctx.stroke()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Association", 425, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawAggregationButton(){
+    ctx.fillStyle = "white"
+    let button = new Path2D()
+    button.rect(487, 10, 50, 40)
+    ctx.stroke(button)
+    ctx.beginPath()
+    ctx.moveTo(500, 20)
+    ctx.lineTo(503, 30)
+    ctx.lineTo(513, 32)
+    ctx.lineTo(508, 22)
+    ctx.closePath()
+    ctx.stroke()
+    ctx.fill()
+    ctx.beginPath()
+    ctx.moveTo(513,32)
+    ctx.lineTo(523,42)
+    ctx.stroke()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Aggregation", 475, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawCompositionButton(){
+    ctx.fillStyle = "black"
+    let button = new Path2D()
+    button.rect(540, 10, 50, 40)
+    ctx.stroke(button)
+    ctx.beginPath()
+    ctx.moveTo(553, 20)
+    ctx.lineTo(556, 30)
+    ctx.lineTo(566, 32)
+    ctx.lineTo(561, 22)
+    ctx.closePath()
+    ctx.stroke()
+    ctx.fill()
+    ctx.beginPath()
+    ctx.moveTo(566, 32)
+    ctx.lineTo(576, 42)
+    ctx.stroke()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Composition", 530, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+
+    })
+}
+
+function drawDeleteButton(){
+    let button = new Path2D()
+    button.rect(593, 10, 50, 40)
+    ctx.stroke(button)
+    ctx.beginPath()
+    ctx.strokeStyle = "red"
+    ctx.moveTo(603, 20)
+    ctx.lineTo(633, 40)
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(633, 20)
+    ctx.lineTo(603, 40)
+    ctx.stroke()
+    ctx.strokeStyle = "black"
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Delete", 595, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+    })
 }
 
 drawToolBar()
@@ -151,6 +358,12 @@ drawInterfaceButton()
 drawPackageButton()
 drawNoteButton()
 drawDependencyButton()
+drawInheritanceButton()
+drawInterfaceTypeButton()
+drawAssociationButton()
+drawAggregationButton()
+drawCompositionButton()
+drawDeleteButton()
 
 //arrays to hold edges and nodes, respectively
 edgeList = []
