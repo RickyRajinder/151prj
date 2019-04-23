@@ -2,24 +2,6 @@
 edgeList = []
 nodeList = []
 
-$(function () {
-    $('#classtoolbar').w2toolbar({
-        name: 'toolbar',
-        items: [
-            {type: 'button', id: 'select', icon: 'rectangle', caption: 'Select'},
-            {type: 'break' },
-            {type: 'button', id: 'class', caption: 'Class'},
-            {type: 'break' },
-            {type: 'button', id: 'interface', caption: 'Interface'},
-            {type: 'break' },
-            {type: 'button', id: 'package', caption: 'Package'},
-            {type: 'break' },
-            {type: 'button', id: 'note', caption: 'Note'},
-            {type: 'break' },
-        ]
-    });
-});
-
 //base node that is inherited by all the other nodes
 function node(){
     this.name = null
