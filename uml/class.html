@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-    </style>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.5.rc1.min.js"></script>
-    <title>UML Editor: Class Diagram</title>
+ <head>
+     <title>UML Editor: Class Diagram</title>
      <p><font size="30">Class Diagram</font></p>
-     <script src="Class.js"></script>
-     <style type="text/css">
-        canvas { border: 1px solid black; }
-      </style>
-</head>
-<body>
-<canvas id="canvas" width="1000" height="800" style="border:1px solid #d3d3d3;">
-    Your browser does not support the HTML5 canvas tag.</canvas>
-
-<div id="classtoolbar" style="width: 100%; height: 100%;"></div>
-<body onload="draw();">
-    <canvas id="canvas" width="800" height="600"></canvas>
-  </body>
-</body>
-</script>
+  <meta charset="utf-8"/>
+  <script src="Class.js">
+  </script>
+  <style type="text/css">
+    canvas { border: 1px solid black; }
+  </style>
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" width="800" height="600"></canvas>
+ </body>
 </html>
