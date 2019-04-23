@@ -32,6 +32,8 @@ function drawSelectButton(){
             drawClassButton()
             drawInterfaceButton()
             drawPackageButton()
+            drawNoteButton()
+            drawDependencyButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -96,8 +98,50 @@ function drawPackageButton(){
     packageButton.rect(169, 10, 50, 40)
     ctx.stroke(packageButton)
     ctx.fillStyle = "white"
-    ctx.fillRect(179, 26, 30, 20)
+    ctx.fillRect(179, 26, 30, 15)
+    ctx.fillRect(179, 20, 20, 10)
+    ctx.rect(179, 20, 20, 6)
+    ctx.rect(179, 26, 30, 15)
+    ctx.stroke()
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(packageButton, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Package", 168, 70)
+        }
+        else {
+        }
+    })
+}
 
+function drawNoteButton(){
+    let noteButton = new Path2D()
+    noteButton.rect(222, 10, 50, 40)
+    ctx.stroke(noteButton)
+    ctx.fillStyle = "#eae364"
+    ctx.fillRect(232, 20, 30, 20)
+    ctx.strokeRect(232, 20, 30, 20)
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(noteButton, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Note", 228, 70)
+        }
+        else {
+        }
+    })
+}
+
+function drawDependencyButton(){
+    let depButton = new Path2D()
+    depButton.rect(275, 10, 50, 40)
+    ctx.stroke(depButton)
+    ctx.beginPath()
+    ctx.setLineDash([4,5])
+    ctx.moveTo(285,20)
+    ctx.lineTo(315,40)
+    ctx.stroke()
+
+    ctx.beginPath()
+    ctx.setLineDash([])
 }
 
 drawToolBar()
@@ -105,6 +149,8 @@ drawSelectButton()
 drawClassButton()
 drawInterfaceButton()
 drawPackageButton()
+drawNoteButton()
+drawDependencyButton()
 
 //arrays to hold edges and nodes, respectively
 edgeList = []
@@ -232,7 +278,7 @@ function removeNode(location){
     nodeList.splice(location, 1)
 }
 
-//draw method for the canvas, will draw the nodes created at the location on the canvas
+//draw method for the mycanvas, will draw the nodes created at the location on the mycanvas
 function draw() {
     //create a node a at position 0, 0
     var a = new node()
@@ -241,24 +287,29 @@ function draw() {
     var b = new node()
     b.setPosition(10, 10)
 
-    var canvas = document.getElementById('canvas');
+    const canvas = document.getElementById('canvas');
     canvas.addEventListener("mousedown", mouseIsDown, false)
     if (canvas.getContext) {
-        var ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
         for(i = 0; i < nodeList.length; i++){
             //draws the nodes created at their position as a 10x10 square
-            ctx.fillRect(nodeList[i].getx(), nodeList[i].gety(), 10, 10)
+           // ctx.fillRect(nodeList[i].getx(), nodeList[i].gety(), 10, 10)
         }
     }
 }
 
+draw()
 
-//event where mouse is down gives position relative to upper left corner of document, not canvas. needs fixing.
+//event where mouse is down gives position relative to upper left corner of document, not mycanvas. needs fixing.
 function mouseIsDown(event){
     canvas_x = event.pageX
     canvas_y = event.pageY
     alert("X = " + canvas_x + "Y = " + canvas_y)
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillRect(500,400,50,50)
+
 }
 
 //just code for testing, can ignore
