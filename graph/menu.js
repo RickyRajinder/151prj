@@ -1,5 +1,5 @@
 'use strict'
-class MenuBar {
+class Menu {
     constructor(buttons) {
         this.buttons = []
     }
@@ -7,7 +7,7 @@ class MenuBar {
     add(MenuButton){
         buttons.push(MenuButton)
     }
-    
+
 
 
 }
