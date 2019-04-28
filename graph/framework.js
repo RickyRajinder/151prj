@@ -90,9 +90,6 @@ Node.prototype.removeChild = function (node) {
 	node.setParent(null)
 }
 
-
-
-
 	function createCircleNode(x, y, size, color) {
 		return {
 			getBounds: () => {
