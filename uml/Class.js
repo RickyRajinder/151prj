@@ -491,7 +491,7 @@ function removeNode(location){
     nodeList.splice(location, 1)
 }
 
-//draw method for the mycanvas, will draw the nodes created at the location on the mycanvas
+//draw method for the canvas, will draw the nodes created at the location on the canvas
 function draw() {
     //create a node a at position 0, 0
     var a = new node()
@@ -514,15 +514,26 @@ function draw() {
 
 draw()
 
-//event where mouse is down gives position relative to upper left corner of document, not mycanvas. needs fixing.
+//event where mouse is down gives position relative to upper left corner of document, not canvas. needs fixing.
 function mouseIsDown(event){
     canvas_x = event.pageX
     canvas_y = event.pageY
     alert("X = " + canvas_x + "Y = " + canvas_y)
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0,0, canvas.width, canvas.height)
+    drawToolBar()
+    drawSelectButton()
+    drawClassButton()
+    drawInterfaceButton()
+    drawPackageButton()
+    drawNoteButton()
+    drawDependencyButton()
+    drawInheritanceButton()
+    drawInterfaceTypeButton()
+    drawAssociationButton()
+    drawAggregationButton()
+    drawCompositionButton()
+    drawDeleteButton()
     ctx.fillRect(500,400,50,50)
-
 }
 
 //just code for testing, can ignore
