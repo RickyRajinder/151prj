@@ -17,7 +17,7 @@ class Toolbar {
                 return buttons[i];
     }
 
-    drawToolBar() {
+    draw() {
         const bar = new Path2D()
         ctx.lineWidth = 2
         bar.rect(5, 5, 990, 50)
