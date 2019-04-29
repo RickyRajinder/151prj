@@ -1,46 +1,42 @@
+import Node from './framework.js'
+
 'use strict'
 
 function drawGrabber(x, y) {
     const size = 5;
-    const panel = document.getElementById('graphpanel')
-    const square = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-    square.setAttribute('x', x - size / 2)
-    square.setAttribute('y', y - size / 2)
-    square.setAttribute('width', size)
-    square.setAttribute('height', size)
-    square.setAttribute('fill', 'black')
-    panel.appendChild(square)
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.beginPath()
+    ctx.rect(x - size/ 2, y - size / 2, size, size)
+    ctx.fillStyle = 'black'
+    ctx.fill()
 }
 
+function center(rect){
+    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
+}
 
-function createCircleNode(x, y, size, color) {
+function createLineEdge() {
+    let start = undefined
+    let end = undefined
     return {
-        getBounds: () => {
-            return {
-                x: x,
-                y: y,
-                width: size,
-                height: size
-            }
-        },
-        contains: p => {
-            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
-        },
-        translate: (dx, dy) => {
-            x += dx
-            y += dy
+        connect: (s, e) => {
+            start = s
+            end = e
         },
         draw: () => {
-            const panel = document.getElementById('graphpanel')
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-            circle.setAttribute('cx', x + size / 2)
-            circle.setAttribute('cy', y + size / 2)
-            circle.setAttribute('r', size / 2)
-            circle.setAttribute('fill', color)
-            panel.appendChild(circle)
+            const canvas = document.getElementById('canvas')
+            const ctx = canvas.getContext('2d')
+            ctx.beginPath()
+            const p = center(start.getBounds())// Just pick the center of the bounds for now
+            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            ctx.moveTo(p.x, p.y)
+            ctx.lineTo(q.x, q.y)
+            ctx.stroke()
         }
     }
 }
+
 
 function createClassNode(x, y, width, height) {
     return {
@@ -85,28 +81,39 @@ class Graph {
             n.draw()
         }
     }
-
-
+    connect(e, p1, p2) {
+        const n1 = this.findNode(p1)
+        const n2 = this.findNode(p2)
+        if (n1 !== undefined && n2 !== undefined) {
+            e.connect(n1, n2)
+            this.edges.push(e)
+            return true
+        }
+        return false
+    }
 }
-
-
 
 
 document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
-    const n1 = createCircleNode(10, 10, 20, 'black')
-    const n2 = createCircleNode(30, 30, 20, 'blue')
-    graph.add(n1)
-    graph.add(n2)
-    graph.draw()
 
-    const panel = document.getElementById('graphpanel')
+
+    const panel = document.getElementById('canvas')
+
+    panel.addEventListener('dblclick', event => {
+        const n1 = Node.prototype.circleNode(event.clientX, event.clientY, 20, 'black')
+        graph.add(n1)
+        graph.draw()
+    })
+
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
 
     function repaint() {
-        panel.innerHTML = ''
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         graph.draw()
         if (selected !== undefined) {
             const bounds = selected.getBounds()
@@ -118,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function mouseLocation(event) {
-        var rect = panel.getBoundingClientRect();
+        const rect = panel.getBoundingClientRect();
         return {
             x: event.clientX - rect.left,
             y: event.clientY - rect.top,
