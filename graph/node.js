@@ -120,4 +120,4 @@ Node.prototype.circleNode = function (x, y, size, color) {
 	}
 }
 
-export default Node;
+export default Node

@@ -12,7 +12,7 @@ class Toolbar {
     }
 
     getSelectedTool() {
-        for (i = 0; i < buttons.length; i++)
+        for (let i = 0; i < buttons.length; i++)
             if (buttons[i].isSelected)
                 return buttons[i];
     }

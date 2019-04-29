@@ -1,4 +1,4 @@
-import Node from './framework.js'
+import Node from './node.js'
 
 'use strict'
 
