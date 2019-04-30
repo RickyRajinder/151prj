@@ -25,6 +25,8 @@ Node.prototype.clone = function() {
 
 
 Node.prototype.translate = function(dx, dy) {
+	this.x += dx
+	this.y += dy
 	for (let i = 0; i < this.children.length; i++) {
 		const n = Node(this.children[i])
 		n.x += dx
@@ -110,7 +112,7 @@ Node.prototype.circleNode = function (x, y, size, color) {
 			y += dy
 		},
 		draw: () => {
-			const canvas = document.getElementById('canvas')
+			const canvas = document.getElementById('canvas1')
 			const ctx = canvas.getContext('2d')
 			ctx.beginPath()
 			ctx.arc(x + size /2, y + size/2, size / 2, 0, Math.PI * 2, true)
