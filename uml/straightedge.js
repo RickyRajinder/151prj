@@ -1,4 +1,4 @@
-class StraightEdge extends Edge {
+class StraightEdge extends LabeledEdge {
     constructor(start, end) {
         super(start, end);
     }

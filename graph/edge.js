@@ -10,16 +10,49 @@ class Edge {
      * @param {Node} startNode starting node
      * @param {Node} endNode ending node
      * @param {EdgeType} type type of edge
-     * @param {ArrowHead} arrowHead type of arrow
-     * @param {Boolean} reverse point from end to start if true  
+     * @param {ArrowHead} startArrowHead arrow head at start node
+     * @param {ArrowHead} endArrowHead arrow head at end node  
      */
     constructor(startNode, endNode) {
         // Body
         this.startNode = startNode;
         this.endNode = endNode;
         this.type = EdgeType.SOLID;
-        this.arrowHead = Arrow.Invisible;
-        this.reverse = false;
+        this.arrowHeadEnd = Arrow.Invisible;
+        this.arrowHeadStart = Arrow.Invisible;
+        this.propertySheet = new PropertySheet(this);
+    }
+
+    /**
+     * Get properties of this edge
+     * @return the dictionary of properties
+     * { Key: [Value, Type, Opts] }
+     */
+    getProperties() {
+        edgeTypes = ["SOLID", "DASH"];
+        arrowHeadTypes = [];
+        for (arrowType in ArrowHead.Types)
+            arrowHeadTypes.push(arrowType.getText());
+        return {
+            "type": [this.type, "Option", edgeTypes],
+            "startArrowHead": [this.startArrowHead, "Option", arrowHeadTypes],
+            "endArrowHead": [this.endArrowHead, "Option", arrowHeadTypes]
+        }
+    }
+
+    /**
+     * Set current properties of this edge to given properties
+     */
+    setProperties(properties) {
+        for (const [key, value] of properties.entries()) {
+            switch(key) {
+                case "type": this.type = value;
+                break;
+                case "startArrowHead": this.startArrowHead = value;
+                break;
+                case "endArrowHead": this.endArrowHead = value;
+            }
+        }
     }
 
     /**
@@ -40,19 +73,19 @@ class Edge {
     }
 
     /**
-     * Set arrow head type
+     * Set arrow head type at start node
      * @param {ArrowHead} arrow 
      */
-    setArrowHead(arrow) {
-        this.arrowHead = arrow;
+    setStartArrowHead(arrow) {
+        this.arrowHeadStart = arrow;
     }
 
     /**
-     * Set revert start and end points
-     * @param {Boolean} reverse 
+     * Set arrow head type at end node
+     * @param {ArrowHead} arrow 
      */
-    setReverse(reverse) {
-        this.reverse = reverse;
+    setEndArrowEnd(arrow) {
+        this.arrowHeadEnd = arrow;
     }
 
     /**

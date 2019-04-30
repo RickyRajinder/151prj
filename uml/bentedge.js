@@ -1,4 +1,4 @@
-class BentEdge extends Edge {
+class BentEdge extends LabeledEdge {
     constructor(start, end) {
         super(start, end);
     }
