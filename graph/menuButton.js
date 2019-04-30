@@ -14,8 +14,4 @@ class MenuButton {
     setSelected(){
         isSelected = true
     }
-
-    
-    
-
 }
