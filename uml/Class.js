@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let selectStatus = false
     let deleteStatus = false
+    let classStatus = false
 
     function drawSelectButton(){
         let select = new Path2D()
@@ -160,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (ctx.isPointInPath(select, e.clientX, e.clientY)){
                 selectStatus = true
                 deleteStatus = false
+                classStatus = false
             }
             repaint()
         })
@@ -186,6 +188,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(classButton, e.clientX, e.clientY)) {
+                classStatus = true
+                deleteStatus = false
+                selectStatus = false
+            }
             repaint()
         })
     }
@@ -461,6 +468,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
                 selectStatus = false
                 deleteStatus = true
+                classStatus = false
             }
             console.log(graph.nodes.length)
             repaint()
@@ -496,6 +504,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 graph.remove(selected)
             }
             repaint()
+        }
+        if (classStatus) {
+            let classnode = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
+            graph.add(classnode)
+            graph.draw()
         }
     })
 

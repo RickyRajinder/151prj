@@ -1,4 +1,5 @@
 'use strict'
+
 class PropertySheet {
 
     //TODO: Add OK, Cancel buttons
