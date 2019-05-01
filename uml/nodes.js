@@ -21,7 +21,7 @@ Node.prototype.classNode = function (x,y) {
             y += dy
         },
         draw: () => {
-            const canvas = document.getElementById('canvas1')
+            const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
@@ -64,7 +64,7 @@ Node.prototype.interfaceNode = function (x,y) {
             y += dy
         },
         draw: () => {
-            const canvas = document.getElementById('canvas1')
+            const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
@@ -107,7 +107,7 @@ Node.prototype.packageNode = function (x,y) {
             y += dy
         },
         draw: () => {
-            const canvas = document.getElementById('canvas1')
+            const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
@@ -151,7 +151,7 @@ Node.prototype.noteNode = function (x,y) {
             y += dy
         },
         draw: () => {
-            const canvas = document.getElementById('canvas1')
+            const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +

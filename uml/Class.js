@@ -1,11 +1,11 @@
 import Node from "./nodes.js"
 
-const canvas = document.getElementById("canvas")
+const canvas = document.getElementById("canvas1")
 const ctx = canvas.getContext("2d")
 
 function drawGrabber(x, y) {
     const size = 5;
-    const canvas = document.getElementById('canvas1')
+    const canvas = document.getElementById('canvas')
     const ctx = canvas.getContext('2d')
     ctx.beginPath()
     ctx.rect(x - size/ 2, y - size / 2, size, size)
@@ -26,7 +26,7 @@ function createLineEdge() {
             end = e
         },
         draw: () => {
-            const canvas = document.getElementById('canvas1')
+            const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             ctx.beginPath()
             const p = center(start.getBounds())// Just pick the center of the bounds for now
@@ -484,6 +484,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectStatus = false
                 deleteStatus = true
                 classStatus = false
+                packageStatus = false
+                interfaceStatus = false
+                noteStatus = false
             }
             console.log(graph.nodes.length)
             repaint()
@@ -504,12 +507,13 @@ document.addEventListener('DOMContentLoaded', function () {
     drawCompositionButton()
     drawDeleteButton()
 
-    const panel = document.getElementById('canvas1')
+    const panel = document.getElementById('canvas')
 
     panel.addEventListener('dblclick', event => {
         if (selectStatus) {
             const node = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
-            graph.add(node)
+            const n1 = Node.prototype.clone();
+            graph.add(n1)
             graph.draw()
         }
         if (deleteStatus) {
@@ -543,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     function repaint() {
-        const canvas = document.getElementById('canvas1')
+        const canvas = document.getElementById('canvas')
         const ctx = canvas.getContext('2d')
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         graph.draw()

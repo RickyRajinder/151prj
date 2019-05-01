@@ -45,10 +45,11 @@ class Node {
      * TODO: Comment
      */
     clone() {
+        console.log(this)
         let cloned = Object.assign({}, this)
         cloned.children = []
-        for (let i = 0; i < Node.prototype.children.length; i++) {
-            let n = Node(Node.prototype.children[i])
+        for (let i = 0; i < this.children.length; i++) {
+            let n = Node(this.children[i])
             cloned.children.push(Object.assign({}, n))
             n.setParent(cloned)
         }
@@ -149,19 +150,19 @@ class Node {
     /**
      * TODO: Comment
      */
-    addChild = function (node) {
+    addChild (node) {
         let oldParent = node.getParent()
         if (oldParent != null){
             oldParent.removeChild(node)
         }
         this.children.push(node)
         node.setParent(this)
-    }
+    };
 
     /**
      * TODO: Comment
      */
-    removeChild = function (node) {
+    removeChild (node) {
         if (node.getParent() !== this){
             return
         }
