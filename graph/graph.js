@@ -58,7 +58,7 @@ function createCircleNode(x, y, width, height) {
             circle.setAttribute('width', width)
             circle.setAttribute('height', height)
             circle.setAttribute('fill', 'black')
-            circle.appendChild(circle)
+            panel.appendChild(circle)
         }
     }
 }
@@ -110,11 +110,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 
-    panel.addEventListener('dblclick', event => {
-        const e1 = createCircleNode()
-        graph.add(e1)
-        graph.draw()
-    })
 
 
     let selected = undefined
