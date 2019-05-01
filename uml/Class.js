@@ -38,30 +38,6 @@ function createLineEdge() {
     }
 }
 
-
-function createClassNode(x, y, width, height) {
-    return {
-        getBounds: () => {
-            return {
-                x: x,
-                y: y,
-                width: width,
-                height: height
-            }
-        },
-        draw: () => {
-            const panel = document.getElementById('graphpanel')
-            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-            rect.setAttribute('x', x - size / 2)
-            rect.setAttribute('y', y - size / 2)
-            rect.setAttribute('width', width)
-            rect.setAttribute('height', height)
-            rect.setAttribute('fill', 'black')
-            rect.appendChild(square)
-        }
-    }
-}
-
 class Graph {
     constructor() {
         this.nodes = []
@@ -118,6 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectStatus = false
     let deleteStatus = false
     let classStatus = false
+    let interfaceStatus = false
+    let packageStatus = false
+    let noteStatus = false
+    let dependencyStatus = false
+    let inheritanceStatus = false
+    let interfaceTIStatus = false
+    let associationStatus = false
+    let aggregationStatus = false
+    let compositionStatus = false
 
     function drawSelectButton(){
         let select = new Path2D()
@@ -162,6 +147,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectStatus = true
                 deleteStatus = false
                 classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                noteStatus = false
             }
             repaint()
         })
@@ -192,6 +180,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 classStatus = true
                 deleteStatus = false
                 selectStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                noteStatus = false
             }
             repaint()
         })
@@ -221,6 +212,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(interfaceButton, e.clientX, e.clientY)){
+                interfaceStatus = true
+                classStatus = false
+                deleteStatus = false
+                selectStatus = false
+                packageStatus = false
+                noteStatus = false
+            }
             repaint()
         })
     }
@@ -244,6 +243,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(packageButton, e.clientX, e.clientY)){
+                packageStatus = true
+                selectStatus = false
+                deleteStatus = false
+                classStatus = false
+                interfaceStatus = false
+                noteStatus = false
+            }
             repaint()
         })
     }
@@ -264,6 +271,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(noteButton, e.clientX, e.clientY)){
+                noteStatus = true
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+            }
             repaint()
         })
     }
@@ -493,8 +508,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     panel.addEventListener('dblclick', event => {
         if (selectStatus) {
-            const n1 = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
-            graph.add(n1)
+            const node = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
+            graph.add(node)
             graph.draw()
         }
         if (deleteStatus) {
@@ -506,8 +521,23 @@ document.addEventListener('DOMContentLoaded', function () {
             repaint()
         }
         if (classStatus) {
-            let classnode = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
-            graph.add(classnode)
+            let node = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
+            graph.add(node)
+            graph.draw()
+        }
+        if (interfaceStatus){
+            let node = Node.prototype.interfaceNode(event.clientX - 20, event.clientY - 100)
+            graph.add(node)
+            graph.draw()
+        }
+        if (packageStatus){
+            let node = Node.prototype.packageNode(event.clientX - 20, event.clientY - 100)
+            graph.add(node)
+            graph.draw()
+        }
+        if (noteStatus){
+            let node = Node.prototype.noteNode(event.clientX - 20, event.clientY - 100)
+            graph.add(node)
             graph.draw()
         }
     })
