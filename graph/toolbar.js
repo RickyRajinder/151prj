@@ -31,10 +31,6 @@ class Toolbar {
 		this.buttons.forEach(function() {
 			
 		});
-
-		
-
-
 }
     
 }

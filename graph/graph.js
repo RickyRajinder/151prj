@@ -1,5 +1,6 @@
 import Node from './node.js'
-
+import Edge from './edge.js'
+import ToolBar from './toolbar.js'
 'use strict'
 
 function drawGrabber(x, y) {
@@ -28,8 +29,8 @@ function createLineEdge() {
             const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
             ctx.beginPath()
-            const p = center(start.getBounds())// Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
+            const p = center(start.clientX)// Just pick the center of the bounds for now
+            const q = center(end.clientX) // Not the "connection points" that graphed2 uses
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(q.x, q.y)
             ctx.stroke()
@@ -38,7 +39,7 @@ function createLineEdge() {
 }
 
 
-function createClassNode(x, y, width, height) {
+function createCircleNode(x, y, width, height) {
     return {
         getBounds: () => {
             return {
@@ -50,7 +51,7 @@ function createClassNode(x, y, width, height) {
         },
         draw: () => {
             const panel = document.getElementById('graphpanel')
-            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
             rect.setAttribute('x', x - size / 2)
             rect.setAttribute('y', y - size / 2)
             rect.setAttribute('width', width)
@@ -91,6 +92,7 @@ class Graph {
         }
         return false
     }
+    
 }
 
 
@@ -103,6 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('dblclick', event => {
         const n1 = Node.prototype.circleNode(event.clientX, event.clientY, 20, 'black')
         graph.add(n1)
+        graph.draw()
+    })
+
+
+    panel.addEventListener('dblclick', event => {
+        const e1 = new Edge(start, end)
+        graph.add(e1)
         graph.draw()
     })
 
