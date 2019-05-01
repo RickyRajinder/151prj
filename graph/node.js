@@ -130,8 +130,7 @@ Node.prototype.classNode = function (x,y) {
 			}
 		},
 		contains: p => {
-			return this.x <= p.x && p.x <= this.x + this.width &&
-				this.y <= p.y && p.y <= this.y + this.height;
+			return (x + 100 / 2 - p.x) ** 2 + (y + 100 / 2 - p.y) ** 2 <= 100 ** 2 / 4
 		},
 		translate: (dx, dy) => {
 			x += dx
@@ -143,7 +142,7 @@ Node.prototype.classNode = function (x,y) {
 			const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
 				"<foreignObject width='100%' height='100%'>" +
 				"<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-				"<table border='1'><tr><td>row 1, cell 1</td><td>row 1, cell 2</td></tr><tr><td>row 2, cell 1</td><td>row 2, cell 2</td></tr></table>" +
+				"<table border='1'><tr><td>Class Name</td></tr><tr><td>Attributes</td></tr><tr><td>Methods</td></tr></table>" +
 				"</div>" +
 				"</foreignObject>" +
 				"</svg>";
