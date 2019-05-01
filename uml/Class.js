@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
             }
-            repaint()
         })
     }
 
@@ -184,7 +183,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
             }
-            repaint()
         })
     }
 
@@ -220,7 +218,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
             }
-            repaint()
         })
     }
 
@@ -251,7 +248,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 noteStatus = false
             }
-            repaint()
         })
     }
 
@@ -279,7 +275,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 deleteStatus = false
             }
-            repaint()
         })
     }
 
@@ -310,7 +305,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -338,7 +332,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -367,7 +360,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -423,7 +415,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -453,7 +444,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -489,7 +479,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 noteStatus = false
             }
             console.log(graph.nodes.length)
-            repaint()
         })
     }
 
