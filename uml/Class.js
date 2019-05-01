@@ -512,8 +512,7 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('dblclick', event => {
         if (selectStatus) {
             const node = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
-            const n1 = Node.prototype.clone();
-            graph.add(n1)
+            graph.add(node)
             graph.draw()
         }
         if (deleteStatus) {
