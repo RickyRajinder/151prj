@@ -1,4 +1,4 @@
-import Node from "../graph/node.js"
+import Node from "./nodes.js"
 
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
