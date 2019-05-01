@@ -1,6 +1,7 @@
 import Node from './node.js'
 import Edge from './edge.js'
 import ToolBar from './toolbar.js'
+import PropertySheet from './propertysheet.js'
 'use strict'
 
 function drawGrabber(x, y) {
@@ -51,13 +52,13 @@ function createCircleNode(x, y, width, height) {
         },
         draw: () => {
             const panel = document.getElementById('graphpanel')
-            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
-            rect.setAttribute('x', x - size / 2)
-            rect.setAttribute('y', y - size / 2)
-            rect.setAttribute('width', width)
-            rect.setAttribute('height', height)
-            rect.setAttribute('fill', 'black')
-            rect.appendChild(square)
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+            circle.setAttribute('x', x - size / 2)
+            circle.setAttribute('y', y - size / 2)
+            circle.setAttribute('width', width)
+            circle.setAttribute('height', height)
+            circle.setAttribute('fill', 'black')
+            circle.appendChild(circle)
         }
     }
 }
@@ -92,7 +93,7 @@ class Graph {
         }
         return false
     }
-    
+        
 }
 
 
@@ -110,10 +111,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     panel.addEventListener('dblclick', event => {
-        const e1 = new Edge(start, end)
+        const e1 = createCircleNode()
         graph.add(e1)
         graph.draw()
     })
+
 
     let selected = undefined
     let dragStartPoint = undefined

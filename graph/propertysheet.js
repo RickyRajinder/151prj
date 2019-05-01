@@ -11,6 +11,7 @@ class PropertySheet {
      */
 	constructor(owner) {
         this.owner = owner;
+        this.addChangeListener = [];
     }
     
     /**
@@ -20,6 +21,7 @@ class PropertySheet {
         // Get owner's properties map
         properties = this.owner.getProperties();
         //TODO: Open a property editor window with
+        
         //owner's property prefilled
     }
 
@@ -31,6 +33,9 @@ class PropertySheet {
         // Then
         owner.setProperties(newProperty);
     }
-
     
+    createButton(){
+        
+    }
 }
+        
