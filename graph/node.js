@@ -203,47 +203,5 @@ class Node {
     }
 }
 
-Node.prototype.classNode = function (x,y) {
-   this.x = x
-   this.y = y
-	return {
-		getBounds: () => {
-			return {
-				x: x,
-				y: y,
-				width: 100,
-				height: 100
-			}
-		},
-		contains: p => {
-			return this.x <= p.x && p.x <= this.x + this.width &&
-				this.y <= p.y && p.y <= this.y + this.height;
-		},
-		translate: (dx, dy) => {
-			x += dx
-			y += dy
-		},
-		draw: () => {
-			const canvas = document.getElementById('canvas1')
-			const ctx = canvas.getContext('2d')
-			const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
-				"<foreignObject width='100%' height='100%'>" +
-				"<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-				"<table border='1'><tr><td>row 1, cell 1</td><td>row 1, cell 2</td></tr><tr><td>row 2, cell 1</td><td>row 2, cell 2</td></tr></table>" +
-				"</div>" +
-				"</foreignObject>" +
-				"</svg>";
 
-			const DOMURL = self.URL || self.webkitURL || self;
-			const img = new Image();
-			const svg = new Blob([data], {type: "image/svg+xml;charset=utf-8"});
-			const url = DOMURL.createObjectURL(svg);
-			img.onload = function() {
-				ctx.drawImage(img, x, y);
-				DOMURL.revokeObjectURL(url);
-			};
-			img.src = url;
-		}
-	}
-}
 export default Node
