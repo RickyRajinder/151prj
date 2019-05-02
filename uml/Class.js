@@ -498,12 +498,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("modal_close").addEventListener("click", function (){
                 props.saveInput("modal_feedback")
             }, false);
-            document.addEventListener("click", function (){
-                props.saveInput("modal_feedback")
-            }, false);
-            document.addEventListener("keydown", function () {
-                props.saveInput("modal_feedback")
-            }, false);
             document.getElementById("update").addEventListener("click", function (){
                 props.saveInput("modal_feedback")
             }, false)
