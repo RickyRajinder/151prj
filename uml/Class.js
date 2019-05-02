@@ -501,8 +501,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("update").addEventListener("click", function (){
                 let input = props.saveInput("modal_feedback")
                 graph.remove(selected)
-                const node = new Node.prototype.classNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
-                graph.add(node)
+                if (classStatus) {
+                    const node = new Node.prototype.classNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                    graph.add(node)
+                }
                 repaint()
             }, false)
         }
