@@ -1,78 +1,10 @@
 import Node from "./nodes.js"
+import { Graph, drawGrabber } from "../graph/graph.js"
+
+'use strict'
 
 const canvas = document.getElementById("canvas1")
 const ctx = canvas.getContext("2d")
-
-function drawGrabber(x, y) {
-    const size = 5;
-    const canvas = document.getElementById('canvas')
-    const ctx = canvas.getContext('2d')
-    ctx.beginPath()
-    ctx.rect(x - size/ 2, y - size / 2, size, size)
-    ctx.fillStyle = 'black'
-    ctx.fill()
-}
-
-function center(rect){
-    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
-}
-
-function createLineEdge() {
-    let start = undefined
-    let end = undefined
-    return {
-        connect: (s, e) => {
-            start = s
-            end = e
-        },
-        draw: () => {
-            const canvas = document.getElementById('canvas')
-            const ctx = canvas.getContext('2d')
-            ctx.beginPath()
-            const p = center(start.getBounds())// Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
-            ctx.stroke()
-        }
-    }
-}
-
-class Graph {
-    constructor() {
-        this.nodes = []
-        this.edges = []
-    }
-    add(n) {
-        this.nodes.push(n)
-    }
-    remove(n) {
-        this.nodes.splice(this.nodes.indexOf(n), 1)
-    }
-    findNode(p) {
-        for (let i = this.nodes.length - 1; i >= 0; i--) {
-            const n = this.nodes[i]
-            if (n.contains(p)) return n
-        }
-        return undefined
-    }
-    draw() {
-        for (const n of this.nodes) {
-            n.draw()
-        }
-    }
-    connect(e, p1, p2) {
-        const n1 = this.findNode(p1)
-        const n2 = this.findNode(p2)
-        if (n1 !== undefined && n2 !== undefined) {
-            e.connect(n1, n2)
-            this.edges.push(e)
-            return true
-        }
-        return false
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()

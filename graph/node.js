@@ -202,6 +202,11 @@ class Node {
             }
         }
     }
+
+    center(rect){
+        return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
+    }
+
 }
 
 
