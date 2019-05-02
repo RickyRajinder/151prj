@@ -159,17 +159,17 @@ Node.prototype.noteNode = function (x,y) {
                 "<table border='0' style='background-color:#eae364'><tr><td>Note: </td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
-                "</svg>";
+                "</svg>"
 
-            const DOMURL = self.URL || self.webkitURL || self;
-            const img = new Image();
-            const svg = new Blob([data], {type: "image/svg+xml;charset=utf-8"});
-            const url = DOMURL.createObjectURL(svg);
+            const DOMURL = self.URL || self.webkitURL || self
+            const img = new Image()
+            const svg = new Blob([data], {type: "image/svg+xml;charset=utf-8"})
+            const url = DOMURL.createObjectURL(svg)
             img.onload = function () {
-                ctx.drawImage(img, x, y);
-                DOMURL.revokeObjectURL(url);
-            };
-            img.src = url;
+                ctx.drawImage(img, x, y)
+                DOMURL.revokeObjectURL(url)
+            }
+            img.src = url
         }
     }
 }

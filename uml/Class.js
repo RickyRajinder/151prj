@@ -1,5 +1,6 @@
 import Node from "./nodes.js"
 import { Graph, drawGrabber } from "../graph/graph.js"
+import PropertyWindow from "./propertysheet.js"
 
 'use strict'
 
@@ -487,6 +488,18 @@ document.addEventListener('DOMContentLoaded', function () {
             y: event.clientY - rect.top,
         }
     }
+
+    panel.addEventListener("auxclick", e => {
+        let mousePoint = mouseLocation(event)
+        selected = graph.findNode(mousePoint)
+        if (selected !== undefined){
+            PropertyWindow.prototype.openModal(e)
+            document.getElementById("modal_close").addEventListener("click", PropertyWindow.prototype.closeModal, false);
+            document.addEventListener("click", PropertyWindow.prototype.clickHandler, false);
+            document.addEventListener("keydown", PropertyWindow.prototype.keyHandler, false);
+            document.getElementById("update").addEventListener("click", PropertyWindow.prototype.saveInput, false)
+        }
+    })
 
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
