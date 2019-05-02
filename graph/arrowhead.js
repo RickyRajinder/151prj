@@ -55,6 +55,18 @@ class ArrowHead{
         }
     }
 
+    getText() {
+        if (this.shape === Shape.NONE)
+            return "NONE"
+        if (this.shape === Shape.VSHAPE)
+            return "V"
+        if (this.shape === Shape.TRIANGLE)
+            return this.color == "black" ? "BLACK_TRIANGLE" : "TRIANGLE"
+        if (this.shape === Shape.DIAMOND)
+            return this.color == "black" ? "BLACK_DIAMOND" : "DIAMOND"
+        return "UNKNOWN"
+    }
+
     /**
      * All available shapes
      */
