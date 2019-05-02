@@ -18,8 +18,7 @@ class Node {
      * Should be implemented in subclass 
      */
     getProperties() {
-        // Empty dict since base Node
-        return {}
+        throw "Abstract method"
     }
 
     /**
@@ -31,6 +30,7 @@ class Node {
     setProperties(properties) {
         // Do nothing since we don't have any property
         // to set in base class
+        throw "Abstract method"
     }
 
     /**
@@ -42,7 +42,7 @@ class Node {
     }
     
     /**
-     * TODO: Comment
+     * Return a clone of this node
      */
     clone() {
         console.log(this)
@@ -70,27 +70,27 @@ class Node {
     }
 
     /**
-     * TODO: Comment
-     * @param {*} edge 
-     * @param {*} point1 
-     * @param {*} point2 
+     * Implement in subclass
+     * @param {Edge} edge 
+     * @param {Point2D} point1 
+     * @param {Point2D} point2 
      */
     addEdge(edge, point1, point2) {
 	    return edge.getEnd() != null //Implement in Edge
     }
 
     /**
-     * TODO: Comment
-     * @param {*} graph 
-     * @param {*} edge 
+     * Implement in subclass
+     * @param {Graph} graph 
+     * @param {Edge} edge 
      */
     removeEdge(graph, edge) {
     }
 
     /**
-     * TODO: Comment
-     * @param {*} graph 
-     * @param {*} node 
+     * Remove a node associates with this node
+     * @param {Graph} graph graph contains this node 
+     * @param {Node} node some node on the graph
      */
     removeNode(graph, node) {
         if (node === this.parent) {
@@ -102,41 +102,42 @@ class Node {
     }
 
     /**
-     * TODO: Comment
-     * @param {*} graph 
-     * @param {*} g2 
-     * @param {*} grid 
+     * Layout node on grid.
+     * Abstract method
+     * @param {Graph} graph 
+     * @param {Graphics} g2 
+     * @param {Grid} grid 
      */
     layout(graph, g2, grid) {
     }
 
     /**
-     * TODO: Comment
-     * @param {*} node 
-     * @param {*} point 
+     * Add sub node to this node
+     * @param {Node} node 
+     * @param {Point2D} point 
      */
     addNode(node, point) {
-	    return false
+        return false
     }
 
     /**
-     * TODO: Comment
+     * Return parent of this node
      */
     getParent() {
 	    return this.parent
     }
 
     /**
-     * TODO: Comment
+     * Return the list of children
      */
     getChildren() {
 	    return this.children
     }
 
     /**
-     * TODO: Comment
-     * @param {*} index 
-     * @param {*} node 
+     * Add child node at index
+     * @param {number} index 
+     * @param {Node} node 
      */
     addChild(index, node) {
         let oldParent = node.getParent()
@@ -148,7 +149,7 @@ class Node {
     }
 
     /**
-     * TODO: Comment
+     * Add child node
      */
     addChild (node) {
         let oldParent = node.getParent()
@@ -160,7 +161,7 @@ class Node {
     };
 
     /**
-     * TODO: Comment
+     * Remove child node
      */
     removeChild (node) {
         if (node.getParent() !== this){

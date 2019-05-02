@@ -6,21 +6,28 @@
 class Edge {
 
     /**
-     * Constructor
-     * @param {Node} startNode starting node
-     * @param {Node} endNode ending node
-     * @param {EdgeType} type type of edge
-     * @param {ArrowHead} startArrowHead arrow head at start node
-     * @param {ArrowHead} endArrowHead arrow head at end node  
+     * Constructor  
      */
     constructor(startNode, endNode) {
         // Body
-        this.startNode = startNode;
-        this.endNode = endNode;
+        this.startNode = undefined;
+        this.endNode = undefined;
         this.type = EdgeType.SOLID;
         this.arrowHeadEnd = Arrow.Invisible;
         this.arrowHeadStart = Arrow.Invisible;
         this.propertySheet = new PropertySheet(this);
+    }
+
+
+
+    /**
+     * Connect 2 nodes
+     * @param {Node} startNode 
+     * @param {Node} endNode 
+     */
+    connect(startNode, endNode) {
+        this.startNode = startNode
+        this.endNode = endNode
     }
 
     /**
@@ -31,8 +38,8 @@ class Edge {
     getProperties() {
         edgeTypes = ["SOLID", "DASH"];
         arrowHeadTypes = [];
-        for (arrowType in ArrowHead.Types)
-            arrowHeadTypes.push(arrowType.getText());
+        for (arrowHead in ArrowHead.Prototypes)
+            arrowHeadTypes.push(arrowHead.getText());
         return {
             "type": [this.type, "Option", edgeTypes],
             "startArrowHead": [this.startArrowHead, "Option", arrowHeadTypes],
@@ -63,7 +70,7 @@ class Edge {
         DOTTED : 1,
         DASH   : 2
     }
-
+    
     /**
      * Set type of edge
      * @param {EdgeType} edgeType 
@@ -82,7 +89,7 @@ class Edge {
 
     /**
      * Set arrow head type at end node
-     * @param {ArrowHead} arrow 
+     * @param {ArrowHead} arrow
      */
     setEndArrowEnd(arrow) {
         this.arrowHeadEnd = arrow;
@@ -90,18 +97,25 @@ class Edge {
 
     /**
      * Check if a point is contained by this edge boundaries
-     * @param {Point2D} point 
+     * @param {number} x x-coordinate
+     * @param {number} y y-coordinate
      */
-    contains(point) {
-        //TODO: Get bounds
-        //TODO: Check point is within bounds
+    contains(x, y) {
+        bounds = this.getBounds()
+        leftMost = bounds.x
+        rightMost = bounds.x + bounds.width
+        topMost = bounds.y
+        bottomMost = bounds.y + bounds.height
+        return (x > leftMost && x < rightMost) &&
+                (y > topMost && y < bottomMost)
     }
 
     /**
-     * Get bounds of this edge
+     * Abstract
+     * Get bounds of this edge.
      */
     getBounds() {
-        //TODO: To be implemented 
+        throw "Abstract method" 
     }
 
 
@@ -110,9 +124,13 @@ class Edge {
      * edge on the connected nodes
      */
     getConnectionPoints() {
-        //TODO: To be implemented
+        startBound = this.startNode.getBounds()
+        endBound = this.endNode.getBounds()
+        startCenterX = (startBound.x + startBound.width) / 2
+        startCenterY = (startBound.y + startBound.height) / 2
+        endCenterX = (endBound.x + endBound.width) / 2
+        endCenterY = (endBound.y + endBound.height) / 2
+        return [startNode.getConnectionPoint(endCenterX, endCenterY),
+                endNode.getConnectionPoint(startCenterX, startCenterY)] 
     }
-
-    
-
 }
