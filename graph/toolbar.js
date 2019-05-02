@@ -17,7 +17,7 @@ class Toolbar {
         this.y = y
         this.width = width
         this.height = height
-        this.start = x
+        this.leftMost = (x + width) / 2 // Center alignment
         this.buttons = []
         canvas.addEventListener("click", handle, false)
     }
@@ -40,24 +40,32 @@ class Toolbar {
      * @param {function} action action for button being added
      * @param {drawble} drawable a drawable object for drawing button icon 
      */
-	addButton(width, height, action, drawable) {
+	addButton(action, drawable) {
+        width = this.width / 15 // 15 button max
+        if (this.leftMost + width >= this.x + this.width)
+            throw "Button overflow"
         paddingX = 3 // pixels
         paddingY = 3 // pixels
-        button = new MenuButton(start + paddingX, y + paddingY, 
+        button = new MenuButton(this.leftMost + paddingX, y + paddingY, 
                         width, height + paddingY)
-        
+        // Realign
+        for (button in this.buttons) {
+            button.x -= width / 2
+        }
+        // Update left most
+        this.leftMost = button.x + width;
 	}
 
-	draw(g2) {
-
-		g2.fillRect(this.x, this.y, this.width, this.height)
+    /**
+     * Draw toolbar + its buttons
+     * @param {Graphics2D} g2 
+     */
+    draw(g2) { 
+        // Draw toobar
+        g2.rect(this.x, this.y, this.width, this.height)
+        // Draw buttons
+        for (b in this.buttons)
+            b.draw(g2)
 	}
-
-	drawButtons() {
-		this.buttons.forEach(function() {
-			
-	    });
-    }
-    
 }
 	
