@@ -20,6 +20,7 @@ export class PropertySheet {
         this.modalWrapper = document.getElementById(modalwrapper)
         this.modalWindow = document.getElementById(modalwindow)
         this.form = document.getElementById(modalform)
+        this.text = ""
     }
     
     /**
@@ -31,6 +32,10 @@ export class PropertySheet {
         //TODO: Open a property editor window with
         
         //owner's property prefilled
+    }
+
+    getText(){
+        return this.text
     }
 
     /**
@@ -63,10 +68,12 @@ export class PropertySheet {
     saveInput (modalform){
         const form = document.getElementById(modalform)
         let text = "";
-        for (let i = 0; i < form.length; i++){
-            text += form.elements[i].value + "<br>";
+        for (let i = 0; i < form.length-1; i++){
+            text += form.elements[i].value + "/";
         }
         this.closeModal()
+        this.text = text.split("/", 3)
+        return this.text
     }
 }
         
