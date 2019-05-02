@@ -14,26 +14,29 @@ export class PropertyWindow /*extends graph/propertysheet.js*/ {
         modalWindow.style.marginLeft = (-modalWindow.offsetWidth)/2 + "px";
         //  e.preventDefault ? e.preventDefault() : e.returnValue = false;
     };
-    closeModal (e) {
+    closeModal () {
         modalWrapper.className = "";
         //e.preventDefault ? e.preventDefault() : e.returnValue = false;
     }
     clickHandler (e) {
         if (!e.target) e.target = e.srcElement;
         if (e.target.tagName === "DIV") {
-            if (e.target.id !== "modal_window") this.closeModal(e);
+            if (e.target.id !== "modal_window") {
+                this.closeModal()
+            }
         }
     }
     keyHandler (e) {
-        if (e.keyCode === 27) this.closeModal(e);
+        if (e.keyCode === 27) this.closeModal();
     };
-    saveInput (){
+    saveInput (e){
         const form = document.getElementById("modal_feedback")
         let text = "";
         for (let i = 0; i < form.length; i++){
             text += form.elements[i].value + "<br>";
         }
         console.log(text)
+        modalWrapper.className = "";
     }
 }
 
