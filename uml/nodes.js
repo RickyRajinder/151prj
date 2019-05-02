@@ -174,4 +174,40 @@ Node.prototype.noteNode = function (x,y) {
     }
 }
 
+/**
+* TODO: Comment
+*/
+Node.prototype.circleNode = function(x, y, size, color) {
+    this.x = x
+    this.y = y
+    return {
+        getBounds: () => {
+            return {
+                x: x,
+                y: y,
+                width: size,
+                height: size
+            }
+        },
+        contains: p => {
+            return (x + size / 2 - p.x) ** 2 + (y + size / 2 - p.y) ** 2 <= size ** 2 / 4
+        },
+        translate: (dx, dy) => {
+            x += dx
+            y += dy
+        },
+        draw: () => {
+            const canvas = document.getElementById('canvas')
+            const ctx = canvas.getContext('2d')
+            ctx.beginPath()
+            ctx.arc(x + size /2, y + size/2, size / 2, 0, Math.PI * 2, true)
+            ctx.fillStyle = color
+            ctx.fill()
+        }
+    }
+}
+
+Node.prototype.center = function(rect) {
+    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
+}
 export default Node

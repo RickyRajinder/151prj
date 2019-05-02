@@ -15,14 +15,19 @@ class MenuButton {
      * @param {Drawable} drawable drawable object
      */
     constructor(x, y, width, height, 
-        drawable = null, background = 'gray') {
+        drawable, background = 'gray') {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.drawable = drawable;
         this.background = background;
+        this.action = undefined
         this.isSelected = false;
+    }
+
+    setAction(action) {
+        this.action = action
     }
 
     /**

@@ -6,11 +6,11 @@
 class Toolbar {
     /**
      * Construct new toolbar
-     * @param {*} canvas html canvas element
-     * @param {*} x top-left-x position 
-     * @param {*} y top-left-y position
-     * @param {*} width width of toolbar
-     * @param {*} height height of toolbar
+     * @param {Canvas} canvas html canvas element
+     * @param {number} x top-left-x position 
+     * @param {number} y top-left-y position
+     * @param {number} width width of toolbar
+     * @param {number} height height of toolbar
      */
 	constructor(canvas, x, y, width, height) {
         this.x = x
@@ -47,7 +47,8 @@ class Toolbar {
         paddingX = 3 // pixels
         paddingY = 3 // pixels
         button = new MenuButton(this.leftMost + paddingX, y + paddingY, 
-                        width, height + paddingY)
+                        width, height + paddingY, drawable)
+        button.setAction(action)
         // Realign
         for (button in this.buttons) {
             button.x -= width / 2
