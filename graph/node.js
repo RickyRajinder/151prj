@@ -1,7 +1,7 @@
 'use strict'
 
 
-class Node {
+export class Node {
 
     constructor() {
         this.children = []
@@ -171,3 +171,5 @@ class Node {
     }
 
 }
+
+export default Node
