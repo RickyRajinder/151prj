@@ -1,6 +1,6 @@
 import Node from "./nodes.js"
 import { Graph, drawGrabber } from "../graph/graph.js"
-import PropertyWindow from "./propertysheet.js"
+import PropertySheet from "../graph/propertysheet.js"
 
 'use strict'
 
@@ -493,11 +493,20 @@ document.addEventListener('DOMContentLoaded', function () {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
         if (selected !== undefined){
-            PropertyWindow.prototype.openModal(e)
-            document.getElementById("modal_close").addEventListener("click", PropertyWindow.prototype.closeModal, false);
-            document.addEventListener("click", PropertyWindow.prototype.clickHandler, false);
-            document.addEventListener("keydown", PropertyWindow.prototype.keyHandler, false);
-            document.getElementById("update").addEventListener("click", PropertyWindow.prototype.saveInput, false)
+            const props = new PropertySheet(selected, "modal_wrapper", "modal_window", "modal_feedback")
+            props.openModal(e)
+            document.getElementById("modal_close").addEventListener("click", function (){
+                props.saveInput("modal_feedback")
+            }, false);
+            document.addEventListener("click", function (){
+                props.saveInput("modal_feedback")
+            }, false);
+            document.addEventListener("keydown", function () {
+                props.saveInput("modal_feedback")
+            }, false);
+            document.getElementById("update").addEventListener("click", function (){
+                props.saveInput("modal_feedback")
+            }, false)
         }
     })
 

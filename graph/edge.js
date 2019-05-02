@@ -38,7 +38,7 @@ class Edge {
     getProperties() {
         edgeTypes = ["SOLID", "DASH"];
         arrowHeadTypes = [];
-        for (arrowHead in ArrowHead.Prototypes)
+        for (arrowHead in ArrowHead.prototype.Prototypes)
             arrowHeadTypes.push(arrowHead.getText());
         return {
             "type": [this.type, "Option", edgeTypes],

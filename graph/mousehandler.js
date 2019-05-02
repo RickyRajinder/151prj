@@ -1,8 +1,8 @@
 import Node from './node.js'
 import { Graph, drawGrabber } from './graph.js'
-//import Edge from './edge.js'
-//import ToolBar from './toolbar.js'
-//import PropertySheet from './propertysheet.js'
+import Edge from './edge.js'
+import ToolBar from './toolbar.js'
+import PropertySheet from './propertysheet.js'
 'use strict'
 
 document.addEventListener('DOMContentLoaded', function () {
