@@ -49,13 +49,13 @@ export class PropertySheet {
     createButton(){
         return (
             <div>
-            <button className="propertysheet" onClick={() => saveInput()}>Ok</button>
+            <button className="propertysheet" onClick={() => saveInput}>Ok</button>
             <button className="propertysheet" onClick={() => closeModal}>Close</button>
             </div>
         );
     }
 
-    openModal (e) {
+    openModal (event) {
         this.modalWrapper.className = "overlay";
         let overflow = this.modalWindow.offsetHeight - document.documentElement.clientHeight;
         if(overflow > 0) {
