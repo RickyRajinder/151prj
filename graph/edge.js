@@ -8,7 +8,7 @@ class Edge {
     /**
      * Constructor  
      */
-    constructor(startNode, endNode) {
+    constructor() {
         // Body
         this.startNode = undefined;
         this.endNode = undefined;
