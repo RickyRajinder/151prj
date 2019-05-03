@@ -1,98 +1,17 @@
 import Node from "./nodes.js"
+import { Graph, drawGrabber } from "../graph/graph.js"
+import PropertySheet from "../graph/propertysheet.js"
+
+'use strict'
 
 const canvas = document.getElementById("canvas1")
 const ctx = canvas.getContext("2d")
-let dragStartPoint = undefined
-let currentx = undefined
-let currenty = undefined
-
-function drawGrabber(x, y) {
-    const size = 5;
-    const canvas = document.getElementById('canvas')
-    const ctx = canvas.getContext('2d')
-    ctx.beginPath()
-    ctx.rect(x - size/ 2, y - size / 2, size, size)
-    ctx.fillStyle = 'black'
-    ctx.fill()
-}
-
-function drawLine(startx, starty, endx, endy) {
-    console.log("Drawing")
-    const size = 5;
-    const canvas = document.getElementById('canvas')
-    const ctx = canvas.getContext('2d')
-    ctx.moveTo(startx, starty)
-    ctx.lineTo(endx, endy)
-    ctx.stroke()
-    
-}
-
-function center(rect){
-    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
-}
-
-function createLineEdge() {
-    let start = undefined
-    let end = undefined
-    return {
-        connect: (s, e) => {
-            start = s
-            end = e
-        },
-        draw: () => {
-            const canvas = document.getElementById('canvas')
-            const ctx = canvas.getContext('2d')
-            ctx.beginPath()
-            const p = center(start.getBounds())// Just pick the center of the bounds for now
-            const q = center(end.getBounds()) // Not the "connection points" that graphed2 uses
-            ctx.moveTo(p.x, p.y)
-            ctx.lineTo(q.x, q.y)
-            ctx.stroke()
-        }
-    }
-}
-
-class Graph {
-    constructor() {
-        this.nodes = []
-        this.edges = []
-    }
-    add(n) {
-        this.nodes.push(n)
-    }
-    remove(n) {
-        this.nodes.splice(this.nodes.indexOf(n), 1)
-    }
-    findNode(p) {
-        for (let i = this.nodes.length - 1; i >= 0; i--) {
-            const n = this.nodes[i]
-            if (n.contains(p)) return n
-        }
-        return undefined
-    }
-    draw() {
-        for (const n of this.nodes) {
-            n.draw()
-        }
-    }
-    connect(e, p1, p2) {
-        const n1 = this.findNode(p1)
-        const n2 = this.findNode(p2)
-        if (n1 !== undefined && n2 !== undefined) {
-            e.connect(n1, n2)
-            this.edges.push(e)
-            return true
-        }
-        return false
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
 
     let selected = undefined
-    let selected2 = undefined
+    let dragStartPoint = undefined
     let dragStartBounds = undefined
 
     function drawToolBar() {
@@ -164,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 noteStatus = false
-                dependencyStatus = false
             }
         })
     }
@@ -197,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 noteStatus = false
-                dependencyStatus = false
             }
         })
     }
@@ -233,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectStatus = false
                 packageStatus = false
                 noteStatus = false
-                dependencyStatus = false
             }
         })
     }
@@ -264,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 classStatus = false
                 interfaceStatus = false
                 noteStatus = false
-                dependencyStatus = false
             }
         })
     }
@@ -292,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 deleteStatus = false
-                dependencyStatus = false
             }
         })
     }
@@ -324,16 +238,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            if (ctx.isPointInPath(depButton, e.clientX, e.clientY)){
-                noteStatus = false
-                selectStatus = false
-                classStatus = false
-                interfaceStatus = false
-                packageStatus = false
-                deleteStatus = false
-                dependencyStatus = true
-                //console.log("Dep sel")
-            }
         })
     }
 
@@ -506,7 +410,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 interfaceStatus = false
                 noteStatus = false
-                dependencyStatus = false
             }
             console.log(graph.nodes.length)
         })
@@ -529,11 +432,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const panel = document.getElementById('canvas')
 
     panel.addEventListener('dblclick', event => {
-        if (selectStatus) {
-            const node = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
-            graph.add(node)
-            graph.draw()
-        }
         if (deleteStatus) {
             let mousePoint = mouseLocation(event)
             selected = graph.findNode(mousePoint)
@@ -575,9 +473,6 @@ document.addEventListener('DOMContentLoaded', function () {
             drawGrabber(bounds.x + bounds.width, bounds.y)
             drawGrabber(bounds.x, bounds.y + bounds.height)
             drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
-        }else if (selected !== undefined && dependencyStatus === true) {
-            //will have line that follows cursor.
-            //drawLine(dragStartPoint.x, dragStartPoint.y, currentx, currenty)
         }
     }
 
@@ -589,13 +484,70 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    panel.addEventListener("auxclick", e => {
+        let mousePoint = mouseLocation(event)
+        selected = graph.findNode(mousePoint)
+        if (selected !== undefined && classStatus){
+            const props = new PropertySheet(selected, "modal_wrapper", "modal_window", "modal_feedback")
+            props.openModal(e)
+            document.getElementById("modal_close").addEventListener("click", function (){
+                props.saveInput("modal_feedback")
+            }, false);
+            document.getElementById("update").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback")
+                graph.remove(selected)
+                const node = new Node.prototype.classNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }
+        if (selected !== undefined && interfaceStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_int", "modal_window_int", "modal_feedback_int")
+            props.openModal(e)
+            document.getElementById("modal_close_int").addEventListener("click", function (){
+                props.saveInput("modal_feedback_int")
+            }, false);
+            document.getElementById("update_int").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_int")
+                graph.remove(selected)
+                const node = new Node.prototype.interfaceNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }
+        if (selected !== undefined && packageStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_pack", "modal_window_pack", "modal_feedback_pack")
+            props.openModal(e)
+            document.getElementById("modal_close_pack").addEventListener("click", function (){
+                props.saveInput("modal_feedback_pack")
+            }, false);
+            document.getElementById("update_pack").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_pack")
+                graph.remove(selected)
+                const node = new Node.prototype.packageNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }if (selected !== undefined && noteStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_note", "modal_window_note", "modal_feedback_note")
+            props.openModal(e)
+            document.getElementById("modal_close_note").addEventListener("click", function (){
+                props.saveInput("modal_feedback_note")
+            }, false);
+            document.getElementById("update_note").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_note")
+                graph.remove(selected)
+                const node = new Node.prototype.noteNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }
+    })
+
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
         if (selected !== undefined && selectStatus === true) {
-            dragStartPoint = mousePoint
-            dragStartBounds = selected.getBounds()
-        }else if (selected !== undefined && dependencyStatus === true) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
         }
@@ -605,8 +557,6 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mousemove', event => {
         if (dragStartPoint === undefined) return
         let mousePoint = mouseLocation(event)
-        currentx = mousePoint.x
-        currenty = mousePoint.y
         if (selected !== undefined && selectStatus === true) {
             const bounds = selected.getBounds();
 
@@ -616,20 +566,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 dragStartBounds.y - bounds.y
                 + mousePoint.y - dragStartPoint.y);
             repaint()
-        }else if (selected !== undefined && dependencyStatus === true) {
-            repaint()
         }
     })
 
     panel.addEventListener('mouseup', event => {
-        let mousePoint = mouseLocation(event)
-        selected2 = graph.findNode(mousePoint)
-        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
-            console.log("Found start and end node!")
-            console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
-            drawLine(dragStartPoint.x, dragStartPoint.y, mousePoint.x, mousePoint. y)
-            repaint()
-        }
         dragStartPoint = undefined
         dragStartBounds = undefined
     })
