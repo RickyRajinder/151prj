@@ -432,11 +432,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const panel = document.getElementById('canvas')
 
     panel.addEventListener('dblclick', event => {
-        if (selectStatus) {
-            const node = Node.prototype.circleNode(event.clientX - 20, event.clientY - 100, 20, 'black')
-            graph.add(node)
-            graph.draw()
-        }
         if (deleteStatus) {
             let mousePoint = mouseLocation(event)
             selected = graph.findNode(mousePoint)
@@ -492,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener("auxclick", e => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
-        if (selected !== undefined){
+        if (selected !== undefined && classStatus){
             const props = new PropertySheet(selected, "modal_wrapper", "modal_window", "modal_feedback")
             props.openModal(e)
             document.getElementById("modal_close").addEventListener("click", function (){
@@ -501,10 +496,49 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("update").addEventListener("click", function (){
                 let input = props.saveInput("modal_feedback")
                 graph.remove(selected)
-                if (classStatus) {
-                    const node = new Node.prototype.classNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
-                    graph.add(node)
-                }
+                const node = new Node.prototype.classNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }
+        if (selected !== undefined && interfaceStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_int", "modal_window_int", "modal_feedback_int")
+            props.openModal(e)
+            document.getElementById("modal_close_int").addEventListener("click", function (){
+                props.saveInput("modal_feedback_int")
+            }, false);
+            document.getElementById("update_int").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_int")
+                graph.remove(selected)
+                const node = new Node.prototype.interfaceNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }
+        if (selected !== undefined && packageStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_pack", "modal_window_pack", "modal_feedback_pack")
+            props.openModal(e)
+            document.getElementById("modal_close_pack").addEventListener("click", function (){
+                props.saveInput("modal_feedback_pack")
+            }, false);
+            document.getElementById("update_pack").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_pack")
+                graph.remove(selected)
+                const node = new Node.prototype.packageNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
+                repaint()
+            }, false)
+        }if (selected !== undefined && noteStatus){
+            const props = new PropertySheet(selected, "modal_wrapper_note", "modal_window_note", "modal_feedback_note")
+            props.openModal(e)
+            document.getElementById("modal_close_note").addEventListener("click", function (){
+                props.saveInput("modal_feedback_note")
+            }, false);
+            document.getElementById("update_note").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback_note")
+                graph.remove(selected)
+                const node = new Node.prototype.noteNodeUpdated(selected.getBounds().x, selected.getBounds().y, input)
+                graph.add(node)
                 repaint()
             }, false)
         }

@@ -12,7 +12,7 @@
             content: " ";
             width: 100%;
             height: 100%;
-            position: fixed;
+            position: relative;
             z-index: 100;
             top: 0;
             left: 0;
@@ -35,7 +35,64 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
+        #modal_window_int {
+            display: none;
+            z-index: 200;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 360px;
+            overflow: auto;
+            padding: 10px 20px;
+            background: #fff;
+            border: 5px solid #999;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        #modal_window_pack {
+            display: none;
+            z-index: 200;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 360px;
+            overflow: auto;
+            padding: 10px 20px;
+            background: #fff;
+            border: 5px solid #999;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        #modal_window_note {
+            display: none;
+            z-index: 200;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 360px;
+            overflow: auto;
+            padding: 10px 20px;
+            background: #fff;
+            border: 5px solid #999;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
         #modal_wrapper.overlay #modal_window {
+            display: block;
+        }
+
+        #modal_wrapper_int.overlay #modal_window_int {
+            display: block;
+        }
+
+        #modal_wrapper_pack.overlay #modal_window_pack {
+            display: block;
+        }
+
+        #modal_wrapper_note.overlay #modal_window_note {
             display: block;
         }
     </style>
@@ -52,14 +109,51 @@
 <div id="modal_window">
     <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
     <form id="modal_feedback" action="#" accept-charset="UTF-8">
-        <p><label>Class Name: <strong>*</strong><br>
+        <p><label>Class Name: <br>
         <input type="text" autofocus required size="24" name="classname" value="">
         </label></p>
-        <p><label>Attributes: <strong>*</strong><br>
+        <p><label>Attributes: <br>
             <textarea name="attributes" cols="48" rows="8"></textarea></label></p>
         <p><label>Methods<br>
             <textarea name="methods" cols="48" rows="8"></textarea></label></p>
         <p><input id ="update" type="button" name="classform" value="Update"></p>
+    </form>
+</div>
+</div>
+<div id="modal_wrapper_int">
+<div id="modal_window_int">
+    <div style="text-align: right;"><a id="modal_close_int" href="#">close <b>X</b></a></div>
+    <form id="modal_feedback_int" action="#" accept-charset="UTF-8">
+        <p><label>Interface Name: <br>
+        <input type="text" autofocus required size="24" name="classname" value="">
+        </label></p>
+        <p><label>Attributes: <br>
+            <textarea name="attributes" cols="48" rows="8"></textarea></label></p>
+        <p><label>Methods<br>
+            <textarea name="methods" cols="48" rows="8"></textarea></label></p>
+        <p><input id ="update_int" type="button" name="interfaceform" value="Update"></p>
+    </form>
+</div>
+</div>
+<div id="modal_wrapper_pack">
+<div id="modal_window_pack">
+    <div style="text-align: right;"><a id="modal_close_pack" href="#">close <b>X</b></a></div>
+    <form id="modal_feedback_pack" action="#" accept-charset="UTF-8">
+        <p><label>Package Name: <br>
+        <input type="text" autofocus required size="24" name="classname" value="">
+        </label></p>
+        <p><input id ="update_pack" type="button" name="packageform" value="Update"></p>
+    </form>
+</div>
+</div>
+<div id="modal_wrapper_note">
+<div id="modal_window_note">
+    <div style="text-align: right;"><a id="modal_close_note" href="#">close <b>X</b></a></div>
+    <form id="modal_feedback_note" action="#" accept-charset="UTF-8">
+        <p><label>Note: <br>
+        <input type="text" autofocus required size="24" name="classname" value="">
+        </label></p>
+        <p><input id ="update_note" type="button" name="noteform" value="Update"></p>
     </form>
 </div>
 </div>
