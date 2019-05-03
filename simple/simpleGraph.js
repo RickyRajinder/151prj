@@ -19,6 +19,7 @@ class SimpleGraph extends Graph{
             "endArrowHead": [this.endArrowHead, "Option", arrowHeadTypes]
         }
     }
+    
 
 
 }
