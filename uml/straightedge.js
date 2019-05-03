@@ -5,7 +5,7 @@ class StraightEdge extends LabeledEdge {
 
     // OVERRIDE
     draw() {
-        //TODO: To be implemented
+        
     }
     
     createLineEdge() {

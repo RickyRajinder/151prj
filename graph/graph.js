@@ -22,6 +22,10 @@ export class Graph {
         for (const n of this.nodes) {
             n.draw()
         }
+        for (const e of this.edges){
+            e.draw();
+        }
+
     }
     connect(e, p1, p2) {
         const n1 = this.findNode(p1)
