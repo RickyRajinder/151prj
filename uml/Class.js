@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
 
     let selected = undefined
+    let selected2 = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
 
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 noteStatus = false
+                dependencyStatus = false
             }
         })
     }
@@ -115,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 noteStatus = false
+                dependencyStatus = false
             }
         })
     }
@@ -150,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectStatus = false
                 packageStatus = false
                 noteStatus = false
+                dependencyStatus = false
             }
         })
     }
@@ -180,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 classStatus = false
                 interfaceStatus = false
                 noteStatus = false
+                dependencyStatus = false
             }
         })
     }
@@ -207,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 deleteStatus = false
+                dependencyStatus = false
             }
         })
     }
@@ -238,6 +244,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(depButton, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = true
+            }
         })
     }
 
@@ -410,6 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 interfaceStatus = false
                 noteStatus = false
+                dependencyStatus = false
             }
             console.log(graph.nodes.length)
         })
@@ -550,6 +566,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined && selectStatus === true) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
+        } else if (selected !== undefined && dependencyStatus === true) {
+            dragStartPoint = mousePoint
+            dragStartBounds = selected.getBounds()
         }
         repaint()
     })
@@ -570,6 +589,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     panel.addEventListener('mouseup', event => {
+        let mousePoint = mouseLocation(event)
+        selected2 = graph.findNode(mousePoint)
+        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
+            console.log("Found start and end node!")
+            console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
+            repaint()
+        }
         dragStartPoint = undefined
         dragStartBounds = undefined
     })

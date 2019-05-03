@@ -47,12 +47,7 @@ export class PropertySheet {
     }
     
     createButton(){
-        return (
-            <div>
-            <button className="propertysheet" onClick={() => saveInput()}>Ok</button>
-            <button className="propertysheet" onClick={() => closeModal}>Close</button>
-            </div>
-        );
+        return
     }
 
     openModal (e) {
