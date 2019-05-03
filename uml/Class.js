@@ -115,6 +115,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 noteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -150,6 +156,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectStatus = false
                 packageStatus = false
                 noteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -180,6 +192,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 classStatus = false
                 interfaceStatus = false
                 noteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -207,6 +225,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 packageStatus = false
                 deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -238,6 +262,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(noteButton, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = true
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
+            }
         })
     }
 
@@ -265,6 +303,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = true
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         })
     }
 
@@ -293,6 +343,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = true
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         })
     }
 
@@ -318,6 +380,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = true
+            aggregationStatus = false
+            compositionStatus = false
             repaint()
         })
     }
@@ -348,6 +422,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = true
+            compositionStatus = false
         })
     }
 
@@ -377,6 +463,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = true
         })
     }
 
