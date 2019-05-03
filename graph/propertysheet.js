@@ -29,7 +29,7 @@ export class PropertySheet {
         // Get owner's properties map
         let properties = this.owner.getProperties();
         //TODO: Open a property editor window with
-        
+        openModal()
         //owner's property prefilled
     }
 
@@ -41,13 +41,18 @@ export class PropertySheet {
      * Collect and update property of owner
      */
     set() {
-        let newProperties = //TODO: Collect data from property editor dialog window
+        let newProperties = this.owner.getProperties;//TODO: Collect data from property editor dialog window
         // Then
-        owner.setProperties(newProperty);
+        owner.setProperties(newProperties);
     }
     
     createButton(){
-        
+        return (
+            <div>
+            <button className="propertysheet" onClick={() => saveInput()}>Ok</button>
+            <button className="propertysheet" onClick={() => closeModal}>Close</button>
+            </div>
+        );
     }
 
     openModal (e) {
