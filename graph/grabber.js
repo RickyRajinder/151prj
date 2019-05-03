@@ -1,9 +1,6 @@
 'use strict'
 
-class Grabber {
-    constructor(Drawable) {
-
-    }
+class Grabbers {
 
     draw(){
         let select = new Path2D()
