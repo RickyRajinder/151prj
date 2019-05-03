@@ -16,15 +16,15 @@ function drawGrabber(x, y) {
     ctx.fill()
 }
 
-function drawLine(x, y) {
+function drawLine(startx, starty, endx, endy) {
     console.log("Drawing")
     const size = 5;
     const canvas = document.getElementById('canvas')
     const ctx = canvas.getContext('2d')
-    console.log("Start pt: " + dragStartPoint.x + " " + dragStartPoint.y)
-    ctx.moveTo(dragStartPoint.x, dragStartPoint.y)
-    ctx.lineTo(x, y)
+    ctx.moveTo(startx, starty)
+    ctx.lineTo(endx, endy)
     ctx.stroke()
+    
 }
 
 function center(rect){
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const graph = new Graph()
 
     let selected = undefined
+    let selected2 = undefined
     let dragStartBounds = undefined
 
     function drawToolBar() {
@@ -331,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 deleteStatus = false
                 dependencyStatus = true
-                console.log("Dep sel")
+                //console.log("Dep sel")
             }
         })
     }
@@ -575,7 +576,8 @@ document.addEventListener('DOMContentLoaded', function () {
             drawGrabber(bounds.x, bounds.y + bounds.height)
             drawGrabber(bounds.x + bounds.width, bounds.y + bounds.height)
         }else if (selected !== undefined && dependencyStatus === true) {
-            drawLine(currentx, currenty)
+            //will have line that follows cursor.
+            //drawLine(dragStartPoint.x, dragStartPoint.y, currentx, currenty)
         }
     }
 
@@ -615,13 +617,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 + mousePoint.y - dragStartPoint.y);
             repaint()
         }else if (selected !== undefined && dependencyStatus === true) {
-            console.log(mousePoint.x + " " + mousePoint.y)
-            drawLine(mousePoint.x, mousePoint.y);
             repaint()
         }
     })
 
     panel.addEventListener('mouseup', event => {
+        let mousePoint = mouseLocation(event)
+        selected2 = graph.findNode(mousePoint)
+        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
+            console.log("Found start and end node!")
+            console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
+            drawLine(dragStartPoint.x, dragStartPoint.y, mousePoint.x, mousePoint. y)
+            repaint()
+        }
         dragStartPoint = undefined
         dragStartBounds = undefined
     })
