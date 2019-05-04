@@ -13,12 +13,10 @@ class Edge {
         this.startNode = undefined;
         this.endNode = undefined;
         this.type = EdgeType.SOLID;
-        this.arrowHeadEnd = Arrow.Invisible;
-        this.arrowHeadStart = Arrow.Invisible;
+        this.arrowHeadEnd = ArrowHead.None;
+        this.arrowHeadStart = ArrowHead.None;
         this.propertySheet = new PropertySheet(this);
     }
-
-
 
     /**
      * Connect 2 nodes
@@ -28,6 +26,20 @@ class Edge {
     connect(startNode, endNode) {
         this.startNode = startNode
         this.endNode = endNode
+    }
+
+    /**
+     * Get end node
+     */
+    getEnd() {
+        return this.endNode;
+    }
+
+    /**
+     * Get start node
+     */
+    getStart() {
+        return this.startNode;
     }
 
     /**
@@ -108,6 +120,14 @@ class Edge {
         let bottomMost = bounds.y + bounds.height
         return (x > leftMost && x < rightMost) &&
                 (y > topMost && y < bottomMost)
+    }
+
+    /**
+     * Abstract method for drawing this edge
+     * @param {Graphics2D} g2 
+     */
+    draw(g2) {
+        throw "Abstract method"
     }
 
     /**

@@ -1,10 +1,7 @@
 'use strict'
 
-export class PropertySheet {
-
-    //TODO: Add OK, Cancel buttons
-    //TODO: Implement event handlers for those buttons
-
+class PropertySheet {
+    
     /**
      * Construct a new property sheet
      * @param {Modifiable} owner
@@ -16,23 +13,49 @@ export class PropertySheet {
 	constructor(owner, modalwrapper, modalwindow, modalform) {
         this.owner = owner;
         this.addChangeListener = [];
-        this.modalWrapper = document.getElementById(modalwrapper)
-        this.modalWindow = document.getElementById(modalwindow)
-        this.form = document.getElementById(modalform)
         this.text = ""
     }
-    
+
     /**
-     * Show property sheet
+     * Show property editor
+     * @param {*} e 
      */
-    show() {
-        // Get owner's properties map
-        let properties = this.owner.getProperties();
-        //TODO: Open a property editor window with
-        openModal()
-        //owner's property prefilled
+    show(e) {
+        let properties = owner.getProperties();
+        openPropertyModal(properties);
     }
 
+    /**
+     * Abstract method for open 
+     * property editor modal window
+     * @param {Event} event
+     * @param {*} properties 
+     */
+    openPropertyModal(event, properties) {
+        throw "Abstract method"
+    }
+
+    /**
+     * Close property editor
+     * @param {*} event 
+     */
+    close(e) {
+        let newProperties = closePropertyModal();
+        setProperties(newProperties);
+    }
+
+    /**
+     * Abstract method for closing
+     * property editor modal window
+     * @return collected new properties
+     */
+    closePropertyModal() {
+        throw "Abstract method"
+    }
+
+    /**
+     * 
+     */
     getText(){
         return this.text
     }
@@ -40,38 +63,17 @@ export class PropertySheet {
     /**
      * Collect and update property of owner
      */
-    set() {
-        let newProperties = this.owner.getProperties;//TODO: Collect data from property editor dialog window
-        // Then
-        owner.setProperties(newProperties);
+    setProperties(properties) { 
+        owner.setProperties(properties);
     }
-    
 
-    openModal () {
-        this.modalWrapper.className = "overlay";
-        let overflow = this.modalWindow.offsetHeight - document.documentElement.clientHeight;
-        if(overflow > 0) {
-            this.modalWindow.style.maxHeight = (parseInt(window.getComputedStyle(this.modalWindow).height) - overflow) + "px";
-        }
-        this.modalWindow.style.marginTop = (-this.modalWindow.offsetHeight)/2 + "px";
-        this.modalWindow.style.marginLeft = (-this.modalWindow.offsetWidth)/2 + "px";
-        //e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-    closeModal () {
-        this.modalWrapper.className = "";
-        //e.preventDefault ? e.preventDefault() : e.returnValue = false;
-    }
-    saveInput (modalform){
-        const form = document.getElementById(modalform)
-        let text = "";
-        for (let i = 0; i < form.length-1; i++){
-            text += form.elements[i].value + "/";
-        }
-        this.closeModal()
-        this.text = text.split("/", 3)
-        return this.text
+    /**
+     * Get properties dictionary from owner
+     * @param {*} modalform 
+     */
+    getProperties() {
+        return owner.getProperties();
     }
 }
-        
 
-export default PropertySheet
+//export default PropertySheet

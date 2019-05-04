@@ -1,5 +1,5 @@
 'use strict'
-class ArrowHead{
+class ArrowHead {
 
     /**
      * Construct an arrow head
