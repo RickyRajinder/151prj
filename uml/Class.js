@@ -334,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
