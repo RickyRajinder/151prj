@@ -47,10 +47,6 @@ export class PropertySheet {
     }
     
     createButton(){
-<<<<<<< HEAD
-=======
-        return
->>>>>>> 4e9501e3f329c6c618b839a521b76a64ad245b07
     }
 
     openModal (event) {
