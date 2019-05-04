@@ -19,3 +19,13 @@ class Grabbers {
         })
     }
 }
+
+export function drawGrabber(x, y) {
+    const size = 5;
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.beginPath()
+    ctx.rect(x - size/ 2, y - size / 2, size, size)
+    ctx.fillStyle = 'black'
+    ctx.fill()
+}

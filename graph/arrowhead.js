@@ -1,5 +1,6 @@
 'use strict'
-class ArrowHead{
+
+export class ArrowHead {
 
     /**
      * Construct an arrow head

@@ -1,13 +1,14 @@
-'use strict'
+import { PropertySheet } from './propertysheet.js'
 
+'use strict'
 
 export class Node {
 
     constructor() {
         this.children = []
         this.parent = null
-        this.x = null
-        this.y = null
+        this.x = 0
+        this.y = 0
         this.propertySheet = new PropertySheet(this);
     }
 
@@ -22,6 +23,30 @@ export class Node {
     }
 
     /**
+     * Draw node
+     * @param {Graphics2D} g2
+     */
+    draw(g2) {
+        throw "Abstract method"
+    }
+
+    /**
+     * Get boundaries of node
+     */
+    getBounds() {
+        throw "Abstract method"
+    }
+
+    /**
+     * Get connection point given the location of
+     * the other node 
+     * @param {*} otherNode 
+     */
+    getConnectionPoint(x, y) {
+        throw "Abstract method"
+    }
+
+    /**
      * Set properties. Set the current properties to the new properties 
      * taken from user's input.
      * Should be implemented in subclass
@@ -31,6 +56,21 @@ export class Node {
         // Do nothing since we don't have any property
         // to set in base class
         throw "Abstract method"
+    }
+
+    /**
+     * Check containment for given point
+     * @param {*} x x-coordinate
+     * @param {*} y y-coordinate
+     */
+    contains(x, y) {
+        let bounds = getBounds()
+        const left = bounds.x
+        const right = bounds.x + bounds.width
+        const top = bounds.y
+        const bottom = bounds.y + bounds.height
+        return x > left && x < right && 
+                x > top && x < bottom
     }
 
     /**
@@ -75,7 +115,7 @@ export class Node {
      * @param {Point2D} point1 
      * @param {Point2D} point2 
      */
-    addEdge(edge, point1, point2) {
+    addEdge(edge, x1, y1, x2, y2) {
 	    return edge.getEnd() != null //Implement in Edge
     }
 
@@ -117,7 +157,7 @@ export class Node {
      * @param {Node} node 
      * @param {Point2D} point 
      */
-    addNode(node, point) {
+    addNode(node, x, y) {
         return false
     }
 

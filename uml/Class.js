@@ -334,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -454,8 +453,13 @@ document.addEventListener('DOMContentLoaded', function () {
             selected = graph.findNode(mousePoint)
             if (selected !== undefined) {
                 graph.remove(selected)
+                repaint()
             }
-            repaint()
+            selected = graph.findEdge(mousePoint)
+            if (selected !== undefined) {
+                graph.removeEdge(selected)
+                repaint()
+            }
         }
         if (classStatus) {
             let node = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
@@ -599,7 +603,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let edge = Edge.prototype.straightedge(selected, selected2)
             //console.log("Nodes: " + selected + " " + selected2)
             //console.log("Edge: " + edge)
-            graph.connect(edge, selected, selected2)
+            graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
             
             repaint()
         }
