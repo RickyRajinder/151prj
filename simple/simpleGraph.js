@@ -1,5 +1,5 @@
-import {SimpleEdge} from "./simpleEdge";
-import {SimpleNode} from "./simpleNode";
+import {SimpleEdge} from "/graph/simpleEdge";
+import {SimpleNode} from "/graph/simpleNode";
 
 'use strict'
 

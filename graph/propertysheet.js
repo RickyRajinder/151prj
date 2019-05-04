@@ -46,12 +46,8 @@ export class PropertySheet {
         owner.setProperties(newProperties);
     }
     
-    createButton(){
-        return;
 
-    }
-
-    openModal (event) {
+    openModal () {
         this.modalWrapper.className = "overlay";
         let overflow = this.modalWindow.offsetHeight - document.documentElement.clientHeight;
         if(overflow > 0) {
@@ -59,7 +55,7 @@ export class PropertySheet {
         }
         this.modalWindow.style.marginTop = (-this.modalWindow.offsetHeight)/2 + "px";
         this.modalWindow.style.marginLeft = (-this.modalWindow.offsetWidth)/2 + "px";
-        //  e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        //e.preventDefault ? e.preventDefault() : e.returnValue = false;
     }
     closeModal () {
         this.modalWrapper.className = "";
