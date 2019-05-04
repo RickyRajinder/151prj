@@ -29,7 +29,7 @@ export class PropertySheet {
         // Get owner's properties map
         let properties = this.owner.getProperties();
         //TODO: Open a property editor window with
-        
+        openModal()
         //owner's property prefilled
     }
 
@@ -41,16 +41,13 @@ export class PropertySheet {
      * Collect and update property of owner
      */
     set() {
-        let newProperties = //TODO: Collect data from property editor dialog window
+        let newProperties = this.owner.getProperties;//TODO: Collect data from property editor dialog window
         // Then
-        owner.setProperties(newProperty);
+        owner.setProperties(newProperties);
     }
     
-    createButton(){
-        
-    }
 
-    openModal (e) {
+    openModal () {
         this.modalWrapper.className = "overlay";
         let overflow = this.modalWindow.offsetHeight - document.documentElement.clientHeight;
         if(overflow > 0) {
@@ -58,7 +55,7 @@ export class PropertySheet {
         }
         this.modalWindow.style.marginTop = (-this.modalWindow.offsetHeight)/2 + "px";
         this.modalWindow.style.marginLeft = (-this.modalWindow.offsetWidth)/2 + "px";
-        //  e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        //e.preventDefault ? e.preventDefault() : e.returnValue = false;
     }
     closeModal () {
         this.modalWrapper.className = "";

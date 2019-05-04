@@ -46,8 +46,8 @@ export class Edge {
      * { Key: [Value, Type, Opts] }
      */
     getProperties() {
-        edgeTypes = ["SOLID", "DASH"];
-        arrowHeadTypes = [];
+        const edgeTypes = ["SOLID", "DASH"];
+        let arrowHeadTypes = [];
         for (arrowHead in ArrowHead.prototype.Prototypes)
             arrowHeadTypes.push(arrowHead.getText());
         return {
@@ -102,11 +102,11 @@ export class Edge {
      * @param {number} y y-coordinate
      */
     contains(x, y) {
-        bounds = this.getBounds()
-        leftMost = bounds.x
-        rightMost = bounds.x + bounds.width
-        topMost = bounds.y
-        bottomMost = bounds.y + bounds.height
+        let bounds = this.getBounds()
+        let leftMost = bounds.x
+        let rightMost = bounds.x + bounds.width
+        let topMost = bounds.y
+        let bottomMost = bounds.y + bounds.height
         return (x > leftMost && x < rightMost) &&
                 (y > topMost && y < bottomMost)
     }
@@ -125,12 +125,12 @@ export class Edge {
      * edge on the connected nodes
      */
     getConnectionPoints() {
-        startBound = this.startNode.getBounds()
-        endBound = this.endNode.getBounds()
-        startCenterX = (startBound.x + startBound.width) / 2
-        startCenterY = (startBound.y + startBound.height) / 2
-        endCenterX = (endBound.x + endBound.width) / 2
-        endCenterY = (endBound.y + endBound.height) / 2
+        let startBound = this.startNode.getBounds()
+        let endBound = this.endNode.getBounds()
+        let startCenterX = (startBound.x + startBound.width) / 2
+        let startCenterY = (startBound.y + startBound.height) / 2
+        let endCenterX = (endBound.x + endBound.width) / 2
+        let endCenterY = (endBound.y + endBound.height) / 2
         return [startNode.getConnectionPoint(endCenterX, endCenterY),
                 endNode.getConnectionPoint(startCenterX, startCenterY)] 
     }

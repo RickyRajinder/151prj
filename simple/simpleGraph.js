@@ -1,25 +1,23 @@
+import {SimpleEdge} from "/graph/simpleEdge";
+import {SimpleNode} from "/graph/simpleNode";
+
 'use strict'
-import {SimpleEdge} from "./simpleEdge";
-import {SimpleNode} from "./simpleNode";
 
 class SimpleGraph extends Graph{
     constructor(){
-        this.edge = [];
-        this.node = [];
+        super();
     }
-
-    getProperties() {
-        edgeTypes = ["SOLID", "DASH"];
-        arrowHeadTypes = [];
-        for (arrowHead in ArrowHead.prototype.Prototypes)
-            arrowHeadTypes.push(arrowHead.getText());
-        return {
-            "type": [this.type, "Option", edgeTypes],
-            "startArrowHead": [this.startArrowHead, "Option", arrowHeadTypes],
-            "endArrowHead": [this.endArrowHead, "Option", arrowHeadTypes]
-        }
-    }
-    
-
-
 }
+
+function drawSelectButton(){
+        
+    }
+document.addEventListener('DOMContentLoaded', function (){
+    const g = new SimpleGraph();
+    const toolbar = new Toolbar('canvas1', 5, 5, 990, 50);
+    toolbar.addButton(, );
+    toolbar.draw();
+
+
+
+})

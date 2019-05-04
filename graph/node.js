@@ -109,6 +109,7 @@ export class Node {
      * @param {Grid} grid 
      */
     layout(graph, g2, grid) {
+        throw "Abtract method"
     }
 
     /**
