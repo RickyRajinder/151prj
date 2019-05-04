@@ -1,4 +1,5 @@
 import Node from "./nodes.js"
+import Edge from "./labelededge.js"
 import { Graph, drawGrabber } from "../graph/graph.js"
 import PropertySheet from "../graph/propertysheet.js"
 
@@ -594,6 +595,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
             console.log("Found start and end node!")
             console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
+            
+            let edge = Edge.prototype.labelededge(selected, selected2)
+            console.log("Nodes: " + selected + " " + selected2)
+            console.log("Edge: " + edge)
+            console.log(graph.edges[0])
+            graph.connect(edge, selected, selected)
+            console.log(graph.edges[0])
+            
             repaint()
         }
         dragStartPoint = undefined
