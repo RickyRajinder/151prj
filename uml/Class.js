@@ -1,5 +1,5 @@
 import Node from "./nodes.js"
-import Edge from "./labelededge.js"
+import Edge from "./straightedge.js"
 import { Graph, drawGrabber } from "../graph/graph.js"
 import PropertySheet from "../graph/propertysheet.js"
 
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Found start and end node!")
             console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
             
-            let edge = Edge.prototype.labelededge(selected, selected2)
+            let edge = Edge.prototype.straightedge(selected, selected2)
             console.log("Nodes: " + selected + " " + selected2)
             console.log("Edge: " + edge)
             console.log(graph.edges[0])

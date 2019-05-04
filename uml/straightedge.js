@@ -1,31 +1,18 @@
-class StraightEdge extends LabeledEdge {
-    constructor(start, end) {
-        super(start, end);
-    }
+import Edge from "../graph/edge.js"
 
-    // OVERRIDE
-    draw() {
-        
-    }
-    
-    createLineEdge() {
-        let start = undefined
-        let end = undefined
-        return {
-            connect: (s, e) => {
-                start = s
-                end = e
-            },
-            draw: () => {
-                const canvas = document.getElementById('canvas')
-                const ctx = canvas.getContext('2d')
-                ctx.beginPath()
-                const p = center(start.clientX)// Just pick the center of the bounds for now
-                const q = center(end.clientX) // Not the "connection points" that graphed2 uses
-                ctx.moveTo(p.x, p.y)
-                ctx.lineTo(q.x, q.y)
-                ctx.stroke()
-            }
+Edge.prototype.straightedge= function (startNode, endNode) {
+    this.startNode = startNode
+    this.endNode = endNode
+    return {
+        draw: () => {
+            console.log("Drawing LabeledEdge.")
+            const canvas = document.getElementById('canvas')
+            const ctx = canvas.getContext('2d')
+            ctx.moveTo(startNode.getBounds().x, startNode.getBounds().y)
+            ctx.lineTo(endNode.getBounds().x, endNode.getBounds().y)
+            ctx.stroke()
         }
     }
 }
+
+export default Edge
