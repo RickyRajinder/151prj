@@ -1,4 +1,5 @@
 import Node from "./nodes.js"
+import Edge from "./straightedge.js"
 import { Graph, drawGrabber } from "../graph/graph.js"
 import PropertySheet from "../graph/propertysheet.js"
 
@@ -333,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
-            repaint()
         })
     }
 
@@ -453,8 +453,13 @@ document.addEventListener('DOMContentLoaded', function () {
             selected = graph.findNode(mousePoint)
             if (selected !== undefined) {
                 graph.remove(selected)
+                repaint()
             }
-            repaint()
+            selected = graph.findEdge(mousePoint)
+            if (selected !== undefined) {
+                graph.removeEdge(selected)
+                repaint()
+            }
         }
         if (classStatus) {
             let node = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
@@ -594,6 +599,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
             console.log("Found start and end node!")
             console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
+            
+            let edge = Edge.prototype.straightedge(selected, selected2)
+            console.log("Nodes: " + selected + " " + selected2)
+            console.log("Edge: " + edge)
+            console.log(graph.edges[0])
+            graph.connect(edge, selected, selected)
+            console.log(graph.edges[0])
+            
             repaint()
         }
         dragStartPoint = undefined

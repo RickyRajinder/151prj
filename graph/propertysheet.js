@@ -1,6 +1,6 @@
 'use strict'
 
-class PropertySheet {
+export class PropertySheet {
     
     /**
      * Construct a new property sheet
@@ -75,5 +75,3 @@ class PropertySheet {
         return owner.getProperties();
     }
 }
-
-//export default PropertySheet

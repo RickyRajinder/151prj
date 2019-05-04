@@ -1,5 +1,6 @@
 'use strict'
 
+
 export class Graph {
 
     constructor() {
@@ -71,10 +72,18 @@ export class Graph {
      * Find a node in this graph
      * @param {*} x, y point on canvas
      */
-    findNode(x, y) {
+    findNode(p) {
         for (let i = this.nodes.length - 1; i >= 0; i--) {
             const n = this.nodes[i]
             if (n.contains(p)) return n
+        }
+        return undefined
+    }
+
+    findEdge(p){
+        for (let i = this.edges.length - 1; i >= 0; i--) {
+            const edge = this.edges[i]
+            if (edge.contains(p.x, p.y)) return edge
         }
         return undefined
     }
@@ -84,9 +93,9 @@ export class Graph {
      * @param {*} g2 
      */
     draw(g2) {
-
+    
         layout(g2)
-
+    
         for (const n of this.nodes) {
             n.draw()
         }

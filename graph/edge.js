@@ -1,9 +1,19 @@
 'use strict'
 
 /**
+* Type of edge
+*/
+export var EdgeType = {
+    SOLID  : 0,
+    DOTTED : 1,
+    DASH   : 2
+};
+
+/**
  * Base class represents edge between two nodes
  */
-class Edge {
+export class Edge {
+    
 
     /**
      * Constructor  
@@ -50,7 +60,7 @@ class Edge {
     getProperties() {
         const edgeTypes = ["SOLID", "DASH"];
         let arrowHeadTypes = [];
-        for (arrowHead in ArrowHead.prototype.Prototypes)
+        for (let arrowHead in ArrowHead.prototype.Prototypes)
             arrowHeadTypes.push(arrowHead.getText());
         return {
             "type": [this.type, "Option", edgeTypes],
@@ -72,15 +82,6 @@ class Edge {
                 case "endArrowHead": this.endArrowHead = value;
             }
         }
-    }
-
-    /**
-     * Type of edge
-     */
-    EdgeType = {
-        SOLID  : 0,
-        DOTTED : 1,
-        DASH   : 2
     }
     
     /**
@@ -154,3 +155,5 @@ class Edge {
                 endNode.getConnectionPoint(startCenterX, startCenterY)] 
     }
 }
+
+export default Edge
