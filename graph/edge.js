@@ -48,7 +48,7 @@ export class Edge {
     getProperties() {
         const edgeTypes = ["SOLID", "DASH"];
         let arrowHeadTypes = [];
-        for (arrowHead in ArrowHead.prototype.Prototypes)
+        for (let arrowHead in ArrowHead.prototype.Prototypes)
             arrowHeadTypes.push(arrowHead.getText());
         return {
             "type": [this.type, "Option", edgeTypes],

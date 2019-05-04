@@ -1,5 +1,6 @@
 'use strict'
 
+
 export class Graph {
     constructor() {
         this.nodes = []
@@ -11,10 +12,20 @@ export class Graph {
     remove(n) {
         this.nodes.splice(this.nodes.indexOf(n), 1)
     }
+    removeEdge(e){
+        this.edges.splice(this.edges.indexOf(e), 1)
+    }
     findNode(p) {
         for (let i = this.nodes.length - 1; i >= 0; i--) {
             const n = this.nodes[i]
             if (n.contains(p)) return n
+        }
+        return undefined
+    }
+    findEdge(p){
+        for (let i = this.edges.length - 1; i >= 0; i--) {
+            const edge = this.edges[i]
+            if (edge.contains(p.x, p.y)) return edge
         }
         return undefined
     }

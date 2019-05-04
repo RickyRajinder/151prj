@@ -453,8 +453,13 @@ document.addEventListener('DOMContentLoaded', function () {
             selected = graph.findNode(mousePoint)
             if (selected !== undefined) {
                 graph.remove(selected)
+                repaint()
             }
-            repaint()
+            selected = graph.findEdge(mousePoint)
+            if (selected !== undefined) {
+                graph.removeEdge(selected)
+                repaint()
+            }
         }
         if (classStatus) {
             let node = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
