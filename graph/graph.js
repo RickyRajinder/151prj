@@ -8,7 +8,7 @@ export class Graph {
         this.edges = []
         this.edgesToBeRemoved = []
         this.nodesToBeRemoved = []
-        needsLayout = true
+        let needsLayout = true
     }
 
     /**
@@ -135,29 +135,29 @@ export class Graph {
             const n = nodes[i]
             n.removeEdge(this, edge)
         }
-        needsLayout = true
+        this.needsLayout = true
     }
 
     /**
      * Causes the layout of the graph to be recomputed.
      */
     layout() {
-        needsLayout = true
+        this.needsLayout = true
     }
 
 
     layout(g2) {
-        if (!needsLayout) return
+        if (!this.needsLayout) return
         this.nodes.filter(function(n) { 
             return !nodesToBeRemoved.includes(n) 
         })
         this.edges.filter(function(e) {
             return !edgesToBeRemoved.includes(e)
         })
-        for (let i = 0; i < this.nodes.length; i++) {
-            const n = this.nodes[i]
-            n.layout(this, g2)
-        }
-        needsLayout = false
+        // for (let i = 0; i < this.nodes.length; i++) {
+        //     const n = this.nodes[i]
+        //     n.layout(this, g2)
+        // }
+        this.needsLayout = false
     }
 }

@@ -1,3 +1,6 @@
+import { ArrowHead } from './arrowhead.js'
+import { PropertySheet } from './propertysheet.js'
+
 'use strict'
 
 /**
@@ -60,8 +63,9 @@ export class Edge {
     getProperties() {
         const edgeTypes = ["SOLID", "DASH"];
         let arrowHeadTypes = [];
-        for (let arrowHead in ArrowHead.prototype.Prototypes)
-            arrowHeadTypes.push(arrowHead.getText());
+        ArrowHead.Prototypes.foreach(
+            function(a) { arrowHeadTypes.push(a.getText()) }
+        )
         return {
             "type": [this.type, "Option", edgeTypes],
             "startArrowHead": [this.startArrowHead, "Option", arrowHeadTypes],

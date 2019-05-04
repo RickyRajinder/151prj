@@ -1,3 +1,5 @@
+import { PropertySheet } from './propertysheet.js'
+
 'use strict'
 
 export class Node {
@@ -5,8 +7,8 @@ export class Node {
     constructor() {
         this.children = []
         this.parent = null
-        this.x = null
-        this.y = null
+        this.x = 0
+        this.y = 0
         this.propertySheet = new PropertySheet(this);
     }
 

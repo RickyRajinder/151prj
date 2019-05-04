@@ -1,23 +1,6 @@
-import {SimpleEdge} from "/graph/simpleEdge";
-import {SimpleNode} from "/graph/simpleNode";
+import { Graph } from '../graph/graph.js'
 
 'use strict'
 
-class SimpleGraph extends Graph{
-    constructor(){
-        super();
-    }
+export class SimpleGraph extends Graph {
 }
-
-function drawSelectButton(){
-        
-    }
-document.addEventListener('DOMContentLoaded', function (){
-    const g = new SimpleGraph();
-    const toolbar = new Toolbar('canvas1', 5, 5, 990, 50);
-    toolbar.addButton(, );
-    toolbar.draw();
-
-
-
-})
