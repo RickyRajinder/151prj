@@ -28,10 +28,10 @@ export class Graph {
 
     }
     connect(e, p1, p2) {
-        console.log("Connecting nodes..")
-        console.log(">Nodes: " + p1 + " " + p2)
+        //console.log("Connecting nodes..")
+        //console.log(">Nodes: " + p1 + " " + p2)
         if (p1 !== undefined && p2 !== undefined) {
-            console.log("Found both nodes!")
+            //console.log("Found both nodes!")
             //e.connect(p1, p2)
             this.edges.push(e)
             return true
