@@ -15,6 +15,12 @@ export class RectangularNode extends Node {
         this.height = height
     }
 
+    translate(dx, dy) {
+        this.x += dx
+        this.y += dy
+        super.translate(dx, dy);
+    }
+
     /**
      * Draw rectangular node
      * @param {*} g2  

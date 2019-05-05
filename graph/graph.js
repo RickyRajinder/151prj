@@ -8,7 +8,7 @@ export class Graph {
         this.edges = []
         this.edgesToBeRemoved = []
         this.nodesToBeRemoved = []
-        let needsLayout = true
+        this.needsLayout = true
     }
 
     /**
@@ -28,7 +28,7 @@ export class Graph {
                 this.edges.push(edge)
                 if (!this.nodes.contains(edge.getEnd()))
                     this.nodes.push(edge.getEnd())
-                needsLayout = true
+                this.needsLayout = true
                 return true
             }
         }
@@ -55,8 +55,8 @@ export class Graph {
         }
         if (insideANode && !accepted)
             return false
-        this.nodes.push(n)
-        needLayout = true
+        this.nodes.push(node);
+        this.needsLayout = true
         return true
     }
 
@@ -94,14 +94,14 @@ export class Graph {
      */
     draw(g2) {
     
-        layout(g2)
+        this.layout(g2);
     
         for (const n of this.nodes) {
-            n.draw()
+            n.draw(g2)
         }
 
         for (const e of this.edges){
-            e.draw();
+            e.draw(g2);
         }
     }
 
@@ -138,21 +138,23 @@ export class Graph {
         this.needsLayout = true
     }
 
-    /**
-     * Causes the layout of the graph to be recomputed.
-     */
-    layout() {
-        this.needsLayout = true
-    }
+    // /**
+    //  * Causes the layout of the graph to be recomputed.
+    //  */
+    // layout() {
+    //     this.needsLayout = true
+    // }
 
 
     layout(g2) {
         if (!this.needsLayout) return
+        const removedNodes = this.nodesToBeRemoved
         this.nodes.filter(function(n) { 
-            return !nodesToBeRemoved.includes(n) 
+            return !removedNodes.includes(n)
         })
+        const removedEdges = this.edgesToBeRemoved
         this.edges.filter(function(e) {
-            return !edgesToBeRemoved.includes(e)
+            return !removedEdges.includes(e)
         })
         // for (let i = 0; i < this.nodes.length; i++) {
         //     const n = this.nodes[i]

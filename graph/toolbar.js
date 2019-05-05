@@ -14,27 +14,16 @@ export class Toolbar {
      * @param {number} width width of toolbar
      * @param {number} height height of toolbar
      */
-	constructor(canvas, x, y, width, height) {
+	constructor(x, y, width, height) {
         this.x = x
         this.y = y
         this.width = width
         this.height = height
         this.leftMost = (x + width) / 2 // Center alignment
         this.buttons = []
-        canvas.addEventListener("click", this.handle, false)
+        // canvas.addEventListener("click", this.handle, false)
     }
     
-    /**
-     * Event handler for this toolbar.
-     * Invoke the action of the button being clicked
-     * @param {Event} event 
-     */
-    handle(event) {
-        this.buttons.foreach(function(b) {
-            if (b.contains(event.clientX, event.clientY))
-                b.action(event)
-        })
-    }
 
     /**
      * Add new button to this toolbar
@@ -57,6 +46,7 @@ export class Toolbar {
         }
         // Update left most
         this.leftMost = button.x + width;
+        return button
 	}
 
     /**

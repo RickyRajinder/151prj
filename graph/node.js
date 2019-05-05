@@ -64,7 +64,7 @@ export class Node {
      * @param {*} y y-coordinate
      */
     contains(x, y) {
-        let bounds = getBounds()
+        let bounds = this.getBounds()
         const left = bounds.x
         const right = bounds.x + bounds.width
         const top = bounds.y

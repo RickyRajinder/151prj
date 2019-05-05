@@ -37,7 +37,7 @@ export class MenuButton {
      */
     contains(x, y) {
         const leftBound = this.x
-        const rightBoud = this.x + this.width
+        const rightBound = this.x + this.width
         const upperBound = this.y
         const lowerBound = this.y + this.height
         return (x > leftBound && x < rightBound) &&
@@ -69,24 +69,16 @@ export class MenuButton {
         g2.fillRect(this.x, this.y, this.width, this.height)
         g2.fillStyle = savedStyle
 
-        // Draw button's icon
-        let hPadding = this.width * 1 / 6;  // Hardcoded ratio. 
-        let vPadding = this.height * 1 / 6; // Increase for smaller icon
-        let iconX = this.x + hPadding;
-        let iconY = this.y + vPadding;
-        let iconW = this.width - hPadding;
-        let iconH = this.height - vPadding;
-        let bound = this.drawable.getBounds()
-        let ratioX = iconW / bound.width
-        let ratioY = iconH / bound.height
-        g2.scale(ratioX, ratioY)
-        let deltaX = bound.x - iconX
-        let deltaY = bound.y - iconY
+        let b = this.drawable.getBounds()
+        let deltaX = (this.x + this.width / 6) - b.x
+        let deltaY = (this.y + this.height / 6) - b.y
+        
         g2.translate(deltaX, deltaY)
+
+        // Draw button's icon
         this.drawable.draw(g2)
 
         //Restore
-        g2.translate(-deltaX, deltaY)
-        g2.scale(1/ratioX, 1/ratioY)
+        g2.translate(-(deltaX), -(deltaY))
     }
 }

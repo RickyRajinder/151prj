@@ -1,7 +1,8 @@
 import Node from "./nodes.js"
 import Edge from "./straightedge.js"
-import { Graph, drawGrabber } from "../graph/graph.js"
-import PropertySheet from "../graph/propertysheet.js"
+import { Graph } from "../graph/graph.js"
+import { drawGrabber } from "../graph/grabber.js"
+import { PropertySheet } from "../graph/propertysheet.js"
 
 'use strict'
 

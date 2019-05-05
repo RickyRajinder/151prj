@@ -25,6 +25,7 @@ export class StraightEdge extends Edge {
         g2.moveTo(x1, y1);
         g2.lineTo(x2, y2);
         g2.stroke();
+        this.arrowHeadEnd.draw(g2, x1, y1, x2, y2)
     }
 
     /**

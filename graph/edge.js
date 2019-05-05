@@ -63,7 +63,7 @@ export class Edge {
     getProperties() {
         const edgeTypes = ["SOLID", "DASH"];
         let arrowHeadTypes = [];
-        ArrowHead.Prototypes.foreach(
+        ArrowHead.Prototypes.forEach(
             function(a) { arrowHeadTypes.push(a.getText()) }
         )
         return {
@@ -108,7 +108,7 @@ export class Edge {
      * Set arrow head type at end node
      * @param {ArrowHead} arrow
      */
-    setEndArrowEnd(arrow) {
+    setEndArrowHead(arrow) {
         this.arrowHeadEnd = arrow;
     }
 

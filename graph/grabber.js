@@ -1,6 +1,6 @@
 'use strict'
 
-class Grabbers {
+export class Grabbers {
 
     draw(){
         let select = new Path2D()
