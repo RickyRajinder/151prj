@@ -1,14 +1,5 @@
+import { RectangularNode } from '../graph/rectangularnode.js'
 'use strict'
 
-class SimpleNode extends Node{
-    
-    getBounds(){
-
-    }
-
-    draw(){
-
-    }
-
-
+export class SimpleNode extends RectangularNode {
 }

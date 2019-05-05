@@ -1,5 +1,6 @@
 'use strict'
-class ArrowHead{
+
+export class ArrowHead {
 
     /**
      * Construct an arrow head
@@ -20,17 +21,17 @@ class ArrowHead{
      * @param {number} yq end y
      */
     draw(g2, xp, yp, xq, yq) {
-        savedFillStyle = g2.fillStyle
+        const savedFillStyle = g2.fillStyle
         g2.fillStyle = this.color
         const ARROW_ANGLE = Math.PI / 6;
         const ARROW_LENGTH = 10;
-        dx = xq - xp;
-        dy = yq - yp;
-        angle = Math.atan2(dy, dx)
-        x1 = xq - ARROW_LENGTH * Math.cos(angle + ARROW_ANGLE)
-        y1 = yq - ARROW_LENGTH * Math.sin(angle + ARROW_ANGLE)
-        x2 = xq - ARROW_LENGTH * Math.cos(angle - ARROW_ANGLE)
-        y2 = yq - ARROW_LENGTH * Math.sin(angle - ARROW_ANGLE)
+        const dx = xq - xp;
+        const dy = yq - yp;
+        const angle = Math.atan2(dy, dx)
+        const x1 = xq - ARROW_LENGTH * Math.cos(angle + ARROW_ANGLE)
+        const y1 = yq - ARROW_LENGTH * Math.sin(angle + ARROW_ANGLE)
+        const x2 = xq - ARROW_LENGTH * Math.cos(angle - ARROW_ANGLE)
+        const y2 = yq - ARROW_LENGTH * Math.sin(angle - ARROW_ANGLE)
         g2.beginPath()
         g2.moveTo(xq, yq)
         g2.lineTo(x1, y1)
@@ -38,17 +39,22 @@ class ArrowHead{
             case Shape.VSHAPE:
                 g2.moveTo(x2, y2)
                 g2.lineTo(xq, yq)
+                g2.stroke()
                 break;
             case Shape.TRIANGLE:
                 g2.lineTo(x2, y2)
                 g2.closePath()
+                g2.stroke()
+                g2.fill()
                 break;
             case Shape.DIAMOND:
-                x3 = x2 - ARROW_LENGTH * Math.cos(angle + ARROW_ANGLE)
-                y3 = y2 - ARROW_LENGTH * Math.sin(angle + ARROW_ANGLE)
+                const x3 = x2 - ARROW_LENGTH * Math.cos(angle + ARROW_ANGLE)
+                const y3 = y2 - ARROW_LENGTH * Math.sin(angle + ARROW_ANGLE)
                 g2.lineTo(x3, y3)
                 g2.lineTo(x2, y2)
                 g2.closePath()
+                g2.stroke()
+                g2.fill()
                 break;
             case Shape.NONE:
             default:
@@ -66,33 +72,33 @@ class ArrowHead{
             return this.color == "black" ? "BLACK_DIAMOND" : "DIAMOND"
         return "UNKNOWN"
     }
-
-    /**
-     * All available shapes
-     */
-    Shape = {
-        NONE     : 0,
-        VSHAPE   : 1,
-        TRIANGLE : 2,
-        DIAMOND  : 3,
-    }
-
-    /**
-     * List of prototypes for ArrowHead
-     */
-    Prototypes = [
-        new ArrowHead(Shape.NONE),
-        new ArrowHead(Shape.VSHAPE, 'black'),
-        new ArrowHead(Shape.TRIANGLE, 'black'),
-        new ArrowHead(Shape.TRIANGLE, 'white'),
-        new ArrowHead(Shape.DIAMOND, 'white'),
-        new ArrowHead(Shape.DIAMOND, 'black'),
-    ]
-
-    None = Prototypes[0]
-    VShape = Prototypes[1]
-    WTriangle = Prototypes[2]
-    BTriangle = Prototypes[3]
-    WDiamond = Prototypes[4]
-    BDiamond = Prototypes[5]
 }
+
+/**
+ * All available shapes
+ */
+const Shape = {
+    NONE     : 0,
+    VSHAPE   : 1,
+    TRIANGLE : 2,
+    DIAMOND  : 3,
+};
+
+/**
+ * List of prototypes for ArrowHead
+ */
+ArrowHead.Prototypes = [
+    new ArrowHead(Shape.NONE),
+    new ArrowHead(Shape.VSHAPE, 'black'),
+    new ArrowHead(Shape.TRIANGLE, 'black'),
+    new ArrowHead(Shape.TRIANGLE, 'white'),
+    new ArrowHead(Shape.DIAMOND, 'white'),
+    new ArrowHead(Shape.DIAMOND, 'black'),
+]
+
+ArrowHead.None = ArrowHead.Prototypes[0]
+ArrowHead.VShape = ArrowHead.Prototypes[1]
+ArrowHead.WTriangle = ArrowHead.Prototypes[2]
+ArrowHead.BTriangle = ArrowHead.Prototypes[3]
+ArrowHead.WDiamond = ArrowHead.Prototypes[4]
+ArrowHead.BDiamond = ArrowHead.Prototypes[5]

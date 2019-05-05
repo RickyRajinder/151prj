@@ -1,3 +1,6 @@
+import { ArrowHead } from './arrowhead.js'
+import { PropertySheet } from './propertysheet.js'
+
 'use strict'
 
 /**
@@ -23,12 +26,10 @@ export class Edge {
         this.startNode = undefined;
         this.endNode = undefined;
         this.type = EdgeType.SOLID;
-        this.arrowHeadEnd = Arrow.Invisible;
-        this.arrowHeadStart = Arrow.Invisible;
+        this.arrowHeadEnd = ArrowHead.None;
+        this.arrowHeadStart = ArrowHead.None;
         this.propertySheet = new PropertySheet(this);
     }
-
-
 
     /**
      * Connect 2 nodes
@@ -41,6 +42,20 @@ export class Edge {
     }
 
     /**
+     * Get end node
+     */
+    getEnd() {
+        return this.endNode;
+    }
+
+    /**
+     * Get start node
+     */
+    getStart() {
+        return this.startNode;
+    }
+
+    /**
      * Get properties of this edge
      * @return the dictionary of properties
      * { Key: [Value, Type, Opts] }
@@ -48,8 +63,9 @@ export class Edge {
     getProperties() {
         const edgeTypes = ["SOLID", "DASH"];
         let arrowHeadTypes = [];
-        for (let arrowHead in ArrowHead.prototype.Prototypes)
-            arrowHeadTypes.push(arrowHead.getText());
+        ArrowHead.Prototypes.forEach(
+            function(a) { arrowHeadTypes.push(a.getText()) }
+        )
         return {
             "type": [this.type, "Option", edgeTypes],
             "startArrowHead": [this.startArrowHead, "Option", arrowHeadTypes],
@@ -92,7 +108,7 @@ export class Edge {
      * Set arrow head type at end node
      * @param {ArrowHead} arrow
      */
-    setEndArrowEnd(arrow) {
+    setEndArrowHead(arrow) {
         this.arrowHeadEnd = arrow;
     }
 
@@ -109,6 +125,14 @@ export class Edge {
         let bottomMost = bounds.y + bounds.height
         return (x > leftMost && x < rightMost) &&
                 (y > topMost && y < bottomMost)
+    }
+
+    /**
+     * Abstract method for drawing this edge
+     * @param {Graphics2D} g2 
+     */
+    draw(g2) {
+        throw "Abstract method"
     }
 
     /**

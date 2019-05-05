@@ -1,9 +1,11 @@
+import { MenuButton } from './menuButton.js'
+
 'use strict'
 
 /**
  * Toolbar which contains multiple tools/buttons
  */
-class Toolbar {
+export class Toolbar {
     /**
      * Construct new toolbar
      * @param {Canvas} canvas html canvas element
@@ -12,49 +14,39 @@ class Toolbar {
      * @param {number} width width of toolbar
      * @param {number} height height of toolbar
      */
-	constructor(canvas, x, y, width, height) {
+	constructor(x, y, width, height) {
         this.x = x
         this.y = y
         this.width = width
         this.height = height
         this.leftMost = (x + width) / 2 // Center alignment
         this.buttons = []
-        canvas.addEventListener("click", handle, false)
+        // canvas.addEventListener("click", this.handle, false)
     }
     
-    /**
-     * Event handler for this toolbar.
-     * Invoke the action of the button being clicked
-     * @param {Event} event 
-     */
-    handle(event) {
-        for (button in this.buttons) {
-            if (button.contains(event.clientX, event.clientY)) {
-                button.action()
-            }
-        }
-    }
 
     /**
      * Add new button to this toolbar
      * @param {function} action action for button being added
      * @param {drawble} drawable a drawable object for drawing button icon 
      */
-	addButton(action, drawable) {
-        width = this.width / 15 // 15 button max
+	addButton(drawable, action) {
+        let width = this.width / 15 // 15 button max
         if (this.leftMost + width >= this.x + this.width)
             throw "Button overflow"
-        paddingX = 3 // pixels
-        paddingY = 3 // pixels
-        button = new MenuButton(this.leftMost + paddingX, y + paddingY, 
-                        width, height + paddingY, drawable)
+        let paddingX = 5 // pixels
+        let paddingY = 5 // pixels
+        let button = new MenuButton(this.leftMost + paddingX, this.y + paddingY, 
+                        width, this.height - paddingY * 2, drawable)
         button.setAction(action)
+        this.buttons.push(button)
         // Realign
-        for (button in this.buttons) {
-            button.x -= width / 2
+        for (let b in this.buttons) {
+            this.buttons[b].x -= width / 2
         }
         // Update left most
         this.leftMost = button.x + width;
+        return button
 	}
 
     /**
@@ -63,10 +55,10 @@ class Toolbar {
      */
     draw(g2) { 
         // Draw toobar
-        g2.rect(this.x, this.y, this.width, this.height)
+        g2.strokeRect(this.x, this.y, this.width, this.height)
         // Draw buttons
-        for (b in this.buttons)
-            b.draw(g2)
+        for (let b in this.buttons)
+            this.buttons[b].draw(g2)
 	}
 }
 	

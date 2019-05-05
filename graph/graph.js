@@ -2,19 +2,76 @@
 
 
 export class Graph {
+
     constructor() {
         this.nodes = []
         this.edges = []
+        this.edgesToBeRemoved = []
+        this.nodesToBeRemoved = []
+        this.needsLayout = true
     }
-    add(n) {
-        this.nodes.push(n)
+
+    /**
+      * Adds an edge to the graph that joins the nodes containing
+      * the given points. If the points aren't both inside nodes,
+      * then no edge is added.
+      * @param e the edge to add
+      * @param x1, y1 a point in the starting node
+      * @param x2, y2 a point in the ending node
+     */
+    connect(edge, x1, y1, x2, y2) {
+        let node1 = findNode(x1, y1)
+        let node2 = findNode(x2, y2)
+        if (node1 != null) {
+            edge.connect(node1, node2)
+            if (node1.addEdge(edge, x1, y1, x2, y2) && edge.getEnd() != null) {
+                this.edges.push(edge)
+                if (!this.nodes.contains(edge.getEnd()))
+                    this.nodes.push(edge.getEnd())
+                this.needsLayout = true
+                return true
+            }
+        }
+        return false
     }
+
+    /**
+     *  Adds a node to the graph so that the top left corner of
+     * the bounding rectangle is at the given point.
+     * @param n the node to add
+     * @param x,y the desired location 
+     */
+    add(node, x, y) {
+        let bounds = node.getBounds()
+        node.translate(x - bounds.x, y - bounds.y)
+        let accepted = false
+        let insideANode = false
+        for (let i = this.nodes.length - 1; i>= 0 && !accepted; i--) {
+            let parent = this.nodes[i]
+            if (parent.contains(x, y)) {
+                insideANode =true
+                if (parent.addNode(node, x, y)) accepted = true
+            }
+        }
+        if (insideANode && !accepted)
+            return false
+        this.nodes.push(node);
+        this.needsLayout = true
+        return true
+    }
+
+    /**
+     * 
+     * @param {*} n 
+     */
     remove(n) {
         this.nodes.splice(this.nodes.indexOf(n), 1)
     }
-    removeEdge(e){
-        this.edges.splice(this.edges.indexOf(e), 1)
-    }
+
+    /**
+     * Find a node in this graph
+     * @param {*} x, y point on canvas
+     */
     findNode(p) {
         for (let i = this.nodes.length - 1; i >= 0; i--) {
             const n = this.nodes[i]
@@ -22,6 +79,7 @@ export class Graph {
         }
         return undefined
     }
+
     findEdge(p){
         for (let i = this.edges.length - 1; i >= 0; i--) {
             const edge = this.edges[i]
@@ -30,35 +88,79 @@ export class Graph {
         }
         return undefined
     }
-    draw() {
+
+    /**
+     * Draw graph
+     * @param {*} g2 
+     */
+    draw(g2) {
+    
+        this.layout(g2);
+    
         for (const n of this.nodes) {
-            n.draw()
+            n.draw(g2)
         }
+
         for (const e of this.edges){
-            e.draw();
+            e.draw(g2);
         }
-
     }
-    connect(e, p1, p2) {
-        console.log("Connecting nodes..")
-        console.log(">Nodes: " + p1 + " " + p2)
-        if (p1 !== undefined && p2 !== undefined) {
-            console.log("Found both nodes!")
-            //e.connect(p1, p2)
-            this.edges.push(e)
-            return true
+
+    /**
+     * Remove a node in this graph
+     * @param {*} node 
+     */
+    removeNode(node) {
+        if (nodesToBeRemoved.includes(node)) return
+        nodesToBeRemoved.push(node)
+        for (let i = 0; i < this.nodes.length; i++) {
+            const node2 = this.nodes[i]
+            node2.removeNode(this, node)
         }
-        return false
+        for (let i = 0; i < this.edges.length; i++) {
+            const edge = this.edges[i]
+            if (edge.getStart() == node || edge.getEnd() == node)
+                removeEdge(edge)
+        }
+        needsLayout = true
+    }
+
+    /**
+     * Remove an edge from the graph
+     * @param {*} edge to remove
+     */
+    removeEdge(edge) {
+        if (edgesToBeRemoved.includes(edge)) return
+        edgesToBeRemoved.push(edge)
+        for (let i = nodes.length - 1; i >= 0; i--) {
+            const n = nodes[i]
+            n.removeEdge(this, edge)
+        }
+        this.needsLayout = true
+    }
+
+    // /**
+    //  * Causes the layout of the graph to be recomputed.
+    //  */
+    // layout() {
+    //     this.needsLayout = true
+    // }
+
+
+    layout(g2) {
+        if (!this.needsLayout) return
+        const removedNodes = this.nodesToBeRemoved
+        this.nodes.filter(function(n) { 
+            return !removedNodes.includes(n)
+        })
+        const removedEdges = this.edgesToBeRemoved
+        this.edges.filter(function(e) {
+            return !removedEdges.includes(e)
+        })
+        // for (let i = 0; i < this.nodes.length; i++) {
+        //     const n = this.nodes[i]
+        //     n.layout(this, g2)
+        // }
+        this.needsLayout = false
     }
 }
-
-export function drawGrabber(x, y) {
-    const size = 5;
-    const canvas = document.getElementById('canvas')
-    const ctx = canvas.getContext('2d')
-    ctx.beginPath()
-    ctx.rect(x - size/ 2, y - size / 2, size, size)
-    ctx.fillStyle = 'black'
-    ctx.fill()
-}
-

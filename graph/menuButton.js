@@ -3,7 +3,7 @@
 /**
  * Rectangular menu button
  */
-class MenuButton {    
+export class MenuButton {    
 
     /**
      * Construct rectangular menu button
@@ -36,10 +36,10 @@ class MenuButton {
      * @param {number} y 
      */
     contains(x, y) {
-        leftBound = this.x
-        rightBoud = this.x + this.width
-        upperBound = this.y
-        lowerBound = this.y + this.height
+        const leftBound = this.x
+        const rightBound = this.x + this.width
+        const upperBound = this.y
+        const lowerBound = this.y + this.height
         return (x > leftBound && x < rightBound) &&
                (y > upperBound && y < lowerBound)
     }
@@ -48,7 +48,7 @@ class MenuButton {
      * Determine if this button is selected
      */
     isSelected(){
-        return isSelected;
+        return this.isSelected;
     }
 
     /**
@@ -56,7 +56,7 @@ class MenuButton {
      * @param {Boolean} bool true or false
      */
     setSelect(bool){
-        isSelected = bool;
+        this.isSelected = bool;
     }
 
     /**
@@ -64,30 +64,21 @@ class MenuButton {
      */
     draw(g2) {
         // Draw button
-        savedStyle = g2.fillStyle
+        let savedStyle = g2.fillStyle
         g2.fillStyle = this.background
         g2.fillRect(this.x, this.y, this.width, this.height)
         g2.fillStyle = savedStyle
-        this.drawable.draw()
+
+        let b = this.drawable.getBounds()
+        let deltaX = (this.x + this.width / 6) - b.x
+        let deltaY = (this.y + this.height / 6) - b.y
+        
+        g2.translate(deltaX, deltaY)
 
         // Draw button's icon
-        hPadding = this.width * 1 / 6;  // Hardcoded ratio. 
-        vPadding = this.height * 1 / 6; // Increase for smaller icon
-        iconX = this.x + padding;
-        iconY = this.y + padding;
-        iconW = this.width - padding;
-        iconH = this.height - padding;
-        bound = this.drawable.getBounds()
-        ratioX = iconW / bound.width
-        ratioY = iconH / bound.height
-        g2.scale(ratioX, ratioY)
-        deltaX = bound.x - iconX
-        deltaY = bound.y - iconY
-        g2.translate(deltaX, deltaY)
-        this.drawable.draw()
+        this.drawable.draw(g2)
 
         //Restore
-        g2.translate(-deltaX, deltaY)
-        g2.scale(1/ratioX, 1/ratioY)
+        g2.translate(-(deltaX), -(deltaY))
     }
 }
