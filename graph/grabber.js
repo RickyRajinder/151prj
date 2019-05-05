@@ -7,7 +7,7 @@ export class Grabbers {
         select.rect(10, 10, 50, 40)
         panelg2.stroke(select)
         panelg2.fillStyle = '#000000'
-        const box = panelg2.fillRect(20, 20, 6, 6)
+        panelg2.fillRect(20, 20, 6, 6)
         panelg2.fillRect(40, 20, 6, 6)
         panelg2.fillRect(20, 35, 6, 6)
         panelg2.fillRect(40, 35, 6, 6)
