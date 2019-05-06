@@ -41,12 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     let panel2 = document.getElementById("canvas")//bottom canvas
+    let g = panel2.getContext('2d');
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
 
 
-    panel.addEventListener('click', event => {//select a tool
+    panel.addEventListener('click', event => {//select a tool from top
         menu.buttons.forEach(function(b){
             if (b.contains(event.clientX, event.clientY))
                 b.action()
@@ -54,32 +55,19 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 
-    panel2.addEventListener('click', event => {//draw an element
+    panel2.addEventListener('mousedown', event => {//draw an element on bottom
+        
         if(menu.selected !== undefined) {
             if(menu.selected == SimpleNode) {
-                let node = new SimpleNode(event.clientX, event.clientY, 30, 10);
-                graph.addNode(node);
-                graph.draw(panel2);
+                graph.addNode(new SimpleNode(event.clientX, event.clientY, n1.width, n1.height));
+                graph.draw(g);
             }
-            else if(menu.selected == StraightEdge) {
-                graph.nodes.forEach(function(n){
-                    if(n.contains(event.clientX, event.clientY)){
-                        let startNode = n;
-                        let edge = new StraightEdge();
-                        edge.addEventListener("click", function(e) {
-                            graph.nodes.forEach(function(n){
-                                if(n.contains(e.clientX, e.clientY)){
-                                    let endNode = n;
-                                    edge.connect(startNode, endNode);
-                                    graph.draw(g2);
-                                }
-                            });
-                        });
-                    }
-                });
 
-
+            if(menu.selected == StraightEdge) {
+                graph.addEdge(StraightEdge());
+                
             }
+            
         }
 
     });

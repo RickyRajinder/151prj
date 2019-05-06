@@ -29,8 +29,8 @@ export class RectangularNode extends Node {
         
         let saved = g2.fillStyle;
         let strokeSaved = g2.strokeStyle;
-        g2.strokeStyle = "black";
-        g2.fillStyle = "white";
+        //g2.strokeStyle = 'black';
+        g2.fillStyle = 'white';
         g2.fillRect(this.x, this.y, this.width, this.height);
         g2.strokeRect(this.x, this.y, this.width, this.height);
         g2.fillStyle = saved;

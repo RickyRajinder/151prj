@@ -5,6 +5,9 @@ export class Graph {
     constructor() {
         this.nodes = []
         this.edges = []
+        this.edgesToBeRemoved = []
+        this.nodesToBeRemoved = []
+        this.needsLayout = true
     }
     /**
      *  Adds a node to the graph so that the top left corner of
@@ -63,15 +66,29 @@ export class Graph {
     /**
      * Draw all of the edges and nodes onto the canvas
      */
-    draw(g2) {
+    draw() {
         for (const n of this.nodes) {
-            n.draw(g2);
+            n.draw();
+        }
+        for (const e of this.edges){
+            e.draw();
+        }
+
+    }
+
+    /** Draw graph
+     * @param {*} g2
+     */
+    draw(g2) {
+        this.layout(g2);
+        for (const n of this.nodes) {
+            n.draw(g2)
         }
         for (const e of this.edges){
             e.draw(g2);
         }
-
     }
+    
     /**
      * Adds an edge to the graph that joins the nodes containing
      * the given points. If the points aren't both inside nodes,
