@@ -705,16 +705,26 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mouseup', event => {
         let mousePoint = mouseLocation(event)
         selected2 = graph.findNode(mousePoint)
-        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true || inheritanceStatus === true ||
-            interfaceTIStatus === true || associationStatus === true ||
-             aggregationStatus === true || compositionStatus === true) {
-            //console.log("Found start and end node!")
-            //console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
-            
-            let edge = Edge.prototype.straightedge(selected, selected2, "Dependency")
-            //console.log("Nodes: " + selected + " " + selected2)
-            //console.log("Edge: " + edge)
-            graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+        if (selected !== undefined && selected2 !== undefined) {
+            if (dependencyStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Dependency")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (inheritanceStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Inheritance")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (interfaceTIStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "InterfaceTI")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (associationStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Association")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (aggregationStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Aggregation")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (compositionStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Composition")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }
             
             repaint()
         }

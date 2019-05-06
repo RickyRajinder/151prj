@@ -16,24 +16,53 @@ Edge.prototype.straightedge= function (startNode, endNode, type) {
             const ctx = canvas.getContext('2d')
             start = {x: startNode.getBounds().x, y: startNode.getBounds().y}
             end = {x: endNode.getBounds().x, y: endNode.getBounds().y}
-            ctx.setLineDash([10, 10])
             slope = (start.y - end.y)/(start.x - end.x)
 
             
             var headlen = 20;   // length of head in pixels
             var angle = Math.atan2(end.y-start.y,end.x-start.x);
             ctx.beginPath()
+            //line dashes if dependency or inheritance
+            if(type === "Dependency" || type === "InterfaceTI"){
+                ctx.setLineDash([10, 10])
+            }
             ctx.moveTo(start.x, start.y)
             ctx.lineTo(end.x, end.y)
             ctx.stroke()
 
-            ctx.beginPath()
-            ctx.setLineDash([])
-            ctx.moveTo(end.x, end.y)
-            ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6),end.y-headlen*Math.sin(angle-Math.PI/6))
-            ctx.lineTo(end.x, end.y)
-            ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
-            ctx.stroke()
+            //draw diamonds
+            if(type === "Aggregation" || type === "Composition"){
+                ctx.beginPath()
+                ctx.setLineDash([])
+                ctx.moveTo(end.x, end.y)
+                ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6),end.y-headlen*Math.sin(angle-Math.PI/6))
+                ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6) -headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6)-headlen*Math.sin(angle-Math.PI/6))
+                ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
+                ctx.lineTo(end.x, end.y)
+                ctx.fillstyle = 'black'
+                if(type === "Aggregation"){
+                    ctx.fillStyle = 'white'
+                }
+                ctx.fill()
+                ctx.stroke()
+                //draw arrows
+            }else{
+                ctx.beginPath()
+                ctx.setLineDash([])
+                ctx.moveTo(end.x, end.y)
+                ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6),end.y-headlen*Math.sin(angle-Math.PI/6))
+                if(type === "Dependency" || type === "Association"){
+                    ctx.lineTo(end.x, end.y)
+                    ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
+                    ctx.stroke()
+                }else{
+                    ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
+                    ctx.lineTo(end.x, end.y)
+                    ctx.fillStyle = 'white'
+                    ctx.fill()
+                    ctx.stroke()
+                }
+            }
             
 
             //console.log(slope)
