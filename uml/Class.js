@@ -558,6 +558,7 @@ function drawSaveButton(){
         let confirmed = false
         if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
             confirmed = confirm("Are you sure you want to save? You will be directed to a new page.")
+            console.log(confirmed)
         }
         if (confirmed) {
             let src = document.getElementById("canvas")
