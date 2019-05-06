@@ -38,7 +38,6 @@ let interfaceTIStatus = false
 let associationStatus = false
 let aggregationStatus = false
 let compositionStatus = false
-let saveStatus = false
 
 function drawSelectButton(){
     let select = new Path2D()
@@ -68,7 +67,6 @@ function drawSelectButton(){
             drawAggregationButton()
             drawCompositionButton()
             drawDeleteButton()
-            drawSaveButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -88,7 +86,11 @@ function drawSelectButton(){
             packageStatus = false
             noteStatus = false
             dependencyStatus = false
-            saveStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -122,8 +124,11 @@ function drawClassButton(){
             packageStatus = false
             noteStatus = false
             dependencyStatus = false
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -160,8 +165,11 @@ function drawInterfaceButton(){
             packageStatus = false
             noteStatus = false
             dependencyStatus = false
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -193,8 +201,11 @@ function drawPackageButton(){
             interfaceStatus = false
             noteStatus = false
             dependencyStatus = false
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -223,8 +234,11 @@ function drawNoteButton(){
             packageStatus = false
             deleteStatus = false
             dependencyStatus = false
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -264,8 +278,11 @@ function drawDependencyButton(){
             packageStatus = false
             deleteStatus = false
             dependencyStatus = true
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
     })
 }
@@ -294,6 +311,20 @@ function drawInheritanceButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(inButton, e.clientX, e.clientY)){
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = true
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
+        }
     })
 }
 
@@ -322,6 +353,20 @@ function drawInterfaceTypeButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = true
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
+        }
     })
 }
 
@@ -347,6 +392,20 @@ function drawAssociationButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = true
+            aggregationStatus = false
+            compositionStatus = false
+        }
     })
 }
 
@@ -376,6 +435,20 @@ function drawAggregationButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = true
+            compositionStatus = false
+        }
     })
 }
 
@@ -405,6 +478,20 @@ function drawCompositionButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            noteStatus = false
+            selectStatus = false
+            classStatus = false
+            interfaceStatus = false
+            packageStatus = false
+            deleteStatus = false
+            dependencyStatus = false
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = true
+        }
     })
 }
 
@@ -439,49 +526,19 @@ function drawDeleteButton(){
             interfaceStatus = false
             noteStatus = false
             dependencyStatus = false
-            saveStatus = false
-
+            inheritanceStatus = false
+            interfaceTIStatus = false
+            associationStatus = false
+            aggregationStatus = false
+            compositionStatus = false
         }
-    })
-}
-
-function drawSaveButton(){
-    let button = new Path2D()
-    button.rect(646, 10, 50, 40)
-    ctx.stroke(button)
-    let icon = new Image()
-    icon.src = "floppy.png"
-    icon.onload = function(){
-        let loop = setInterval(function() {
-            ctx.clearRect(0,0,canvas.width, canvas.height)
-            ctx.drawImage(icon, 648, 7, icon.width*0.09, icon.height*0.09)
-        }, 1000/60);
-    }
-    ctx.strokeStyle = "black"
-    canvas.addEventListener('mousemove', function(e) {
-        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
-            ctx.font = "lighter 15px Arial"
-            ctx.fillText("Save as Image", 625, 70)
-        }
-        else {
-        }
-    })
-    canvas.addEventListener('click', function (e) {
-        if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
-            selectStatus = false
-            deleteStatus = false
-            classStatus = false
-            packageStatus = false
-            interfaceStatus = false
-            noteStatus = false
-            dependencyStatus = false
-            saveStatus = true
-
-        }
+        console.log(graph.nodes.length)
     })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+
+
     drawToolBar()
     drawSelectButton()
     drawClassButton()
@@ -495,7 +552,6 @@ document.addEventListener('DOMContentLoaded', function () {
     drawAggregationButton()
     drawCompositionButton()
     drawDeleteButton()
-    drawSaveButton()
 
     const panel = document.getElementById('canvas')
 
@@ -623,7 +679,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined && selectStatus === true) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
-        } else if (selected !== undefined && dependencyStatus === true) {
+        } else if (selected !== undefined &&
+            (dependencyStatus === true || inheritanceStatus === true ||
+                interfaceTIStatus === true || associationStatus === true ||
+                aggregationStatus === true || compositionStatus === true)) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
         }
@@ -648,15 +707,27 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mouseup', event => {
         let mousePoint = mouseLocation(event)
         selected2 = graph.findNode(mousePoint)
-        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
-            //console.log("Found start and end node!")
-            //console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
-            
-            let edge = Edge.prototype.straightedge(selected, selected2)
-            //console.log("Nodes: " + selected + " " + selected2)
-            //console.log("Edge: " + edge)
-            graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
-            
+        if (selected !== undefined && selected2 !== undefined) {
+            if (dependencyStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Dependency")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (inheritanceStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Inheritance")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (interfaceTIStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "InterfaceTI")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (associationStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Association")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (aggregationStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Aggregation")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }else if (compositionStatus === true){
+                let edge = Edge.prototype.straightedge(selected, selected2, "Composition")
+                graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
+            }
+
             repaint()
         }
         dragStartPoint = undefined
