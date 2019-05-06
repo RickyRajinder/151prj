@@ -17,15 +17,6 @@ export class Graph {
     addNode(n) {
         this.nodes.push(n)
     }
-
-    /**
-     * Adds an edge
-     * @param {*} n 
-     */
-    addEdge(e) {
-        this.edges.push(e);
-    }
-
     /**
      * Remove node from graph
      * @param {*} n
@@ -75,20 +66,22 @@ export class Graph {
         }
 
     }
-
-    /** Draw graph
+    /**
+     * Draw graph
      * @param {*} g2
      */
     draw(g2) {
-        this.layout(g2);
+
+      //  this.layout(g2);
+
         for (const n of this.nodes) {
             n.draw(g2)
         }
+
         for (const e of this.edges){
             e.draw(g2);
         }
     }
-    
     /**
      * Adds an edge to the graph that joins the nodes containing
      * the given points. If the points aren't both inside nodes,
@@ -98,10 +91,10 @@ export class Graph {
      * @param p2 a point in the ending node
      */
     connect(e, p1, p2) {
-        console.log("Connecting nodes..");
-        console.log(">Nodes: " + p1 + " " + p2);
+        //console.log("Connecting nodes..")
+        //console.log(">Nodes: " + p1 + " " + p2)
         if (p1 !== undefined && p2 !== undefined) {
-            console.log("Found both nodes!");
+            //console.log("Found both nodes!")
             //e.connect(p1, p2)
             this.edges.push(e);
             return true;

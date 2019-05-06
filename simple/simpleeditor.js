@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if(menu.selected == StraightEdge) {
-                graph.addEdge(StraightEdge());
+                if (graph.)
                 
             }
             

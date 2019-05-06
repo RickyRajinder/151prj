@@ -62,20 +62,29 @@ Edge.prototype.straightedge= function (startNode, endNode, type) {
 
             //draw diamonds
             if(type === "Aggregation" || type === "Composition"){
-                ctx.beginPath()
-                ctx.setLineDash([])
-                ctx.moveTo(end.x, end.y)
-                ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6),end.y-headlen*Math.sin(angle-Math.PI/6))
-                ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6) -headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6)-headlen*Math.sin(angle-Math.PI/6))
-                ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
-                ctx.lineTo(end.x, end.y)
                 if(type === "Aggregation"){
+                    ctx.beginPath()
+                    ctx.setLineDash([])
+                    ctx.moveTo(start.x, start.y)
+                    ctx.lineTo(start.x+headlen*Math.cos(angle-Math.PI/6),start.y+headlen*Math.sin(angle-Math.PI/6))
+                    ctx.lineTo(start.x+headlen*Math.cos(angle-Math.PI/6)+headlen*Math.cos(angle+Math.PI/6),start.y+headlen*Math.sin(angle+Math.PI/6)+headlen*Math.sin(angle-Math.PI/6))
+                    ctx.lineTo(start.x+headlen*Math.cos(angle+Math.PI/6),start.y+headlen*Math.sin(angle+Math.PI/6))
+                    ctx.lineTo(start.x, start.y)
                     ctx.fillStyle = 'white'
+                    ctx.fill()
+                    ctx.stroke()
                 }else{
-                    ctx.fillstyle = 'black'
+                    ctx.beginPath()
+                    ctx.setLineDash([])
+                    ctx.moveTo(start.x, start.y)
+                    ctx.lineTo(start.x+headlen*Math.cos(angle-Math.PI/6),start.y+headlen*Math.sin(angle-Math.PI/6))
+                    ctx.lineTo(start.x+headlen*Math.cos(angle-Math.PI/6)+headlen*Math.cos(angle+Math.PI/6),start.y+headlen*Math.sin(angle+Math.PI/6)+headlen*Math.sin(angle-Math.PI/6))
+                    ctx.lineTo(start.x+headlen*Math.cos(angle+Math.PI/6),start.y+headlen*Math.sin(angle+Math.PI/6))
+                    ctx.lineTo(start.x, start.y)
+                    ctx.fillStyle = 'black'
+                    ctx.fill()
+                    ctx.stroke()
                 }
-                ctx.fill()
-                ctx.stroke()
                 //draw arrows
             }else{
                 ctx.beginPath()
