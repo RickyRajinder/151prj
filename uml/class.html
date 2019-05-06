@@ -164,7 +164,10 @@
         let confirmed = confirm("Are you sure you want to save? You will be directed to a new page.");
         if (confirmed) {
             let src = document.getElementById("canvas");
-            window.open(src.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+            let img = new Image();
+            img.setAttribute('crossOrigin', 'anonymous');
+            img.src = src.toDataURL("image/png").replace("image/png", "image/octet-stream")
+            window.open(img.src);
         }
     }
     </script>
