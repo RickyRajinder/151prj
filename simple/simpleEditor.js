@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 for(const n of graph.nodes) {
                     if(n.contains(event.clientX, event.clientY)) {
                         let grabber = new Grabbers(n.x, n.y, 5);
-                        grabber.draw()
+                        grabber.draw(g)
                     }
                 }
             }
