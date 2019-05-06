@@ -5,6 +5,7 @@ import { SimpleNode } from './simpleNode.js'
 import { StraightEdge } from './simpleEdge.js'
 import { ArrowHead } from '../graph/arrowhead.js'
 import { PropertySheet } from "../graph/propertysheet.js";
+import {ColorNode} from "./simpleNode.js";
 
 
 function addNodeMenuButton(menu, node) {
@@ -29,6 +30,7 @@ function addEdgeMenuButton(menu, edge) {
 
 document.addEventListener('DOMContentLoaded', function () {
     let panel = document.getElementById("canvas1")//top canvas for toolbar
+
 
     /**
      * Get the x and y coordinates of the mouse
@@ -84,16 +86,15 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById("update").addEventListener("click", function (){
                 let input = props.saveInput("modal_feedback")
                 graph.remove(selected)
-                const colornode = new SimpleNode(selected.getBounds().x, selected.getBounds().y, n1.width, n1.height)
+                const colornode = new ColorNode(selected.getBounds().x, selected.getBounds().y, n1.width, n1.height, input[0])
                 graph.add(colornode)
                 graph.draw(g)
-                colornode.drawColor(g, input[0])
             }, false)
         }
     })
 
     panel2.addEventListener('mousedown', event => {//draw an element on bottom
-        
+
         if(menu.selected !== undefined) {
             if(menu.selected === SimpleNode) {
                 graph.addNode(new SimpleNode(event.clientX - 20, event.clientY - 100, n1.width, n1.height));
@@ -112,6 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+
 
     panel2.addEventListener('mouseup', event => {
         if(menu.selected !== undefined && menu.selected === StraightEdge) {
