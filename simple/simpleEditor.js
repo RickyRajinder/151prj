@@ -29,13 +29,9 @@ function addEdgeMenuButton(menu, edge) {
 function addSelectMenuButton(menu, grabber) {
     let b1 = menu.addButton(grabber, function() {
         menu.selected = Grabbers;
-        let panel = document.getElementById("canvas1")//top canvas for toolbar
-        let g2 = panel.getContext("2d");
-        grabber.draw(g2, b1.x, b1.y);
-        grabber.draw(g2, b1.x + b1.width, b1.y);
-        grabber.draw(g2, b1.x, b1.y + b1.height);
-        grabber.draw(g2, b1.x + b1.width, b1.y + b1.height);
+        
     });
+    return b1;
     
 }
 
@@ -49,11 +45,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const n1 = new SimpleNode(0, 0, 30, 10);
     const e1 = new StraightEdge();
     const grabber = new Grabbers(0, 0, 5);
+    addSelectMenuButton(menu, grabber);
+    
     addNodeMenuButton(menu, n1);
     addEdgeMenuButton(menu, e1);
-    addSelectMenuButton(menu, grabber);
-
+    
     menu.draw(g2);
+    
     
 
     let panel2 = document.getElementById("canvas")//bottom canvas
@@ -76,6 +74,14 @@ document.addEventListener('DOMContentLoaded', function () {
     panel2.addEventListener('mousedown', event => {//draw an element on bottom
         
         if(menu.selected !== undefined) {
+            if(menu.selected == Grabbers) {
+                for(const n of graph.nodes) {
+                    if(n.contains(event.clientX, event.clientY)) {
+                        let grabber = new Grabbers(n.x, n.y, 5);
+                        grabber.draw()
+                    }
+                }
+            }
             if(menu.selected == SimpleNode) {
                 graph.addNode(new SimpleNode(event.clientX, event.clientY, n1.width, n1.height));
                 graph.draw(g);
