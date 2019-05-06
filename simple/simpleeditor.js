@@ -4,6 +4,8 @@ import { SimpleGraph } from './simpleGraph.js'
 import { SimpleNode } from './simpleNode.js'
 import { StraightEdge } from './simpleEdge.js'
 import { ArrowHead } from '../graph/arrowhead.js'
+import { PropertySheet } from "../graph/propertysheet.js";
+
 
 function addNodeMenuButton(menu, node) {
     let b0 = menu.addButton(node, function() {
@@ -25,9 +27,22 @@ function addEdgeMenuButton(menu, edge) {
 }
 
 
-
 document.addEventListener('DOMContentLoaded', function () {
     let panel = document.getElementById("canvas1")//top canvas for toolbar
+
+    /**
+     * Get the x and y coordinates of the mouse
+     * @param event
+     * @returns {{x: number, y: number}}
+     */
+    function mouseLocation(event) {
+        const rect = panel.getBoundingClientRect();
+        return {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+        }
+    }
+
     let g2 = panel.getContext("2d")
     const graph = new SimpleGraph()
     let menu = new Toolbar(0, 0, 1000, 60)
@@ -56,16 +71,37 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
 
+    panel2.addEventListener("auxclick", e => {
+        let mousePoint = mouseLocation(event)
+        selected = graph.findNode(mousePoint)
+        console.log(selected)
+        if (selected !== undefined) {
+            const props = new PropertySheet(selected, "modal_wrapper", "modal_window", "modal_feedback")
+            props.openModal()
+            document.getElementById("modal_close").addEventListener("click", function (){
+                props.saveInput("modal_feedback")
+            }, false);
+            document.getElementById("update").addEventListener("click", function (){
+                let input = props.saveInput("modal_feedback")
+                graph.remove(selected)
+                const colornode = new SimpleNode(selected.getBounds().x, selected.getBounds().y, n1.width, n1.height)
+                graph.add(colornode)
+                graph.draw(g)
+                colornode.drawColor(g, input[0])
+            }, false)
+        }
+    })
 
     panel2.addEventListener('mousedown', event => {//draw an element on bottom
         
         if(menu.selected !== undefined) {
-            if(menu.selected == SimpleNode) {
-                graph.addNode(new SimpleNode(event.clientX, event.clientY, n1.width, n1.height));
-                graph.draw(g);
+            if(menu.selected === SimpleNode) {
+                graph.addNode(new SimpleNode(event.clientX - 20, event.clientY - 100, n1.width, n1.height));
+                console.log(graph.nodes.length)
+                  graph.draw(g);
             }
 
-            if(menu.selected == StraightEdge) {
+            if(menu.selected === StraightEdge) {
                 for(const n of graph.nodes) {
                     if(n.contains(event.clientX, event.clientY)) 
                         startNode = n;
@@ -78,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     panel2.addEventListener('mouseup', event => {
-        if(menu.selected !== undefined && menu.selected == StraightEdge) {
+        if(menu.selected !== undefined && menu.selected === StraightEdge) {
             for(const n of graph.nodes) {
                     if(n.contains(event.clientX, event.clientY)) 
                         endNode = n;

@@ -63,14 +63,10 @@ export class Node {
      * @param {*} x x-coordinate
      * @param {*} y y-coordinate
      */
-    contains(x, y) {
+    contains(p) {
         let bounds = this.getBounds()
-        const left = bounds.x
-        const right = bounds.x + bounds.width
-        const top = bounds.y
-        const bottom = bounds.y + bounds.height
-        return x > left && x < right && 
-                x > top && x < bottom
+        console.log(bounds.x, bounds.y)
+        return (this.x + bounds.x / 2 - p.x) ** 2 + (this.y + bounds.y / 2 - p.y) ** 2 <= bounds.x ** 2 / 4
     }
 
     /**

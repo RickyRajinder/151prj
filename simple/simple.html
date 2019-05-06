@@ -2,7 +2,10 @@
 <html>
 
 <head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8"/>
+
     <title>Simple Diagram Editor</title>
+    <link rel="stylesheet" type="text/css" href="simple.css" media="screen" />
     <style>
         table {
             border: 1px solid black;
@@ -23,20 +26,11 @@
         <div id="modal_window">
 
             <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
-
-            <p>Complete the form below to send an email:</p>
-
-            <form id="modal_feedback" method="POST" action="#" accept-charset="UTF-8">
-                <p><label>Your Name<strong>*</strong><br>
+            <p>Change the color of this node</p>
+            <form id="modal_feedback" accept-charset="UTF-8">
+                <p><label>Color value: <strong>*</strong><br>
                         <input type="text" autofocus required size="48" name="name" value=""></label></p>
-                <p><label>Email Address<strong>*</strong><br>
-                        <input type="email" required title="Please enter a valid email address" size="48" name="email"
-                            value=""></label></p>
-                <p><label>Subject<br>
-                        <input type="text" size="48" name="subject" value=""></label></p>
-                <p><label>Enquiry<strong>*</strong><br>
-                        <textarea required name="message" cols="48" rows="8"></textarea></label></p>
-                <p><input type="submit" name="feedbackForm" value="Send Message"></p>
+                <p><input id='update' type="button" name="colorForm" value="Change color"></p>
             </form>
 
         </div> <!-- #modal_window -->
