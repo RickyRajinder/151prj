@@ -68,7 +68,6 @@ function drawSelectButton(){
             drawAggregationButton()
             drawCompositionButton()
             drawDeleteButton()
-            drawSaveButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -538,44 +537,6 @@ function drawDeleteButton(){
 }
 
 
-
-function drawSaveButton(){
-    let button = new Path2D()
-    button.rect(646, 10, 50, 40)
-    ctx.stroke(button)
-    let icon = new Image()
-    icon.src = "floppy.png"
-    ctx.drawImage(icon, 648, 7, icon.width*0.09, icon.height*0.09)
-    canvas.addEventListener('mousemove', function(e) {
-        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
-            ctx.font = "lighter 15px Arial"
-            ctx.fillText("Save as Image", 625, 70)
-        }
-        else {
-        }
-    })
-    canvas.addEventListener('click', function (e) {
-        let clicked = false
-        let confirmed = false
-        if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
-           clicked = true
-        }
-        if (clicked) {
-            confirmed = confirm("Are you sure you want to save? You will be directed to a new page.")
-            if (!confirmed){
-                clicked = false
-            }
-            console.log(confirmed)
-        }
-        if (confirmed) {
-            let src = document.getElementById("canvas")
-            window.open(src.toDataURL("image/png"))
-        }
-    })
-}
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
     drawToolBar()
@@ -591,7 +552,6 @@ document.addEventListener('DOMContentLoaded', function () {
     drawAggregationButton()
     drawCompositionButton()
     drawDeleteButton()
-    drawSaveButton()
 
     const panel = document.getElementById('canvas')
 
