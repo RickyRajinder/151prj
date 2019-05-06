@@ -14,9 +14,26 @@ export class Graph {
      * the bounding rectangle is at the given point.
      * @param n the node to add
      */
-    add(n) {
+    addNode(n) {
         this.nodes.push(n)
     }
+
+    /**
+     * Adds an edge to the array
+     * @param {*} e edge to add
+     */
+    addEdge(e) {
+        this.edges.push(e)
+    }
+
+    /**
+     * Adds a node without using context 2d
+     * @param {*} node 
+     */
+    add(node) {
+        this.nodes.push(node)
+    }
+
     /**
      * Remove node from graph
      * @param {*} n
@@ -59,7 +76,7 @@ export class Graph {
      */
     draw() {
         for (const n of this.nodes) {
-            n.draw()
+            n.draw();
         }
         for (const e of this.edges){
             e.draw();
@@ -96,10 +113,10 @@ export class Graph {
         if (p1 !== undefined && p2 !== undefined) {
             //console.log("Found both nodes!")
             //e.connect(p1, p2)
-            this.edges.push(e)
-            return true
+            this.edges.push(e);
+            return true;
         }
-        return false
+        return false;
     }
 
 }
