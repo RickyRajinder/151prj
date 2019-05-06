@@ -26,7 +26,7 @@ Node.prototype.classNode = function (x,y) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1' width='100' height='100'><tr><td>Class Name: </td></tr><tr><td>Attributes: </td></tr><tr><td>Methods: </td></tr></table>" +
+                "<table border='1' width='100' height='100' style='background-color: white'><tr><td>Class Name: </td></tr><tr><td>Attributes: </td></tr><tr><td>Methods: </td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
@@ -70,7 +70,7 @@ Node.prototype.classNodeUpdated = function (x,y, strarr) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1' width='100' height='100'><tr><td>" + this.strarr[0] + "</td></tr><tr><td>" + this.strarr[1] + "</td></tr><tr><td>" + this.strarr[2] + "</td></tr></table>" +
+                "<table border='1' width='100' height='100' style='background-color: white'><tr><td>" + this.strarr[0] + "</td></tr><tr><td>" + this.strarr[1] + "</td></tr><tr><td>" + this.strarr[2] + "</td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
@@ -114,7 +114,7 @@ Node.prototype.interfaceNode = function (x,y) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1' width='100' height='100'><tr><td>Interface Name: </td></tr><tr><td>Attributes: </td></tr><tr><td>Methods: </td></tr></table>" +
+                "<table border='1' width='100' height='100' style='background-color: white'><tr><td>Interface Name: </td></tr><tr><td>Attributes: </td></tr><tr><td>Methods: </td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
@@ -158,7 +158,7 @@ Node.prototype.interfaceNodeUpdated = function (x,y, strarr) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1' width='100' height='100'><tr><td>" + this.strarr[0] + "</td></tr><tr><td>" + this.strarr[1] + "</td></tr><tr><td>" + this.strarr[2] + "</td></tr></table>" +
+                "<table border='1' width='100' height='100' style='background-color: white'><tr><td>" + this.strarr[0] + "</td></tr><tr><td>" + this.strarr[1] + "</td></tr><tr><td>" + this.strarr[2] + "</td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
@@ -201,8 +201,8 @@ Node.prototype.packageNode = function (x,y) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1' ><tr><td>______</td></tr></table>" +
-                "<table border='1' width='100' height='75'><tr><td align='center'>Package Name: </td></tr></table>" +
+                "<table border='1' style='background-color: white'><tr><td>______</td></tr></table>" +
+                "<table border='1' width='100' height='75' style='background-color: white'><tr><td align='center'>Package Name: </td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
@@ -246,8 +246,8 @@ Node.prototype.packageNodeUpdated = function (x,y, strarr) {
             const data = "<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'>" +
                 "<foreignObject width='100%' height='100%'>" +
                 "<div xmlns='http://www.w3.org/1999/xhtml' style='font-size:10px'>" +
-                "<table border='1'><tr><td>______</td></tr></table>" +
-                "<table border='1' width='100' height='75'><tr><td align='center'>" + this.strarr[0] +"</td></tr></table>" +
+                "<table border='1' style='background-color: white'><tr><td>______</td></tr></table>" +
+                "<table border='1' width='100' height='75' style='background-color: white'><tr><td align='center'>" + this.strarr[0] +"</td></tr></table>" +
                 "</div>" +
                 "</foreignObject>" +
                 "</svg>";
