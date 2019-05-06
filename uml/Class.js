@@ -562,6 +562,7 @@ function drawSaveButton(){
         if (confirmed) {
             let src = document.getElementById("canvas")
             window.location.href = src.toDataURL("image/png")
+            confirmed = false
         }
     })
 }
