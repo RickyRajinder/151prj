@@ -1,4 +1,4 @@
-import { RectangularNode } from '../graph/rectangularnode.js'
+import { RectangularNode } from '../graph/rectangularNode.js'
 'use strict'
 
 export class SimpleNode extends RectangularNode {
