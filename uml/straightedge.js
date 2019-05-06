@@ -3,19 +3,10 @@ import Edge from "../graph/edge.js"
 Edge.prototype.straightedge= function (startNode, endNode) {
     this.startNode = startNode
     this.endNode = endNode
-    var slope = undefined
-    var start = undefined
-    var end = undefined
+    let slope = undefined;
+    let start = undefined;
+    let end = undefined;
     return {
-        contains: (x, y) => {
-            let bounds = this.getBounds()
-            let leftMost = bounds.x
-            let rightMost = bounds.x + bounds.width
-            let topMost = bounds.y
-            let bottomMost = bounds.y + bounds.height
-            return (x > leftMost && x < rightMost) &&
-                (y > topMost && y < bottomMost)
-        },
         draw: () => {
             //console.log("Drawing LabeledEdge.")
             const canvas = document.getElementById('canvas')
@@ -23,7 +14,7 @@ Edge.prototype.straightedge= function (startNode, endNode) {
             start = {x: startNode.getBounds().x, y: startNode.getBounds().y}
             end = {x: endNode.getBounds().x, y: endNode.getBounds().y}
             ctx.setLineDash([4, 16]);
-            slope = (start.y - end.y)/(start.x - end.x) 
+            slope = (start.y - end.y)/(start.x - end.x)
             //console.log(slope)
             ctx.moveTo(startNode.getBounds().x, startNode.getBounds().y)
             ctx.lineTo(endNode.getBounds().x, endNode.getBounds().y)
@@ -38,7 +29,7 @@ Edge.prototype.straightedge= function (startNode, endNode) {
             var linex = p.x
             //console.log("Line is at: " + linex + " " + liney)
             return (p.x > linex - leniency && p.x < linex + leniency) &&
-            (p.y > liney - leniency && p.y < liney + leniency)
+                (p.y > liney - leniency && p.y < liney + leniency)
         },
         getBounds: () => {
             return {

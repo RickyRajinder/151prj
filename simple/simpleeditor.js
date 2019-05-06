@@ -43,16 +43,16 @@ addNodeMenuButton(menu, new SimpleNode(0, 0, 0, 0))
 addEdgeMenuButton(menu, new StraightEdge())
 menu.draw(g2)
 panel2.addEventListener("click", function(e) {
-    if(selected = null) {
+    if(selected === null) {
         throw "Nothing Selected";
     }
-    else if(selected == SimpleNode) {
+    else if(selected === SimpleNode) {
         let node = new SimpleNode(e.clientX, e.clientY, 30, 10);
         graph.add(node, e.clientX, e.clientX);
         graph.draw(g2);
 
     }
-    else if (selected == StraightEdge) {
+    else if (selected === StraightEdge) {
         graph.nodes.forEach(function(n){
             if(n.contains(e.clientX, e.clientY)){
                 let startNode = n;
