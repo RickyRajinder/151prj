@@ -555,14 +555,21 @@ function drawSaveButton(){
         }
     })
     canvas.addEventListener('click', function (e) {
+        let clicked = false
         let confirmed = false
         if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
+           clicked = true
+        }
+        if (clicked) {
             confirmed = confirm("Are you sure you want to save? You will be directed to a new page.")
+            if (!confirmed){
+                clicked = false
+            }
             console.log(confirmed)
         }
         if (confirmed) {
             let src = document.getElementById("canvas")
-            window.location.href = src.toDataURL("image/png")
+            window.open(src.toDataURL("image/png"))
         }
     })
 }
