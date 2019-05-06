@@ -87,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -120,6 +125,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -156,6 +166,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 noteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -187,6 +202,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 noteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -215,6 +235,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 deleteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -254,6 +279,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 packageStatus = false
                 deleteStatus = false
                 dependencyStatus = true
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
         })
     }
@@ -282,6 +312,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(inButton, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = true
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
+            }
         })
     }
 
@@ -310,6 +354,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = true
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
+            }
         })
     }
 
@@ -335,6 +393,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = true
+                aggregationStatus = false
+                compositionStatus = false
+            }
         })
     }
 
@@ -364,6 +436,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = true
+                compositionStatus = false
+            }
         })
     }
 
@@ -393,6 +479,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         canvas.addEventListener('click', function (e) {
+            if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+                noteStatus = false
+                selectStatus = false
+                classStatus = false
+                interfaceStatus = false
+                packageStatus = false
+                deleteStatus = false
+                dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = true
+            }
         })
     }
 
@@ -427,6 +527,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 interfaceStatus = false
                 noteStatus = false
                 dependencyStatus = false
+                inheritanceStatus = false
+                interfaceTIStatus = false
+                associationStatus = false
+                aggregationStatus = false
+                compositionStatus = false
             }
             console.log(graph.nodes.length)
         })
@@ -572,7 +677,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (selected !== undefined && selectStatus === true) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
-        } else if (selected !== undefined && dependencyStatus === true) {
+        } else if (selected !== undefined && 
+            (dependencyStatus === true || inheritanceStatus === true ||
+                 interfaceTIStatus === true || associationStatus === true ||
+                  aggregationStatus === true || compositionStatus === true)) {
             dragStartPoint = mousePoint
             dragStartBounds = selected.getBounds()
         }
@@ -597,11 +705,13 @@ document.addEventListener('DOMContentLoaded', function () {
     panel.addEventListener('mouseup', event => {
         let mousePoint = mouseLocation(event)
         selected2 = graph.findNode(mousePoint)
-        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true) {
+        if (selected !== undefined && selected2 !== undefined && dependencyStatus === true || inheritanceStatus === true ||
+            interfaceTIStatus === true || associationStatus === true ||
+             aggregationStatus === true || compositionStatus === true) {
             //console.log("Found start and end node!")
             //console.log("Line will go from: " + dragStartPoint.x + " " + dragStartPoint.y + " to " + mousePoint.x + " " + mousePoint.y)
             
-            let edge = Edge.prototype.straightedge(selected, selected2)
+            let edge = Edge.prototype.straightedge(selected, selected2, "Dependency")
             //console.log("Nodes: " + selected + " " + selected2)
             //console.log("Edge: " + edge)
             graph.connect(edge, selected.getBounds().x, selected.getBounds().y, selected2.getBounds().x, selected2.getBounds().y)
