@@ -11,11 +11,41 @@ Edge.prototype.straightedge= function (startNode, endNode, type) {
     let edgeType = type
     return {
         draw: () => {
-            console.log("Drawing StraightEdge of type " + edgeType)
+            //console.log("Drawing StraightEdge of type " + edgeType)
             const canvas = document.getElementById('canvas')
             const ctx = canvas.getContext('2d')
-            start = {x: startNode.getBounds().x, y: startNode.getBounds().y}
-            end = {x: endNode.getBounds().x, y: endNode.getBounds().y}
+            //with respect to startnode
+            //startnode is higher than endnode
+            var centerStart = {
+                x: startNode.getBounds().x + (startNode.getBounds().width / 2),
+                y: startNode.getBounds().y + (startNode.getBounds().height / 2)
+            }
+            var centerEnd = {
+                x: endNode.getBounds().x + (endNode.getBounds().width / 2),
+                y: endNode.getBounds().y + (endNode.getBounds().height / 2)
+            }
+            if(centerStart.y <= centerEnd.y){
+                //LR start, UL end
+                if(centerStart.x <= centerEnd.x){
+                    start = {x: startNode.getBounds().x + startNode.getBounds().width, y: startNode.getBounds().y + startNode.getBounds().height}
+                    end = {x: endNode.getBounds().x, y: endNode.getBounds().y}
+                //LL start, UR end
+                }else{
+                    start = {x: startNode.getBounds().x, y: startNode.getBounds().y + startNode.getBounds().height}
+                    end = {x: endNode.getBounds().x + endNode.getBounds().width, y: endNode.getBounds().y}
+                }
+            //else if is lower
+            }else{
+                //UR start, LL end
+                if(centerStart.x <= centerEnd.x){
+                    start = {x: startNode.getBounds().x + startNode.getBounds().width, y: startNode.getBounds().y}
+                    end = {x: endNode.getBounds().x, y: endNode.getBounds().y + endNode.getBounds().height}
+                //UL start, LR end
+                }else{
+                    start = {x: startNode.getBounds().x, y: startNode.getBounds().y}
+                    end = {x: endNode.getBounds().x + endNode.getBounds().width, y: endNode.getBounds().y + endNode.getBounds().height}
+                }
+            }
             slope = (start.y - end.y)/(start.x - end.x)
 
             
@@ -39,9 +69,10 @@ Edge.prototype.straightedge= function (startNode, endNode, type) {
                 ctx.lineTo(end.x-headlen*Math.cos(angle-Math.PI/6) -headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6)-headlen*Math.sin(angle-Math.PI/6))
                 ctx.lineTo(end.x-headlen*Math.cos(angle+Math.PI/6),end.y-headlen*Math.sin(angle+Math.PI/6))
                 ctx.lineTo(end.x, end.y)
-                ctx.fillstyle = 'black'
                 if(type === "Aggregation"){
                     ctx.fillStyle = 'white'
+                }else{
+                    ctx.fillstyle = 'black'
                 }
                 ctx.fill()
                 ctx.stroke()
