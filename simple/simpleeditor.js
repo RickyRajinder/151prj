@@ -45,7 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let selected = undefined
     let dragStartPoint = undefined
     let dragStartBounds = undefined
-
+    let startNode = undefined;
+    let endNode = undefined;
+    let edge = undefined;
 
     panel.addEventListener('click', event => {//select a tool from top
         menu.buttons.forEach(function(b){
@@ -64,12 +66,26 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if(menu.selected == StraightEdge) {
-                if (graph.)
-                
+                for(const n of graph.nodes) {
+                    if(n.contains(event.clientX, event.clientY)) 
+                        startNode = n;
+                }
+                edge = new StraightEdge(startNode, endNode);
+                graph.addEdge(edge);
+                graph.draw(g);  
             }
-            
         }
+    });
 
+    panel2.addEventListener('mouseup', event => {
+        if(menu.selected !== undefined && menu.selected == StraightEdge) {
+            for(const n of graph.nodes) {
+                    if(n.contains(event.clientX, event.clientY)) 
+                        endNode = n;
+            }
+            edge.connect(startNode, endNode)
+            graph.draw(g)
+        }
     });
 })
 

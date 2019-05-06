@@ -17,6 +17,23 @@ export class Graph {
     addNode(n) {
         this.nodes.push(n)
     }
+
+    /**
+     * Adds an edge to the array
+     * @param {*} e edge to add
+     */
+    addEdge(e) {
+        this.edges.push(e)
+    }
+
+    /**
+     * Adds a node without using context 2d
+     * @param {*} node 
+     */
+    add(node) {
+        this.nodes.push(node)
+    }
+
     /**
      * Remove node from graph
      * @param {*} n

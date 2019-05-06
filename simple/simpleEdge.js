@@ -8,8 +8,10 @@ export class StraightEdge extends Edge {
      * @param {Node} startNode 
      * @param {Node} endNode 
      */
-    constructor(){
+    constructor(startNode, endNode){
         super();
+        this.startNode = startNode;
+        this.endNode = endNode;
     }
 
     /**
