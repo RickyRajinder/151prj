@@ -1,3 +1,4 @@
+'use strict' 
 import { Toolbar } from '../graph/toolbar.js'
 import { SimpleGraph } from './simpleGraph.js'
 import { SimpleNode } from './simpleNode.js'
@@ -23,19 +24,21 @@ function addEdgeMenuButton(menu, edge) {
     edge.setEndArrowHead(ArrowHead.WDiamond)
 }
 
-let panel = document.getElementById("canvas1")//top canvas for toolbar
-let g2 = panel.getContext("2d")
+
 
 document.addEventListener('DOMContentLoaded', function () {
+    let panel = document.getElementById("canvas1")//top canvas for toolbar
+    let g2 = panel.getContext("2d")
     const graph = new SimpleGraph()
     let menu = new Toolbar(0, 0, 1000, 60)
     const n1 = new SimpleNode(0, 0, 30, 10)
+    //graph.addNode(n1);
     const e1 = new StraightEdge()
-    addNodeMenuButton(menu, n1)
-    addEdgeMenuButton(menu, e1)
-    //graph.add(n1, 0, 0)
-    menu.draw(g2)
-    graph.draw()
+    //graph.addEdge(e1);
+    addNodeMenuButton(menu, n1);
+    addEdgeMenuButton(menu, e1);
+    menu.draw(g2);
+    
 
     let panel2 = document.getElementById("canvas")//bottom canvas
     let selected = undefined
@@ -43,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let dragStartBounds = undefined
 
 
-    panel.addEventListener('click', event => {
+    panel.addEventListener('click', event => {//select a tool
         menu.buttons.forEach(function(b){
             if (b.contains(event.clientX, event.clientY))
                 b.action()
@@ -51,12 +54,12 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 
-    panel2.addEventListener('click', event => {
+    panel2.addEventListener('click', event => {//draw an element
         if(menu.selected !== undefined) {
             if(menu.selected == SimpleNode) {
                 let node = new SimpleNode(event.clientX, event.clientY, 30, 10);
-                graph.add(node, event.clientX, event.clientY);
-                graph.draw(g2);
+                graph.addNode(node);
+                graph.draw(panel2);
             }
             else if(menu.selected == StraightEdge) {
                 graph.nodes.forEach(function(n){

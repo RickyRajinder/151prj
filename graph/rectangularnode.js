@@ -26,11 +26,15 @@ export class RectangularNode extends Node {
      * @param {*} g2  
      */
     draw(g2) {
-        g2.strokeRect(this.x, this.y, this.width, this.height)
-        let saved = g2.fillStyle
-        g2.fillStyle = "white"
-        g2.fillRect(this.x, this.y, this.width, this.height)
-        g2.fillStyle = saved
+        
+        let saved = g2.fillStyle;
+        let strokeSaved = g2.strokeStyle;
+        g2.strokeStyle = "black";
+        g2.fillStyle = "white";
+        g2.fillRect(this.x, this.y, this.width, this.height);
+        g2.strokeRect(this.x, this.y, this.width, this.height);
+        g2.fillStyle = saved;
+        g2.strokeStyle = strokeSaved;
     }
 
     /**

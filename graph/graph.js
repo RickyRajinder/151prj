@@ -11,9 +11,18 @@ export class Graph {
      * the bounding rectangle is at the given point.
      * @param n the node to add
      */
-    add(n) {
+    addNode(n) {
         this.nodes.push(n)
     }
+
+    /**
+     * Adds an edge
+     * @param {*} n 
+     */
+    addEdge(e) {
+        this.edges.push(e);
+    }
+
     /**
      * Remove node from graph
      * @param {*} n
@@ -54,12 +63,12 @@ export class Graph {
     /**
      * Draw all of the edges and nodes onto the canvas
      */
-    draw() {
+    draw(g2) {
         for (const n of this.nodes) {
-            n.draw()
+            n.draw(g2);
         }
         for (const e of this.edges){
-            e.draw();
+            e.draw(g2);
         }
 
     }
@@ -72,15 +81,15 @@ export class Graph {
      * @param p2 a point in the ending node
      */
     connect(e, p1, p2) {
-        console.log("Connecting nodes..")
-        console.log(">Nodes: " + p1 + " " + p2)
+        console.log("Connecting nodes..");
+        console.log(">Nodes: " + p1 + " " + p2);
         if (p1 !== undefined && p2 !== undefined) {
-            console.log("Found both nodes!")
+            console.log("Found both nodes!");
             //e.connect(p1, p2)
-            this.edges.push(e)
-            return true
+            this.edges.push(e);
+            return true;
         }
-        return false
+        return false;
     }
 
 }
