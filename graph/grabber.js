@@ -2,21 +2,33 @@
 
 export class Grabbers {
 
-    draw(){
-        let select = new Path2D()
-        select.rect(10, 10, 50, 40)
-        panelg2.stroke(select)
-        panelg2.fillStyle = '#000000'
-        panelg2.fillRect(20, 20, 6, 6)
-        panelg2.fillRect(40, 20, 6, 6)
-        panelg2.fillRect(20, 35, 6, 6)
-        panelg2.fillRect(40, 35, 6, 6)
-        panel.addEventListener('mousemove', function(e) {
-            if (panelg2.isPointInPath(select, e.clientX, e.clientY)){
-                panelg2.font = "15px Arial"
-                panelg2.fillText("Select", 15, 70)
-            }
-        })
+    constructor(x, y, size) {
+        this.x = x
+        this.y = y
+        this.size = size
+    }
+    /**
+     * Draw an individual grabber
+     * @param {context} g2 
+     * @param {*} x coordinate 
+     * @param {*} y coordinate
+     */
+    draw(g2){//g2 = ctx 2d
+        g2.beginPath()
+        g2.rect(this.x - this.size/ 2, this.y - this.size / 2, this.size, this.size)
+        g2.fillStyle = 'black'
+        g2.fill()
+    }
+    /**
+     * Get bounds 
+     */
+    getBounds() {
+        return {
+            x: this.x,
+            y: this.y,
+            width: this.width,
+            height: this.height, 
+        }
     }
 }
 

@@ -85,5 +85,3 @@ export class PropertySheet {
     }
 }
 
-
-export default PropertySheet
