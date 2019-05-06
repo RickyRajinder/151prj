@@ -23,10 +23,10 @@ Edge.prototype.straightedge= function (startNode, endNode) {
         contains: p => {
             //console.log("Checking for contains")
             //console.log("Mouse is at: " + p.x + " " + p.y)
-            var leniency = 10
-            var multiplier = (p.x - start.x)
-            var liney = start.y + (multiplier * slope)
-            var linex = p.x
+            const leniency = 10;
+            let multiplier = (p.x - start.x);
+            let liney = start.y + (multiplier * slope);
+            let linex = p.x;
             //console.log("Line is at: " + linex + " " + liney)
             return (p.x > linex - leniency && p.x < linex + leniency) &&
                 (p.y > liney - leniency && p.y < liney + leniency)

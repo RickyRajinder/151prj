@@ -46,7 +46,7 @@ export class Graph {
     findEdge(p){
         for (let i = this.edges.length - 1; i >= 0; i--) {
             const edge = this.edges[i]
-            if (edge.contains(p.x, p.y)) return edge
+            if (edge.contains(p)) return edge
         }
         return undefined
     }
