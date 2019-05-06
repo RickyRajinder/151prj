@@ -4,12 +4,9 @@ import { SimpleGraph } from './simpleGraph.js'
 import { SimpleNode } from './simpleNode.js'
 import { StraightEdge } from './simpleEdge.js'
 import { ArrowHead } from '../graph/arrowhead.js'
-<<<<<<< HEAD:simple/simpleeditor.js
 import { PropertySheet } from "../graph/propertysheet.js";
 import {ColorNode} from "./simpleNode.js";
-=======
 import { Grabbers } from '../graph/grabber.js'
->>>>>>> 7d0bceda121db0b5f74b91f0714f8ef5b06ee3f0:simple/simpleEditor.js
 
 
 function addNodeMenuButton(menu, node) {
@@ -43,8 +40,6 @@ function addSelectMenuButton(menu, grabber) {
 
 document.addEventListener('DOMContentLoaded', function () {
     let panel = document.getElementById("canvas1")//top canvas for toolbar
-<<<<<<< HEAD:simple/simpleeditor.js
-
 
     /**
      * Get the x and y coordinates of the mouse
@@ -59,14 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    let g2 = panel.getContext("2d")
-    const graph = new SimpleGraph()
-    let menu = new Toolbar(0, 0, 1000, 60)
-    const n1 = new SimpleNode(0, 0, 30, 10)
-    //graph.addNode(n1);
-    const e1 = new StraightEdge()
-    //graph.addEdge(e1);
-=======
     let g2 = panel.getContext("2d");
     const graph = new SimpleGraph();
     let menu = new Toolbar(0, 0, 1000, 60);
@@ -75,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const grabber = new Grabbers(0, 0, 5);
     addSelectMenuButton(menu, grabber);
     
->>>>>>> 7d0bceda121db0b5f74b91f0714f8ef5b06ee3f0:simple/simpleEditor.js
     addNodeMenuButton(menu, n1);
     addEdgeMenuButton(menu, e1);
     
@@ -101,18 +87,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     panel2.addEventListener("auxclick", e => {
         let mousePoint = mouseLocation(event)
-        selected = graph.findNode(mousePoint)
-        console.log(selected)
-        if (selected !== undefined) {
-            const props = new PropertySheet(selected, "modal_wrapper", "modal_window", "modal_feedback")
+        elementSelected = graph.findNode(mousePoint)
+        console.log(elementSelected)
+        if (elementSelected !== undefined) {
+            const props = new PropertySheet(elementSelected, "modal_wrapper", "modal_window", "modal_feedback")
             props.openModal()
             document.getElementById("modal_close").addEventListener("click", function (){
                 props.saveInput("modal_feedback")
             }, false);
             document.getElementById("update").addEventListener("click", function (){
                 let input = props.saveInput("modal_feedback")
-                graph.remove(selected)
-                const colornode = new ColorNode(selected.getBounds().x, selected.getBounds().y, n1.width, n1.height, input[0])
+                graph.remove(elementSelected)
+                const colornode = new ColorNode(elementSelected.getBounds().x, elementSelected.getBounds().y, n1.width, n1.height, input[0])
                 graph.add(colornode)
                 graph.draw(g)
             }, false)
@@ -122,13 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     panel2.addEventListener('mousedown', event => {//draw an element on bottom
 
         if(menu.selected !== undefined) {
-<<<<<<< HEAD:simple/simpleeditor.js
-            if(menu.selected === SimpleNode) {
-                graph.addNode(new SimpleNode(event.clientX - 20, event.clientY - 100, n1.width, n1.height));
-                console.log(graph.nodes.length)
-                  graph.draw(g);
-=======
-            if(menu.selected == Grabbers) {
+            if(menu.selected === Grabbers) {
                 for(const n of graph.nodes) {
                     if(n.contains(event.clientX, event.clientY)) {
                         let grabber = new Grabbers(n.x, n.y, 5);
@@ -136,10 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
             }
-            if(menu.selected == SimpleNode) {
-                graph.addNode(new SimpleNode(event.clientX, event.clientY, n1.width, n1.height));
+            if(menu.selected === SimpleNode) {
+                graph.addNode(new SimpleNode(event.clientX - 20, event.clientY - 100, n1.width, n1.height));
                 graph.draw(g);
->>>>>>> 7d0bceda121db0b5f74b91f0714f8ef5b06ee3f0:simple/simpleEditor.js
             }
 
             if(menu.selected === StraightEdge) {
@@ -154,16 +133,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-<<<<<<< HEAD:simple/simpleeditor.js
-
-=======
     panel2.addEventListener('mousemove', event => {
-        if(menu.selected !== undefined && menu.selected == SimpleNode) {
+        if(menu.selected !== undefined && menu.selected === SimpleNode) {
 
         }
     });
->>>>>>> 7d0bceda121db0b5f74b91f0714f8ef5b06ee3f0:simple/simpleEditor.js
-
     panel2.addEventListener('mouseup', event => {
         if(menu.selected !== undefined && menu.selected === StraightEdge) {
             for(const n of graph.nodes) {

@@ -15,25 +15,29 @@
 
 <body>
 
-    <canvas id="canvas1" width="1000" height="70" style="border:1px solid #d3d3d3;">
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>
-    <canvas id="canvas" width="1000" height="600" style="border:1px solid #d3d3d3;">
-        Your browser does not support the HTML5 canvas tag.
-    </canvas>
+<canvas id="canvas1" width="1000" height="70" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<canvas id="canvas" width="1000" height="600" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
 
-            <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
-            <p>Change the color of this node</p>
-            <form id="modal_feedback" accept-charset="UTF-8">
-                <p><label>Color value: <strong>*</strong><br>
-                        <input type="text" autofocus required size="48" name="name" value=""></label></p>
-                <p><input id='update' type="button" name="colorForm" value="Change color"></p>
-            </form>
+<div id="modal_wrapper">
+    <div id="modal_window">
 
-        </div> <!-- #modal_window -->
-    </div> <!-- #modal_wrapper -->
-    <script type="module" src="simpleEditor.js">
-    </script>
+        <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
+        <p>Change the color of this node</p>
+        <form id="modal_feedback" accept-charset="UTF-8">
+            <p><label>Color value: <strong>*</strong><br>
+                <input type="text" autofocus required size="48" name="name" value=""></label></p>
+            <p><input id='update' type="button" name="colorForm" value="Change color"></p>
+        </form>
+
+    </div> <!-- #modal_window -->
+</div> <!-- #modal_wrapper -->
+
+<script type="module" src="simpleEditor.js">
+</script>
 </body>
 
 </html>
