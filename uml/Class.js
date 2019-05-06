@@ -39,6 +39,7 @@ let associationStatus = false
 let aggregationStatus = false
 let compositionStatus = false
 
+
 function drawSelectButton(){
     let select = new Path2D()
     select.rect(10, 10, 50, 40)
@@ -67,6 +68,7 @@ function drawSelectButton(){
             drawAggregationButton()
             drawCompositionButton()
             drawDeleteButton()
+            drawSaveButton()
             let select = new Path2D()
             select.rect(10, 10, 50, 40)
             ctx.stroke(select)
@@ -532,12 +534,40 @@ function drawDeleteButton(){
             aggregationStatus = false
             compositionStatus = false
         }
-        console.log(graph.nodes.length)
     })
 }
 
-document.addEventListener('DOMContentLoaded', function () {
 
+
+function drawSaveButton(){
+    let button = new Path2D()
+    button.rect(646, 10, 50, 40)
+    ctx.stroke(button)
+    let icon = new Image()
+    icon.src = "floppy.png"
+    ctx.drawImage(icon, 648, 7, icon.width*0.09, icon.height*0.09)
+    canvas.addEventListener('mousemove', function(e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)){
+            ctx.font = "lighter 15px Arial"
+            ctx.fillText("Save as Image", 625, 70)
+        }
+        else {
+        }
+    })
+    canvas.addEventListener('click', function (e) {
+        if (ctx.isPointInPath(button, e.clientX, e.clientY)) {
+            let confirmed = confirm("Are you sure you want to save? You will be directed to a new page.")
+            if (confirmed) {
+                let src = document.getElementById("canvas")
+                window.location.href = src.toDataURL("image/png")
+            }
+        }
+    })
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
     drawToolBar()
     drawSelectButton()
@@ -552,6 +582,7 @@ document.addEventListener('DOMContentLoaded', function () {
     drawAggregationButton()
     drawCompositionButton()
     drawDeleteButton()
+    drawSaveButton()
 
     const panel = document.getElementById('canvas')
 
