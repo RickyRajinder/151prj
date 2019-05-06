@@ -1,6 +1,12 @@
 import Node from  '../graph/node.js'
 
 
+/**
+ * Creates a class node obj with default values
+ * @param x coordinate
+ * @param y coordinate
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.classNode = function (x,y) {
     this.x = x
     this.y = y
@@ -44,6 +50,13 @@ Node.prototype.classNode = function (x,y) {
     }
 }
 
+/**
+ * Creates a class node obj with supplied class name, attributes, methods
+ * @param x coordinate
+ * @param y coordinate
+ * @param strarr string array
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.classNodeUpdated = function (x,y, strarr) {
     this.x = x
     this.y = y
@@ -88,7 +101,12 @@ Node.prototype.classNodeUpdated = function (x,y, strarr) {
     }
 }
 
-
+/**
+ * Creates an interface node obj with default values
+ * @param x coordinate
+ * @param y coordinate
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.interfaceNode = function (x,y) {
     this.x = x
     this.y = y
@@ -132,6 +150,13 @@ Node.prototype.interfaceNode = function (x,y) {
     }
 }
 
+/**
+ * Creates an interface node obj with supplied class name, attributes, methods
+ * @param x coordinate
+ * @param y coordinate
+ * @param strarr string array
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.interfaceNodeUpdated = function (x,y, strarr) {
     this.x = x
     this.y = y
@@ -176,6 +201,12 @@ Node.prototype.interfaceNodeUpdated = function (x,y, strarr) {
     }
 }
 
+/**
+ * Creates a package node with default value
+ * @param x coordinate
+ * @param y coordinate
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.packageNode = function (x,y) {
     this.x = x
     this.y = y
@@ -220,6 +251,13 @@ Node.prototype.packageNode = function (x,y) {
     }
 }
 
+/**
+ * Creates a package node obj with supplied package name
+ * @param x coordinate
+ * @param y coordinate
+ * @param strarr string array
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.packageNodeUpdated = function (x,y, strarr) {
     this.x = x
     this.y = y
@@ -265,6 +303,12 @@ Node.prototype.packageNodeUpdated = function (x,y, strarr) {
     }
 }
 
+/**
+ * Creates an note node obj with default value
+ * @param x coordinate
+ * @param y coordinate
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.noteNode = function (x,y) {
     this.x = x
     this.y = y
@@ -308,6 +352,13 @@ Node.prototype.noteNode = function (x,y) {
     }
 }
 
+/**
+ * Creates an note node obj with supplied note value
+ * @param x coordinate
+ * @param y coordinate
+ * @param strarr string array
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: number, y: *, height: number}), translate: translate}}
+ */
 Node.prototype.noteNodeUpdated = function (x,y, strarr) {
     this.x = x
     this.y = y
@@ -353,8 +404,13 @@ Node.prototype.noteNodeUpdated = function (x,y, strarr) {
 }
 
 /**
-* TODO: Comment
-*/
+ * Creates a circle node
+ * @param x
+ * @param y
+ * @param size
+ * @param color
+ * @returns {{contains: (function(*): boolean), draw: draw, getBounds: (function(): {x: *, width: *, y: *, height: *}), translate: translate}}
+ */
 Node.prototype.circleNode = function(x, y, size, color) {
     this.x = x
     this.y = y
@@ -385,7 +441,4 @@ Node.prototype.circleNode = function(x, y, size, color) {
     }
 }
 
-Node.prototype.center = function(rect) {
-    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2}
-}
 export default Node

@@ -16,6 +16,9 @@ let selected2 = undefined
 let dragStartPoint = undefined
 let dragStartBounds = undefined
 
+/**
+ * Draws background for toolbar
+ */
 function drawToolBar() {
     const bar = new Path2D()
     ctx.lineWidth = 2
@@ -26,6 +29,10 @@ function drawToolBar() {
     ctx.stroke()
 }
 
+/**
+ * Boolean variables that are updated and tracked depending on what button is clicked
+ * @type {boolean}
+ */
 let selectStatus = false
 let deleteStatus = false
 let classStatus = false
@@ -40,6 +47,10 @@ let aggregationStatus = false
 let compositionStatus = false
 
 
+/**
+ * Draw the select button on the toolbar with
+ * and individual click handler
+ */
 function drawSelectButton(){
     let select = new Path2D()
     select.rect(10, 10, 50, 40)
@@ -96,6 +107,10 @@ function drawSelectButton(){
     })
 }
 
+/**
+ * Draw the class button on the toolbar with
+ * and individual click handler
+ */
 function drawClassButton(){
     let classButton = new Path2D()
     classButton.rect(63, 10, 50, 40)
@@ -134,6 +149,10 @@ function drawClassButton(){
     })
 }
 
+/**
+ * Draw the interface button on the toolbar with
+ * and individual click handler
+ */
 function drawInterfaceButton(){
     let interfaceButton = new Path2D()
     interfaceButton.rect(116, 10, 50, 40)
@@ -175,6 +194,10 @@ function drawInterfaceButton(){
     })
 }
 
+/**
+ * Draw the package button on the toolbar with
+ * and individual click handler
+ */
 function drawPackageButton(){
     let packageButton = new Path2D()
     packageButton.rect(169, 10, 50, 40)
@@ -211,6 +234,10 @@ function drawPackageButton(){
     })
 }
 
+/**
+ * Draw the note button on the toolbar with
+ * and individual click handler
+ */
 function drawNoteButton(){
     let noteButton = new Path2D()
     noteButton.rect(222, 10, 50, 40)
@@ -244,6 +271,10 @@ function drawNoteButton(){
     })
 }
 
+/**
+ * Draw the dependency button on the toolbar with
+ * and individual click handler
+ */
 function drawDependencyButton(){
     let depButton = new Path2D()
     depButton.rect(275, 10, 50, 40)
@@ -288,6 +319,10 @@ function drawDependencyButton(){
     })
 }
 
+/**
+ * Draw the inheritance button on the toolbar with
+ * and individual click handler
+ */
 function drawInheritanceButton(){
     ctx.fillStyle = "white"
     let inButton = new Path2D()
@@ -329,6 +364,10 @@ function drawInheritanceButton(){
     })
 }
 
+/**
+ * Draw the interface type button on the toolbar with
+ * and individual click handler
+ */
 function drawInterfaceTypeButton(){
     let button = new Path2D()
     button.rect(381, 10, 50, 40)
@@ -371,6 +410,10 @@ function drawInterfaceTypeButton(){
     })
 }
 
+/**
+ * Draw the association button on the toolbar with
+ * and individual click handler
+ */
 function drawAssociationButton(){
     let button = new Path2D()
     button.rect(434, 10, 50, 40)
@@ -410,6 +453,10 @@ function drawAssociationButton(){
     })
 }
 
+/**
+ * Draw the aggregation button on the toolbar with
+ * and individual click handler
+ */
 function drawAggregationButton(){
     ctx.fillStyle = "white"
     let button = new Path2D()
@@ -453,6 +500,10 @@ function drawAggregationButton(){
     })
 }
 
+/**
+ * Draw the composition button on the toolbar with
+ * and individual click handler
+ */
 function drawCompositionButton(){
     ctx.fillStyle = "black"
     let button = new Path2D()
@@ -496,6 +547,10 @@ function drawCompositionButton(){
     })
 }
 
+/**
+ * Draw the delete button on the toolbar with
+ * and individual click handler
+ */
 function drawDeleteButton(){
     let button = new Path2D()
     button.rect(593, 10, 50, 40)
@@ -555,6 +610,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const panel = document.getElementById('canvas')
 
+    /**
+     * Double-click handler to add nodes depending on what node button is clicked
+     */
     panel.addEventListener('dblclick', event => {
         if (deleteStatus) {
             let mousePoint = mouseLocation(event)
@@ -563,11 +621,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 graph.remove(selected)
                 repaint()
             }
-            selected = graph.findEdge(mousePoint)
-            if (selected !== undefined) {
-                graph.removeEdge(selected)
-                repaint()
-            }
+
         }
         if (classStatus) {
             let node = Node.prototype.classNode(event.clientX - 20, event.clientY - 100)
@@ -591,6 +645,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    /**
+     * Repaint all components on canvas
+     */
     function repaint() {
         const canvas = document.getElementById('canvas')
         const ctx = canvas.getContext('2d')
@@ -605,6 +662,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Get the x and y coordinates of the mouse
+     * @param event
+     * @returns {{x: number, y: number}}
+     */
     function mouseLocation(event) {
         const rect = panel.getBoundingClientRect();
         return {
@@ -613,6 +675,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /**
+     * Right-click handler to edit nodes
+     */
     panel.addEventListener("auxclick", e => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
@@ -673,6 +738,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    /**
+     * Mousedown handler to add edges
+     */
     panel.addEventListener('mousedown', event => {
         let mousePoint = mouseLocation(event)
         selected = graph.findNode(mousePoint)
@@ -689,6 +757,9 @@ document.addEventListener('DOMContentLoaded', function () {
         repaint()
     })
 
+    /**
+     * Mousemove handler to add edges
+     */
     panel.addEventListener('mousemove', event => {
         if (dragStartPoint === undefined) return
         let mousePoint = mouseLocation(event)
@@ -704,6 +775,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
+    /**
+     * Connects nodes with the selected edge type
+     */
     panel.addEventListener('mouseup', event => {
         let mousePoint = mouseLocation(event)
         selected2 = graph.findNode(mousePoint)
